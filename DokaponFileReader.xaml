@@ -1,0 +1,1120 @@
+﻿<Window x:Class="DokaponFileReader.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DokaponFileReader"
+        mc:Ignorable="d"
+        Title="Dokapon File Reader" Height="723" Width="1060">
+    <Grid>
+        <Menu x:Name="MainMenu" HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="1040">
+            <MenuItem x:Name="OpenMenuItem" FontWeight="Bold" Header="Open" Click="OpenMenuItem_Click"/>
+            <MenuItem x:Name="SaveMenuItem" Header="Save" FontWeight="Bold" IsEnabled="False"/>
+            <MenuItem x:Name="CloseMenuItem" FontWeight="Bold" Header="Exit" ItemsSource="{Binding ClickEvent, ElementName=CloseMenuItem}" Click="CloseMenuItem_Click"/>
+        </Menu>
+        <TabControl HorizontalAlignment="Left" Height="632" Margin="23,43,0,0" VerticalAlignment="Top" Width="999">
+            <TabItem x:Name="JobDataTab" Header="Jobs">
+                <Grid Background="#FFE5E5E5">
+                    <TabControl>
+                        <TabItem x:Name="StartingStats" Header="Starting Stats">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid x:Name="JobStartingStats" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Job Name"  Binding="{Binding jobName}"/>
+                                        <DataGridTextColumn Header="Sex"  Binding="{Binding sex}"/>
+                                        <DataGridTextColumn Header="AT"  Binding="{Binding startingAttack}"/>
+                                        <DataGridTextColumn Header="DF"  Binding="{Binding startingDefense}"/>
+                                        <DataGridTextColumn Header="MG"  Binding="{Binding startingMagic}"/>
+                                        <DataGridTextColumn Header="SP"  Binding="{Binding startingSpeed}"/>
+                                        <DataGridTextColumn Header="HP"  Binding="{Binding startingHP}"/>
+                                        <DataGridTextColumn Header="Items"  Binding="{Binding bagItemSpace}"/>
+                                        <DataGridTextColumn Header="Field Magic"  Binding="{Binding fieldMagicSpace}"/>
+                                        <DataGridTextColumn Header="Description"  Binding="{Binding jobDescription}"/>
+
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+                        <TabItem x:Name="LevelUp" Header="Level Up">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid x:Name="JobLevelUpStats" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Job Name"  Binding="{Binding jobName}"/>
+                                        <DataGridTextColumn Header="Sex"  Binding="{Binding sex}"/>
+                                        <DataGridTextColumn Header="AT"  Binding="{Binding levelUpAttack}"/>
+                                        <DataGridTextColumn Header="DF"  Binding="{Binding levelUpDefense}"/>
+                                        <DataGridTextColumn Header="MG"  Binding="{Binding levelUpMagic}"/>
+                                        <DataGridTextColumn Header="SP"  Binding="{Binding levelUpSpeed}"/>
+                                        <DataGridTextColumn Header="HP"  Binding="{Binding levelUpHP}"/>
+                                        <DataGridTextColumn Header="Battles to Level"  Binding="{Binding battlesToLevel}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+                        <TabItem x:Name="JobMastery" HorizontalAlignment="Center" Height="20" Header="Mastery" VerticalAlignment="Center" Width="54">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid x:Name="JobMasteryStats" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Job Name"  Binding="{Binding jobName}"/>
+                                        <DataGridTextColumn Header="Sex"  Binding="{Binding sex}"/>
+                                        <DataGridTextColumn Header="AT"  Binding="{Binding masteryAttack}"/>
+                                        <DataGridTextColumn Header="DF"  Binding="{Binding masteryDefense}"/>
+                                        <DataGridTextColumn Header="MG"  Binding="{Binding masteryMagic}"/>
+                                        <DataGridTextColumn Header="SP"  Binding="{Binding masterySpeed}"/>
+                                        <DataGridTextColumn Header="HP"  Binding="{Binding masteryHP}"/>
+
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+                        <TabItem x:Name="SalaryData" HorizontalAlignment="Center" Height="20" Header="Salary" VerticalAlignment="Center" Width="54">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid x:Name="SalaryStats" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Job Name"  Binding="{Binding jobName}"/>
+                                        <DataGridTextColumn Header="Sex"  Binding="{Binding sex}"/>
+                                        <DataGridTextColumn Header="Salary"  Binding="{Binding startingSalary}"/>
+                                        <DataGridTextColumn Header="Salary Multiplier"  Binding="{Binding levelUpSalaryMultiplier}"/>
+                                        <DataGridTextColumn Header="Bonus Count"  Binding="{Binding bonusRequirementCount}"/>
+                                        <DataGridTextColumn Header="Bonus Multiplier"  Binding="{Binding bonusMultiplier}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+                        <TabItem x:Name="SkillData" HorizontalAlignment="Center" Height="20" Header="Skills" VerticalAlignment="Center" Width="54">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid x:Name="SkillStats" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Job Name"  Binding="{Binding jobName}"/>
+                                        <DataGridTextColumn Header="Sex"  Binding="{Binding sex}"/>
+                                        <DataGridTextColumn Header="Level 4 Skill"  Binding="{Binding level4BattleSkill}"/>
+                                        <DataGridTextColumn Header="Level 6 Skill"  Binding="{Binding level6BattleSkill}"/>
+                                        <DataGridTextColumn Header="Passive"  Binding="{Binding jobPassiveName}"/>
+                                        <DataGridTextColumn Header="Activation Rate"  Binding="{Binding jobPassiveActivationRate}"/>
+                                        <DataGridTextColumn Header="Passive Effect"  Binding="{Binding jobPassiveDescription}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+                        <TabItem x:Name="RequirementData" HorizontalAlignment="Center" Height="20" Header="Requirements" VerticalAlignment="Top" Width="87" Margin="0,-1,0,0">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid x:Name="Requirements" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Job Name"  Binding="{Binding jobName}"/>
+                                        <DataGridTextColumn Header="Sex"  Binding="{Binding sex}"/>
+                                        <DataGridTextColumn Header="Mastery 1"  Binding="{Binding masteryRequirement[0]}"/>
+                                        <DataGridTextColumn Header="Mastery 2"  Binding="{Binding masteryRequirement[1]}"/>
+                                        <DataGridTextColumn Header="Mastery 3"  Binding="{Binding masteryRequirement[2]}"/>
+                                        <DataGridTextColumn Header="Item Required"  Binding="{Binding itemRequirement}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="MonsterDataTab" Header="Monsters">
+                <Grid Background="#FFE5E5E5">
+                    <TabControl>
+                        <TabItem x:Name="GeneralMonsterData" Header="General">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid x:Name="GeneralData" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
+                                        <DataGridTextColumn Header="Level"  Binding="{Binding level}"/>
+                                        <DataGridTextColumn Header="AT"  Binding="{Binding attack}"/>
+                                        <DataGridTextColumn Header="DF"  Binding="{Binding defense}"/>
+                                        <DataGridTextColumn Header="MG"  Binding="{Binding magic}"/>
+                                        <DataGridTextColumn Header="SP"  Binding="{Binding speed}"/>
+                                        <DataGridTextColumn Header="HP"  Binding="{Binding hp}"/>
+                                        <DataGridTextColumn Header="Monster Type"  Binding="{Binding monsterType}"/>
+                                        <DataGridTextColumn Header="Model ID"  Binding="{Binding modelID}"/>
+                                        <DataGridTextColumn Header="Description"  Binding="{Binding description}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+                        <TabItem x:Name="MonsterCombatData" Header="Combat">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid x:Name="CombatData" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
+                                        <DataGridTextColumn Header="Offensive Magic"  Binding="{Binding offensiveMagic}"/>
+                                        <DataGridTextColumn Header="Defensive Magic"  Binding="{Binding defensiveMagic}"/>
+                                        <DataGridTextColumn Header="Battle Skill"  Binding="{Binding battleSkill}"/>
+                                        <DataGridTextColumn Header="Attack Rate"  Binding="{Binding attackRate}"/>
+                                        <DataGridTextColumn Header="Magic Rate"  Binding="{Binding magicRate}"/>
+                                        <DataGridTextColumn Header="Skill Rate"  Binding="{Binding skillRate}"/>
+                                        <DataGridTextColumn Header="Strike Rate"  Binding="{Binding strikeRate}"/>
+                                        <DataGridTextColumn Header="Defend Rate"  Binding="{Binding defendRate}"/>
+                                        <DataGridTextColumn Header="Magic Guard Rate"  Binding="{Binding magicGuardRate}"/>
+                                        <DataGridTextColumn Header="Counter Rate"  Binding="{Binding counterRate}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+                        <TabItem x:Name="MonsterRewardData" HorizontalAlignment="Center" Height="20" Header="Rewards" VerticalAlignment="Center" Width="54">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid x:Name="RewardData" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
+                                        <DataGridTextColumn Header="XP"  Binding="{Binding xp}"/>
+                                        <DataGridTextColumn Header="Gold"  Binding="{Binding gold}"/>
+                                        <DataGridTextColumn Header="Item 1"  Binding="{Binding dropItem[0]}"/>
+                                        <DataGridTextColumn Header="Item 1 Chance"  Binding="{Binding dropItemChance[0]}"/>
+                                        <DataGridTextColumn Header="Item 2"  Binding="{Binding dropItem[1]}"/>
+                                        <DataGridTextColumn Header="Item 2 Chance"  Binding="{Binding dropItemChance[1]}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="ItemData" HorizontalAlignment="Center" Height="20" Header="Items" VerticalAlignment="Center" Width="54">
+                <Grid Background="#FFE5E5E5">
+                    <TabControl>
+                        <TabItem x:Name="WeaponDataTab" Header="Weapons">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid x:Name="WeaponsData" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
+                                        <DataGridTextColumn Header="Price"  Binding="{Binding price}"/>
+                                        <DataGridTextColumn Header="AT"  Binding="{Binding attack}"/>
+                                        <DataGridTextColumn Header="DF"  Binding="{Binding defense}"/>
+                                        <DataGridTextColumn Header="MG"  Binding="{Binding magic}"/>
+                                        <DataGridTextColumn Header="SP"  Binding="{Binding speed}"/>
+                                        <DataGridTextColumn Header="HP"  Binding="{Binding hp}"/>
+                                        <DataGridTextColumn Header="Bonus Class"  Binding="{Binding bonusClass}"/>
+                                        <DataGridTextColumn Header="Activation Rate"  Binding="{Binding activationRate}"/>
+                                        <DataGridTextColumn Header="Icon ID"  Binding="{Binding iconID}"/>
+                                        <DataGridTextColumn Header="Attack Type"  Binding="{Binding attackAnimation}"/>
+                                        <DataGridTextColumn Header="Description"  Binding="{Binding description}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+                        <TabItem x:Name="ShieldDataTab" Header="Shields">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid x:Name="ShieldDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
+                                        <DataGridTextColumn Header="Price"  Binding="{Binding price}"/>
+                                        <DataGridTextColumn Header="AT"  Binding="{Binding attack}"/>
+                                        <DataGridTextColumn Header="DF"  Binding="{Binding defense}"/>
+                                        <DataGridTextColumn Header="MG"  Binding="{Binding magic}"/>
+                                        <DataGridTextColumn Header="SP"  Binding="{Binding speed}"/>
+                                        <DataGridTextColumn Header="HP"  Binding="{Binding hp}"/>
+                                        <DataGridTextColumn Header="Activation Rate"  Binding="{Binding activationRate}"/>
+                                        <DataGridTextColumn Header="Icon ID"  Binding="{Binding iconID}"/>
+                                        <DataGridTextColumn Header="Description"  Binding="{Binding description}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+                        <TabItem x:Name="AccessoryDataTab" HorizontalAlignment="Center" Height="20" Header="Accessories" VerticalAlignment="Top" Width="84" Margin="0,-1,0,0">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid x:Name="AccessoryDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
+                                        <DataGridTextColumn Header="Price"  Binding="{Binding price}"/>
+                                        <DataGridTextColumn Header="AT"  Binding="{Binding attack}"/>
+                                        <DataGridTextColumn Header="DF"  Binding="{Binding defense}"/>
+                                        <DataGridTextColumn Header="MG"  Binding="{Binding magic}"/>
+                                        <DataGridTextColumn Header="SP"  Binding="{Binding speed}"/>
+                                        <DataGridTextColumn Header="HP"  Binding="{Binding hp}"/>
+                                        <DataGridTextColumn Header="Activation Rate"  Binding="{Binding activationRate}"/>
+                                        <DataGridTextColumn Header="Icon ID"  Binding="{Binding iconID}"/>
+                                        <DataGridTextColumn Header="Description"  Binding="{Binding description}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+                        <TabItem x:Name="HairstyleDataTab" HorizontalAlignment="Center" Height="20" Header="HairStyles" VerticalAlignment="Top" Width="72" Margin="0,-1,0,0">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid x:Name="HairstyleDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
+                                        <DataGridTextColumn Header="Sex"  Binding="{Binding sex}"/>
+                                        <DataGridTextColumn Header="Hair Type ID"  Binding="{Binding hairTypeID}"/>
+                                        <DataGridTextColumn Header="Icon ID"  Binding="{Binding iconID}"/>
+                                        <DataGridTextColumn Header="Description"  Binding="{Binding description}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+                        <TabItem x:Name="BagItemDataTab" HorizontalAlignment="Center" Height="20" Header="Bag Items" VerticalAlignment="Top" Width="76" Margin="0,-1,0,0">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid x:Name="BagItemDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
+                                        <DataGridTextColumn Header="Price"  Binding="{Binding price}"/>
+                                        <DataGridTextColumn Header="Item Type"  Binding="{Binding itemType}"/>
+                                        <DataGridTextColumn Header="Icon ID"  Binding="{Binding iconID}"/>
+                                        <DataGridTextColumn Header="Description"  Binding="{Binding description}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+                        <TabItem x:Name="LocalItemDataTab" HorizontalAlignment="Center" Height="20" Header="Local Items" VerticalAlignment="Top" Width="76" Margin="0,-1,0,0">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid x:Name="LocalItemDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
+                                        <DataGridTextColumn Header="Location"  Binding="{Binding location}"/>
+                                        <DataGridTextColumn Header="Price"  Binding="{Binding price}"/>
+                                        <DataGridTextColumn Header="Gift Value"  Binding="{Binding giftValue}"/>
+                                        <DataGridTextColumn Header="Spawn Rate"  Binding="{Binding spawnRate}"/>
+                                        <DataGridTextColumn Header="Icon ID"  Binding="{Binding iconID}"/>
+                                        <DataGridTextColumn Header="Description"  Binding="{Binding description}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+                        <TabItem x:Name="OffensiveMagicDataTab" HorizontalAlignment="Center" Height="20" Header="Offensive Magic" VerticalAlignment="Top" Width="102" Margin="0,-1,0,0">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid x:Name="OffensiveMagicDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
+                                        <DataGridTextColumn Header="Price"  Binding="{Binding price}"/>
+                                        <DataGridTextColumn Header="Power"  Binding="{Binding power}"/>
+                                        <DataGridTextColumn Header="Magic Type"  Binding="{Binding magicType}"/>
+                                        <DataGridTextColumn Header="Effect Type"  Binding="{Binding effectType, StringFormat={}0x{0:X4}}"/>
+                                        <DataGridTextColumn Header="Icon ID"  Binding="{Binding iconID}"/>
+                                        <DataGridTextColumn Header="Sort Index"  Binding="{Binding sortIndex}"/>
+                                        <DataGridTextColumn Header="Description"  Binding="{Binding description}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+                        <TabItem x:Name="DefensiveMagicDataTab" HorizontalAlignment="Center" Height="20" Header="Defensive Magic" VerticalAlignment="Top" Width="106" Margin="0,-1,0,0">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid x:Name="DefensiveMagicDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
+                                        <DataGridTextColumn Header="Price"  Binding="{Binding price}"/>
+                                        <DataGridTextColumn Header="Power"  Binding="{Binding power}"/>
+                                        <DataGridTextColumn Header="Magic Type"  Binding="{Binding magicType}"/>
+                                        <DataGridTextColumn Header="Effect Type"  Binding="{Binding effectType, StringFormat={}0x{0:X4}}"/>
+                                        <DataGridTextColumn Header="Icon ID"  Binding="{Binding iconID}"/>
+                                        <DataGridTextColumn Header="Sort Index"  Binding="{Binding sortIndex}"/>
+                                        <DataGridTextColumn Header="Description"  Binding="{Binding description}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+                        <TabItem x:Name="FieldMagicDataTab" HorizontalAlignment="Center" Height="20" Header="Field Magic" VerticalAlignment="Top" Width="86" Margin="0,-1,0,0">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid x:Name="FieldMagicDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
+                                        <DataGridTextColumn Header="Price"  Binding="{Binding price}"/>
+                                        <DataGridTextColumn Header="Power"  Binding="{Binding power}"/>
+                                        <DataGridTextColumn Header="Magic Type"  Binding="{Binding magicType}"/>
+                                        <DataGridTextColumn Header="Effect Type"  Binding="{Binding effectType, StringFormat={}0x{0:X4}}"/>
+                                        <DataGridTextColumn Header="Icon ID"  Binding="{Binding iconID}"/>
+                                        <DataGridTextColumn Header="Description"  Binding="{Binding description}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+                        <TabItem x:Name="BattleSkillDataTab" HorizontalAlignment="Center" Height="20" Header="Battle Skills" VerticalAlignment="Top" Width="82" Margin="0,-1,0,0">
+                            <DataGrid x:Name="BattleSkillDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
+                                    <DataGridTextColumn Header="Activation Rate"  Binding="{Binding activationRate}"/>
+                                    <DataGridTextColumn Header="Description"  Binding="{Binding description}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </TabItem>
+                        <TabItem x:Name="DarkArtDataTab" HorizontalAlignment="Center" Height="20" Header="Dark Arts" VerticalAlignment="Top" Width="82" Margin="0,-1,0,0">
+                            <DataGrid x:Name="DarkArtDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
+                                    <DataGridTextColumn Header="Cost"  Binding="{Binding cost}"/>
+                                    <DataGridTextColumn Header="Description"  Binding="{Binding description}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
+            <TabItem HorizontalAlignment="Center" Height="20" Header="NPCs" VerticalAlignment="Center" Width="54">
+                <Grid x:Name="NPCDataTab" Background="#FFE5E5E5">
+                    <TabControl>
+                        <TabItem x:Name="NPCNameDataTab" Header="NPC Names">
+                            <DataGrid x:Name="NPCNameDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </TabItem>
+                        <TabItem x:Name="DialogueDataTab" Header="Dialogue">
+                            <DataGrid x:Name="DialogueDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Dialogue"  Binding="{Binding dialogue}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="MiscTab" HorizontalAlignment="Center" Height="20" Header="Miscellaneous" VerticalAlignment="Top" Width="102" Margin="0,-1,0,0">
+                <Grid Background="#FFE5E5E5">
+                    <TabControl>
+                        <TabItem x:Name="CombatFormulaDataTab" Header="Combat Formulas">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid x:Name="CombatFormulaDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
+                                        <DataGridTextColumn Header="Index"  Binding="{Binding index}"/>
+                                        <DataGridTextColumn Header="Formula"  Binding="{Binding formula}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+                        <TabItem x:Name="CPUNameDataTab" Header="CPU Names">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid x:Name="CPUNameDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Sex"  Binding="{Binding sex}"/>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+                        <TabItem x:Name="PrankNameDataTab" Header="Prank Names">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid x:Name="PrankNameDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+                        <TabItem x:Name="EffectDataTab1" HorizontalAlignment="Center" Height="20" Header="Effects 1" VerticalAlignment="Top" Width="62" Margin="0,-1,0,0">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid x:Name="EffectDatas1" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
+                                        <DataGridTextColumn Header="Icon ID"  Binding="{Binding iconID}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+                        <TabItem x:Name="EffectDataTab2" HorizontalAlignment="Center" Height="20" Header="Effects 2" VerticalAlignment="Top" Width="65" Margin="0,-1,0,0">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid x:Name="EffectDatas2" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
+                                        <DataGridTextColumn Header="Min Duration"  Binding="{Binding minDuration}"/>
+                                        <DataGridTextColumn Header="Max Duration"  Binding="{Binding maxDuration}"/>
+                                        <DataGridTextColumn Header="Icon ID"  Binding="{Binding iconID}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+                        <TabItem x:Name="EffectDataTab3" HorizontalAlignment="Center" Height="20" Header="Effects3" VerticalAlignment="Top" Width="66" Margin="0,-1,0,0">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid x:Name="EffectDatas3" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
+                                        <DataGridTextColumn Header="Min Duration"  Binding="{Binding minDuration}"/>
+                                        <DataGridTextColumn Header="Max Duration"  Binding="{Binding maxDuration}"/>
+                                        <DataGridTextColumn Header="Icon ID"  Binding="{Binding iconID}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+                        <TabItem x:Name="InstructionDataTab" HorizontalAlignment="Center" Height="20" Header="Instructions" VerticalAlignment="Top" Width="87" Margin="0,-1,0,0">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid x:Name="InstructionDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Instruction"  Binding="{Binding instruction}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="StageDataTab" HorizontalAlignment="Center" Height="20" Header="Stage Data" VerticalAlignment="Top" Width="75" Margin="0,-1,0,0">
+                <Grid x:Name="___No_Name_" Background="#FFE5E5E5">
+                    <TabControl>
+                        <TabItem x:Name="SpaceDataTab" Header="Spaces">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid x:Name="SpaceDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
+                                        <DataGridTextColumn Header="Description"  Binding="{Binding description}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+                        <TabItem x:Name="LocationDataTab" Header="Locations">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid x:Name="LocationDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+                        <TabItem x:Name="TownCastleDataTab" Header="Towns/Castles">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid x:Name="TownCastleDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
+                                        <DataGridTextColumn Header="Continent"  Binding="{Binding continent}"/>
+                                        <DataGridTextColumn Header="Location ID"  Binding="{Binding locationID}"/>
+                                        <DataGridTextColumn Header="Town Value"  Binding="{Binding townValue}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+                        <TabItem x:Name="TempleDataTab" Header="Temples">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid x:Name="TempleDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
+                                        <DataGridTextColumn Header="Continent"  Binding="{Binding continent}"/>
+                                        <DataGridTextColumn Header="Location ID"  Binding="{Binding locationID}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+                        <TabItem x:Name="RandomLootDataTab" Header="Random Loot">
+                            <Grid Background="#FFE5E5E5">
+                                <TabControl>
+                                    <TabItem x:Name="Table_0" Header="0">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData0" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_1" Header="1">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData1" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_2" Header="2">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData2" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_3" Header="3">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData3" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_4" Header="4">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData4" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_5" Header="5">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData5" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_6" Header="6">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData6" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_7" Header="7">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData7" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_8" Header="8">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData8" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_9" Header="9">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData9" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_10" Header="10">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData10" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_11" Header="11">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData11" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_12" Header="12">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData12" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_13" Header="13">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData13" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_14" Header="14">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData14" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_15" Header="15">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData15" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_16" Header="16">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData16" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_17" Header="17">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData17" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_18" Header="18">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData18" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_19" Header="19">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData19" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_20" Header="20">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData20" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_21" Header="21">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData21" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_22" Header="22">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData22" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_23" Header="23">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData23" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_24" Header="24">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData24" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_25" Header="25">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData25" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_26" Header="26">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData26" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_27" Header="27">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData27" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_28" Header="28">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData28" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_29" Header="29">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData29" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_30" Header="30">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData30" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_31" Header="31">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData31" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_32" Header="32">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData32" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_33" Header="33">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData33" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_34" Header="34">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData34" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_35" Header="35">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData35" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_36" Header="36">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData36" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_37" Header="37">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData37" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_38" Header="38">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData38" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_39" Header="39">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData39" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_40" Header="40">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData40" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_41" Header="41">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData41" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_42" Header="42">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData42" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_43" Header="43">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData43" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_44" Header="44">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData44" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_45" Header="45">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData45" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_46" Header="46">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData46" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_47" Header="47">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData47" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_48" Header="48">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData48" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_49" Header="49">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData49" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_50" Header="50">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData50" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_51" Header="51">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData51" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_52" Header="52">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData52" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_53" Header="53">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData53" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_54" Header="54">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData54" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_55" Header="55">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData55" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_56" Header="56">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData56" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_57" Header="57">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData57" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_58" Header="58">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData58" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_59" Header="59">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData59" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_60" Header="60">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData60" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_61" Header="61">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData61" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_62" Header="62">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData62" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_63" Header="63">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData63" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_64" Header="64">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData64" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_65" Header="65">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData65" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_66" Header="66">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData66" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_67" Header="67">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData67" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="Table_68" Header="68">
+                                        <Grid Background="#FFE5E5E5">
+                                            <DataGrid x:Name="TableData68" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+                                </TabControl>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
+
+        </TabControl>
+
+    </Grid>
+</Window>
