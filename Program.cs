@@ -24,7 +24,7 @@ namespace DokaponFileReader
 
             while (!exit)
             {
-                ;
+                Thread.Sleep(10);
             }
 
             return 0;

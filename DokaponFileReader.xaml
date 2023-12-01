@@ -160,6 +160,7 @@
                                         <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
                                         <DataGridTextColumn Header="XP"  Binding="{Binding xp}"/>
                                         <DataGridTextColumn Header="Gold"  Binding="{Binding gold}"/>
+                                        <DataGridTextColumn Header="Times Week?"  Binding="{Binding dynamicGold}"/>
                                         <DataGridTextColumn Header="Item 1"  Binding="{Binding dropItem[0]}"/>
                                         <DataGridTextColumn Header="Item 1 Chance"  Binding="{Binding dropItemChance[0]}"/>
                                         <DataGridTextColumn Header="Item 2"  Binding="{Binding dropItem[1]}"/>

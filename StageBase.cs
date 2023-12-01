@@ -71,7 +71,7 @@ namespace DokaponFileReader
             byte[] wordBuffer = new byte[4];
 
             stageFile.Read(ref wordBuffer);
-            fileHeader = Encoding.ASCII.GetString(wordBuffer);
+            fileHeader = Encoding.GetEncoding(932).GetString(wordBuffer);
             fileSize = stageFile.GetUInt32();
             headerSize = stageFile.GetUInt32();
             stageFile.Read(ref filler);

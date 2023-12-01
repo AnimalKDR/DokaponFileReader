@@ -20,6 +20,7 @@ namespace DokaponFileReader
         public string battleSkill { get; set; }
         public int xp { get; set; }
         public int gold { get; set; }
+        public bool dynamicGold { get; set; }
         public string [] dropItem { get; set; }
         public int[] dropItemChance { get; set; }
         public int attackRate { get; set; }
@@ -57,7 +58,8 @@ namespace DokaponFileReader
                 monsterData.speed = (int)monster.speed;
                 monsterData.hp = (int)monster.hp;
                 monsterData.xp = monster.experience;
-                monsterData.gold = (int)monster.gold;
+                monsterData.gold = Math.Abs(monster.gold);
+                monsterData.dynamicGold = monster.gold < 0 ? true : false;
                 monsterData.battleSkill = charaFile.GetItemName(ItemType.BattleSkill, monster.battleSkillID);
                 monsterData.offensiveMagic = charaFile.GetItemName(ItemType.OffensiveMagic, monster.offensiveMagicID);
                 monsterData.defensiveMagic = charaFile.GetItemName(ItemType.DefensiveMagic, monster.defensiveMagicID);

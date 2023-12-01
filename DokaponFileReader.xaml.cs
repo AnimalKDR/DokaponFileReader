@@ -20,6 +20,7 @@ namespace DokaponFileReader
 
         ~MainWindow()
         {
+            Close();
             MainProgram.exit = true;
         }
 

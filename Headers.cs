@@ -11,6 +11,8 @@ namespace DokaponFileReader
 
         public DokaponFileReader(string path)
         {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
             fileStream = File.Open(path, FileMode.Open);
             byteRead = new bool[fileStream.Length];
             fileOffset = 0;
@@ -77,11 +79,11 @@ namespace DokaponFileReader
         {
             byte[] buffer = new byte[bytesToRead];
             string result = String.Empty;
-
+      
             do
             {
                 Read(ref buffer, reread);
-                result += Encoding.ASCII.GetString(buffer);
+                result += Encoding.GetEncoding(932).GetString(buffer);
             } while (!buffer.ToList().Contains(0));
 
             return result;
@@ -1711,7 +1713,8 @@ namespace DokaponFileReader
         public byte defensiveMagicID;
         public UInt16 battleSkillID;
         public UInt16 experience;
-        public UInt16 gold;
+        public Int16 gold;
+        
 
         public MonsterHeader()
         {
@@ -1737,7 +1740,7 @@ namespace DokaponFileReader
             header.defensiveMagicID = stageFile.GetByte();
             header.battleSkillID = stageFile.GetUInt16();
             header.experience = stageFile.GetUInt16();
-            header.gold = stageFile.GetUInt16();
+            header.gold = stageFile.GetInt16();
 
             return header;
         }
