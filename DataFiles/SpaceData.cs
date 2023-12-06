@@ -23,12 +23,25 @@ namespace DokaponFileReader.DataFiles
                 data.Add(spaceData);
             }
 
-            for (int i = 0; i < stageBaseFile.SpaceDescriptionHeaders[0].description.Count; i++)
+            for (int i = 0; i < stageBaseFile.SpaceDescriptionHeader.description.Count; i++)
             {
-                data[i].description = stageBaseFile.SpaceDescriptionHeaders[0].description[i];
+                data[i].description = stageBaseFile.SpaceDescriptionHeader.description[i];
             }
 
             return data;
+        }
+
+        public static void SetData(ObservableCollection<SpaceData> spaceData, ref StageBaseFile stageBaseFile)
+        {
+            for (int i = 0; i < spaceData.Count && i < stageBaseFile.SpaceNameHeaders.Count; i++)
+            {
+                stageBaseFile.SpaceNameHeaders[i].name = spaceData[i].name;
+            }
+
+            for (int i = 0; i < spaceData.Count && i < stageBaseFile.SpaceDescriptionHeader.description.Count; i++)
+            {
+                stageBaseFile.SpaceDescriptionHeader.description[i] = spaceData[i].description;
+            }
         }
     }
 }

@@ -26,5 +26,18 @@ namespace DokaponFileReader.DataFiles
 
             return data;
         }
+
+        public static void SetData(ObservableCollection<DialogueData> dialogueData, ref CharaFile charaFile)
+        {
+            int k = 0;
+
+            for (int i = 0; i < charaFile.DialogListHeaders.Count; i++)
+            {
+                for (int j = 0; j< charaFile.DialogListHeaders[i].dialog.Count; j++)
+                {
+                    charaFile.DialogListHeaders[i].dialog[j] = dialogueData[k++].dialogue;
+                }
+            }
+        }
     }
 }

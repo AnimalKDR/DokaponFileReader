@@ -6,12 +6,9 @@ namespace DokaponFileReader
     {
         public string name { get; set; }
         public string sex { get; set; }
-
-        public int iconID { get; set; }
-
-        public int hairTypeID { get; set; }
-
-        public int descriptionIndex { get; set; }
+        public ushort iconID { get; set; }
+        public byte hairTypeID { get; set; }
+        public byte descriptionIndex { get; set; }
         public string description { get; set; }
 
         public HairstyleData(string name)
@@ -32,17 +29,33 @@ namespace DokaponFileReader
                 else
                     hairstyleData.sex = "Female";
 
-                hairstyleData.hairTypeID = hairstyle.unknownHairType;
-                hairstyleData.iconID = hairstyle.objectType;
-                hairstyleData.descriptionIndex = hairstyle.nonClassIndex;
+                hairstyleData.hairTypeID = hairstyle.hairTypeID;
+                hairstyleData.iconID = hairstyle.iconID;
+                hairstyleData.descriptionIndex = hairstyle.descriptionIndex;
 
-                if (hairstyle.unknownHairType != 0)
-                    hairstyleData.description = charaFile.HairstyleDescriptionHeaders[0].description[hairstyle.descriptionID];
+                if (hairstyleData.descriptionIndex != 0)
+                    hairstyleData.description = charaFile.HairstyleDescriptionHeaders[0].description[hairstyleData.descriptionIndex - 1];
 
                 data.Add(hairstyleData);
             }
 
             return data;
+        }
+
+        public static void SetData(ObservableCollection<HairstyleData> hairstyleData, ref CharaFile charaFile)
+        {
+            for (int i = 0; i < hairstyleData.Count && i < charaFile.HairstyleHeaders.Count; i++)
+            {
+                charaFile.HairstyleHeaders[i].name = hairstyleData[i].name;
+                charaFile.HairstyleHeaders[i].hairTypeID = hairstyleData[i].hairTypeID;
+                charaFile.HairstyleHeaders[i].iconID = hairstyleData[i].iconID;
+                charaFile.HairstyleHeaders[i].descriptionIndex = hairstyleData[i].descriptionIndex;
+
+                if (hairstyleData[i].descriptionIndex == 0)
+                    continue;
+
+                charaFile.HairstyleDescriptionHeaders[0].description[hairstyleData[i].descriptionIndex - 1] = hairstyleData[i].description;
+            }
         }
     }
 }

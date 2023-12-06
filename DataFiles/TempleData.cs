@@ -6,7 +6,7 @@ namespace DokaponFileReader.DataFiles
     {
         public string name { get; set; }
         public string continent { get; set; }
-        public int locationID { get; set; }
+        public ushort mapLocationID { get; set; }
 
         public TempleData(string name)
         {
@@ -20,21 +20,23 @@ namespace DokaponFileReader.DataFiles
             foreach (var header in stageBaseFile.TempleNameHeaders)
             {
                 TempleData templeData = new TempleData(header.name);
-                templeData.locationID = header.mapLocationID;
-
-                foreach (var location in stageBaseFile.LocationHeaders)
-                {
-                    if (header.continent != location.index)
-                        continue;
-                    
-                    templeData.continent = location.name;
-                    break;
-                }
+                templeData.mapLocationID = header.mapLocationID;
+                templeData.continent = stageBaseFile.GetLocationName(header.continent);
 
                 data.Add(templeData);
             }
 
             return data;
+        }
+
+        public static void SetData(ObservableCollection<TempleData> templeData, ref StageBaseFile stageBaseFile)
+        {
+            for (int i = 0; i < templeData.Count && i < stageBaseFile.TempleNameHeaders.Count; i++)
+            {
+                stageBaseFile.TownCastleHeaders[i].name = templeData[i].name;
+                stageBaseFile.TownCastleHeaders[i].mapLocationID = templeData[i].mapLocationID;
+                stageBaseFile.TownCastleHeaders[i].continent = stageBaseFile.GetLocationIndex(templeData[i].continent);
+            }
         }
     }
 }

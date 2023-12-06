@@ -6,13 +6,13 @@ namespace DokaponFileReader
     {
         public string name { get; set; }
         public uint price { get; set; }
-        public int attack { get; set; }
-        public int defense { get; set; }
-        public int magic { get; set; }
-        public int speed { get; set; }
+        public short attack { get; set; }
+        public short defense { get; set; }
+        public short magic { get; set; }
+        public short speed { get; set; }
         public int hp { get; set; }
-        public int iconID { get; set; }
-        public int activationRate { get; set; }
+        public ushort iconID { get; set; }
+        public byte activationRate { get; set; }
         public string description { get; set; }
 
         public AccessoryData(string name)
@@ -28,13 +28,13 @@ namespace DokaponFileReader
             {
                 AccessoryData accessoryData = new AccessoryData(accessory.name);
                 accessoryData.price = accessory.price;
-                accessoryData.attack = (int)accessory.attack;
-                accessoryData.defense = (int)accessory.defense;
-                accessoryData.magic = (int)accessory.magic;
-                accessoryData.speed = (int)accessory.speed;
-                accessoryData.hp = 10 * (int)accessory.hp;
+                accessoryData.attack = accessory.attack;
+                accessoryData.defense = accessory.defense;
+                accessoryData.magic = accessory.magic;
+                accessoryData.speed = accessory.speed;
+                accessoryData.hp = 10 * accessory.hp;
 
-                accessoryData.iconID = accessory.objectType;
+                accessoryData.iconID = accessory.iconID;
                 accessoryData.activationRate = accessory.activationRate;
 
                 data.Add(accessoryData);
@@ -46,6 +46,27 @@ namespace DokaponFileReader
             }
 
             return data;
+        }
+
+        public static void SetData(ObservableCollection<AccessoryData> accesoryData, ref CharaFile charaFile)
+        {
+            for (int i = 0; i < accesoryData.Count && i < charaFile.AccessoryHeaders.Count; i++)
+            {
+                charaFile.AccessoryHeaders[i].name = accesoryData[i].name;
+                charaFile.AccessoryHeaders[i].price = accesoryData[i].price;
+                charaFile.AccessoryHeaders[i].attack = accesoryData[i].attack;
+                charaFile.AccessoryHeaders[i].defense = accesoryData[i].defense;
+                charaFile.AccessoryHeaders[i].magic = accesoryData[i].magic;
+                charaFile.AccessoryHeaders[i].speed = accesoryData[i].speed;
+                charaFile.AccessoryHeaders[i].hp = (short)(accesoryData[i].hp / 10);
+                charaFile.AccessoryHeaders[i].iconID = accesoryData[i].iconID;
+                charaFile.AccessoryHeaders[i].activationRate = accesoryData[i].activationRate;
+            }
+
+            for (int i = 0; i < accesoryData.Count && i < charaFile.AccessoryDescriptionHeaders.Count; i++)
+            {
+                charaFile.AccessoryDescriptionHeaders[0].description[i] = accesoryData[i].description;
+            }
         }
     }
 }

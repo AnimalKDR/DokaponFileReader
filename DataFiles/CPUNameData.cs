@@ -29,5 +29,19 @@ namespace DokaponFileReader.DataFiles
 
             return data;
         }
+
+        public static void SetData(ObservableCollection<CPUNameData> cpuNameData, ref CharaFile charaFile)
+        {
+            int maleNames = 0;
+            int femaleNames = 0;
+
+            for (int i = 0; i < cpuNameData.Count; i++)
+            {
+                if (cpuNameData[i].sex == 0)
+                    charaFile.CPUNamesHeaders[0].names[i] = cpuNameData[maleNames++].name;
+                else
+                    charaFile.CPUNamesHeaders[1].names[i] = cpuNameData[femaleNames++].name;
+            }
+        }
     }
 }

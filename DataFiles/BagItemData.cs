@@ -6,7 +6,7 @@ namespace DokaponFileReader
     {
         public string name { get; set; }
         public uint price { get; set; }
-        public int iconID { get; set; }
+        public ushort iconID { get; set; }
         public string itemType { get; set; }
         public string description { get; set; }
 
@@ -24,9 +24,8 @@ namespace DokaponFileReader
             {
                 BagItemData bagItemData = new BagItemData(bagItem.name);
                 bagItemData.price = bagItem.price;
-                if (bagItem.itemType != 0)
-                    bagItemData.itemType = charaFile.BagItemTypeNameHeaders[bagItem.itemType - 1].name;
-                bagItemData.iconID = bagItem.objectType;
+                bagItemData.itemType = charaFile.GetBagItemTypeName(bagItem.itemType);
+                bagItemData.iconID = bagItem.iconID;
 
                 data.Add(bagItemData);
             }
@@ -37,6 +36,22 @@ namespace DokaponFileReader
             }
 
             return data;
+        }
+
+        public static void SetData(ObservableCollection<BagItemData> bagItemData, ref CharaFile charaFile)
+        {
+            for (int i = 0; i < bagItemData.Count && i < charaFile.BagItemHeaders.Count; i++)
+            {
+                charaFile.BagItemHeaders[i].name = bagItemData[i].name;
+                charaFile.BagItemHeaders[i].price = bagItemData[i].price;
+                charaFile.BagItemHeaders[i].iconID = bagItemData[i].iconID;
+                charaFile.BagItemHeaders[i].itemType = charaFile.GetBagItemTypeID(bagItemData[i].itemType); 
+            }
+
+            for (int i = 0; i < bagItemData.Count && i < charaFile.BagItemDescriptionHeaders.Count; i++)
+            {
+                charaFile.BagItemDescriptionHeaders[0].description[i] = bagItemData[i].description;
+            }
         }
     }
 }

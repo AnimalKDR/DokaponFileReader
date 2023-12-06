@@ -5,7 +5,7 @@ namespace DokaponFileReader.DataFiles
     public class DarkArtData
     {
         public string name { get; set; }
-        public int cost { get; set; }
+        public ushort cost { get; set; }
         public string description { get; set; }
 
         public DarkArtData(string name)
@@ -31,6 +31,20 @@ namespace DokaponFileReader.DataFiles
             }
 
             return data;
+        }
+
+        public static void SetData(ObservableCollection<DarkArtData> darkArtData, ref CharaFile charaFile)
+        {
+            for (int i = 0; i < darkArtData.Count && i < charaFile.DarkArtHeaders.Count; i++)
+            {
+                charaFile.DarkArtHeaders[i].name = darkArtData[i].name;
+                charaFile.DarkArtHeaders[i].pointCost = darkArtData[i].cost;
+            }
+
+            for (int i = 0; i < darkArtData.Count && i < charaFile.DarkArtDescritpionHeaders.Count; i++)
+            {
+                charaFile.DarkArtDescritpionHeaders[0].description[i] = darkArtData[i].description;
+            }
         }
     }
 }

@@ -9,7 +9,7 @@
     <Grid>
         <Menu x:Name="MainMenu" HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="1040">
             <MenuItem x:Name="OpenMenuItem" FontWeight="Bold" Header="Open" Click="OpenMenuItem_Click"/>
-            <MenuItem x:Name="SaveMenuItem" Header="Save" FontWeight="Bold" IsEnabled="False"/>
+            <MenuItem x:Name="SaveMenuItem" Header="Save" FontWeight="Bold" Click="SaveMenuItem_Click"/>
             <MenuItem x:Name="CloseMenuItem" FontWeight="Bold" Header="Exit" ItemsSource="{Binding ClickEvent, ElementName=CloseMenuItem}" Click="CloseMenuItem_Click"/>
         </Menu>
         <TabControl HorizontalAlignment="Left" Height="632" Margin="23,43,0,0" VerticalAlignment="Top" Width="999">
@@ -467,7 +467,7 @@
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
                                         <DataGridTextColumn Header="Continent"  Binding="{Binding continent}"/>
-                                        <DataGridTextColumn Header="Location ID"  Binding="{Binding locationID}"/>
+                                        <DataGridTextColumn Header="Location ID"  Binding="{Binding mapLocationID}"/>
                                         <DataGridTextColumn Header="Town Value"  Binding="{Binding townValue}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
@@ -479,7 +479,7 @@
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
                                         <DataGridTextColumn Header="Continent"  Binding="{Binding continent}"/>
-                                        <DataGridTextColumn Header="Location ID"  Binding="{Binding locationID}"/>
+                                        <DataGridTextColumn Header="Location ID"  Binding="{Binding mapLocationID}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -491,7 +491,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData0" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -500,7 +500,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData1" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -509,7 +509,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData2" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -518,7 +518,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData3" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -527,7 +527,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData4" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -536,7 +536,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData5" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -545,7 +545,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData6" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -554,7 +554,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData7" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -563,7 +563,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData8" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -572,7 +572,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData9" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -581,7 +581,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData10" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -590,7 +590,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData11" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -599,7 +599,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData12" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -608,7 +608,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData13" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -617,7 +617,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData14" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -626,7 +626,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData15" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -635,7 +635,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData16" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -644,7 +644,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData17" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -653,7 +653,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData18" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -662,7 +662,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData19" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -671,7 +671,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData20" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -680,7 +680,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData21" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -689,7 +689,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData22" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -698,7 +698,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData23" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -707,7 +707,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData24" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -716,7 +716,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData25" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -725,7 +725,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData26" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -734,7 +734,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData27" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -743,7 +743,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData28" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -752,7 +752,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData29" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -761,7 +761,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData30" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -770,7 +770,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData31" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -779,7 +779,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData32" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -788,7 +788,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData33" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -797,7 +797,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData34" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -806,7 +806,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData35" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -815,7 +815,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData36" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -824,7 +824,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData37" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -833,7 +833,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData38" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -842,7 +842,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData39" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -851,7 +851,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData40" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -860,7 +860,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData41" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -869,7 +869,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData42" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -878,7 +878,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData43" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -887,7 +887,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData44" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -896,7 +896,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData45" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -905,7 +905,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData46" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -914,7 +914,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData47" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -923,7 +923,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData48" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -932,7 +932,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData49" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -941,7 +941,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData50" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -950,7 +950,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData51" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -959,7 +959,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData52" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -968,7 +968,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData53" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -977,7 +977,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData54" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -986,7 +986,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData55" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -995,7 +995,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData56" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -1004,7 +1004,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData57" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -1013,7 +1013,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData58" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -1022,7 +1022,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData59" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -1031,7 +1031,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData60" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -1040,7 +1040,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData61" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -1049,7 +1049,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData62" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -1058,7 +1058,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData63" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -1067,7 +1067,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData64" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -1076,7 +1076,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData65" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -1085,7 +1085,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData66" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -1094,7 +1094,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData67" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -1103,7 +1103,7 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData68" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding item}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>

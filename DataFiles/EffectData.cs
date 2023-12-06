@@ -5,9 +5,9 @@ namespace DokaponFileReader.DataFiles
     public class EffectData
     {
         public string name { get; set; }
-        public int minDuration { get; set; }
-        public int maxDuration { get; set; }
-        public int iconID { get; set; }
+        public byte minDuration { get; set; }
+        public byte maxDuration { get; set; }
+        public ushort iconID { get; set; }
 
         public EffectData(string name)
         {
@@ -58,6 +58,37 @@ namespace DokaponFileReader.DataFiles
             }
 
             return data;
+        }
+
+        public static void SetDataFromHeader1(ObservableCollection<EffectData> effectData, ref CharaFile charaFile)
+        {
+            for (int i = 0; i < effectData.Count && i < charaFile.EffectNameHeaders1.Count; i++)
+            {
+                charaFile.EffectNameHeaders1[i].name = effectData[i].name;
+                charaFile.EffectNameHeaders1[i].iconID = effectData[i].iconID;
+            }
+        }
+
+        public static void SetDataFromHeader2(ObservableCollection<EffectData> effectData, ref CharaFile charaFile)
+        {
+            for (int i = 0; i < effectData.Count && i < charaFile.EffectNameHeaders2.Count; i++)
+            {
+                charaFile.EffectNameHeaders2[i].name = effectData[i].name;
+                charaFile.EffectNameHeaders2[i].minDuration = effectData[i].minDuration;
+                charaFile.EffectNameHeaders2[i].maxDuration = effectData[i].maxDuration;
+                charaFile.EffectNameHeaders2[i].iconID = effectData[i].iconID;
+            }
+        }
+
+        public static void SetDataFromHeader3(ObservableCollection<EffectData> effectData, ref CharaFile charaFile)
+        {
+            for (int i = 0; i < effectData.Count && i < charaFile.EffectNameHeaders3.Count; i++)
+            {
+                charaFile.EffectNameHeaders3[i].name = effectData[i].name;
+                charaFile.EffectNameHeaders3[i].minDuration = effectData[i].minDuration;
+                charaFile.EffectNameHeaders3[i].maxDuration = effectData[i].maxDuration;
+                charaFile.EffectNameHeaders3[i].iconID = effectData[i].iconID;
+            }
         }
     }
 }

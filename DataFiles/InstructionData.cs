@@ -26,5 +26,18 @@ namespace DokaponFileReader.DataFiles
 
             return data;
         }
+
+        public static void SetData(ObservableCollection<InstructionData> instructionData, ref CharaFile charaFile)
+        {
+            int k = 0;
+
+            for (int i = 0; i < charaFile.InstructionListHeaders.Count; i++)
+            {
+                for (int j = 0; j < charaFile.InstructionListHeaders[i].instructions.Count; j++)
+                {
+                    charaFile.InstructionListHeaders[i].instructions[j] = instructionData[k++].instruction;
+                }
+            }
+        }
     }
 }

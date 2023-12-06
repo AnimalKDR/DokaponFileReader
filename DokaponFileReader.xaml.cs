@@ -13,6 +13,35 @@ namespace DokaponFileReader
         public StageBaseFile stageBaseFile = new StageBaseFile();
         public CharaFile charaFile = new CharaFile();
 
+        public ObservableCollection<JobData> jobData = new ObservableCollection<JobData>();
+        public ObservableCollection<MonsterData> monsterData = new ObservableCollection<MonsterData>();
+        public ObservableCollection<WeaponData> weaponData = new ObservableCollection<WeaponData>();
+        public ObservableCollection<ShieldData> shieldData = new ObservableCollection<ShieldData>();
+        public ObservableCollection<AccessoryData> accessorydData = new ObservableCollection<AccessoryData>();
+        public ObservableCollection<HairstyleData> hairstyleData = new ObservableCollection<HairstyleData>();
+        public ObservableCollection<BagItemData> bagItemData = new ObservableCollection<BagItemData>();
+        public ObservableCollection<LocalItemData> localItemData = new ObservableCollection<LocalItemData>();
+        public ObservableCollection<OffensiveMagicData> offensiveMagicData = new ObservableCollection<OffensiveMagicData>();
+        public ObservableCollection<DefensiveMagicData> defensiveMagicData = new ObservableCollection<DefensiveMagicData>();
+        public ObservableCollection<FieldMagicData> fieldMagicData = new ObservableCollection<FieldMagicData>();
+        public ObservableCollection<BattleSkillData> battleSkillData = new ObservableCollection<BattleSkillData>();
+        public ObservableCollection<DarkArtData> darkArtData = new ObservableCollection<DarkArtData>();
+        public ObservableCollection<CombatFormulaData> combatFormulaData = new ObservableCollection<CombatFormulaData>();
+        public ObservableCollection<CPUNameData> cpuNameData = new ObservableCollection<CPUNameData>();
+        public ObservableCollection<NPCData> npcData = new ObservableCollection<NPCData>();
+        public ObservableCollection<DialogueData> dialogueData = new ObservableCollection<DialogueData>();
+        public ObservableCollection<EffectData> effectData1 = new ObservableCollection<EffectData>();
+        public ObservableCollection<EffectData> effectData2 = new ObservableCollection<EffectData>();
+        public ObservableCollection<EffectData> effectData3 = new ObservableCollection<EffectData>();
+        public ObservableCollection<InstructionData> instructionData = new ObservableCollection<InstructionData>();
+        public ObservableCollection<PrankNameData> prankNameData = new ObservableCollection<PrankNameData>();
+        public ObservableCollection<SpaceData> spaceData = new ObservableCollection<SpaceData>();
+        public ObservableCollection<LocationData> locationData = new ObservableCollection<LocationData>();
+        public ObservableCollection<TempleData> templeData = new ObservableCollection<TempleData>();
+        public ObservableCollection<TownCastleData> townCastleData = new ObservableCollection<TownCastleData>();
+
+        public List<ObservableCollection<RandomLootData>> randomLootData = new List<ObservableCollection<RandomLootData>>();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -61,6 +90,27 @@ namespace DokaponFileReader
             }
         }
 
+        private void SaveMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Title = "Save StageBase File",
+
+                CheckFileExists = false,
+                CheckPathExists = true,
+
+                DefaultExt = "DAT",
+                Filter = "DAT files (*.DAT)|*.DAT",
+                FilterIndex = 2,
+                RestoreDirectory = true,
+            };
+
+            if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                SaveStageBaseFile(saveFileDialog.FileName);
+            }
+        }
+
         private void OpenStageBaseFile(string path)
         {
             DokaponFileReader fileReader = new DokaponFileReader(path);
@@ -76,34 +126,34 @@ namespace DokaponFileReader
 
                 charaFile.ReadCharaFile(fileReader);
 
-                ObservableCollection<JobData> jobData = JobData.GetData(charaFile);
-                ObservableCollection<MonsterData> monsterData = MonsterData.GetData(charaFile);
-                ObservableCollection<WeaponData> weaponData = WeaponData.GetData(charaFile);
-                ObservableCollection<ShieldData> shieldData = ShieldData.GetData(charaFile);
-                ObservableCollection<AccessoryData> accessorydData = AccessoryData.GetData(charaFile);
-                ObservableCollection<HairstyleData> hairstyleData = HairstyleData.GetData(charaFile);
-                ObservableCollection<BagItemData> bagItemData = BagItemData.GetData(charaFile);
-                ObservableCollection<LocalItemData> localItemData = LocalItemData.GetData(charaFile, stageBaseFile);
-                ObservableCollection<OffensiveMagicData> offensiveMagicData = OffensiveMagicData.GetData(charaFile);
-                ObservableCollection<DefensiveMagicData> defensiveMagicData = DefensiveMagicData.GetData(charaFile);
-                ObservableCollection<FieldMagicData> fieldMagicData = FieldMagicData.GetData(charaFile);
-                ObservableCollection<BattleSkillData> battleSkillData = BattleSkillData.GetData(charaFile);
-                ObservableCollection<DarkArtData> darkArtData = DarkArtData.GetData(charaFile);
-                ObservableCollection<CombatFormulaData> combatFormulaData = CombatFormulaData.GetData(charaFile);
-                ObservableCollection<CPUNameData> cpuNameData = CPUNameData.GetData(charaFile);
-                ObservableCollection<NPCData> npcData = NPCData.GetData(charaFile);
-                ObservableCollection<DialogueData> dialogueData = DialogueData.GetData(charaFile);
-                ObservableCollection<EffectData> effectData1 = EffectData.GetDataFromHeader1(charaFile);
-                ObservableCollection<EffectData> effectData2 = EffectData.GetDataFromHeader2(charaFile);
-                ObservableCollection<EffectData> effectData3 = EffectData.GetDataFromHeader3(charaFile);
-                ObservableCollection<InstructionData> instructionData = InstructionData.GetData(charaFile);
-                ObservableCollection<PrankNameData> prankNameData = PrankNameData.GetData(charaFile);
-                ObservableCollection<SpaceData> spaceData = SpaceData.GetData(stageBaseFile);
-                ObservableCollection<LocationData> locationData = LocationData.GetData(stageBaseFile);
-                ObservableCollection<TempleData> templeData = TempleData.GetData(stageBaseFile);
-                ObservableCollection<TownCastleData> townCastleData = TownCastleData.GetData(stageBaseFile);
+                jobData = JobData.GetData(charaFile);
+                monsterData = MonsterData.GetData(charaFile);
+                weaponData = WeaponData.GetData(charaFile);
+                shieldData = ShieldData.GetData(charaFile);
+                accessorydData = AccessoryData.GetData(charaFile);
+                hairstyleData = HairstyleData.GetData(charaFile);
+                bagItemData = BagItemData.GetData(charaFile);
+                localItemData = LocalItemData.GetData(charaFile, stageBaseFile);
+                offensiveMagicData = OffensiveMagicData.GetData(charaFile);
+                defensiveMagicData = DefensiveMagicData.GetData(charaFile);
+                fieldMagicData = FieldMagicData.GetData(charaFile);
+                battleSkillData = BattleSkillData.GetData(charaFile);
+                darkArtData = DarkArtData.GetData(charaFile);
+                combatFormulaData = CombatFormulaData.GetData(charaFile);
+                cpuNameData = CPUNameData.GetData(charaFile);
+                npcData = NPCData.GetData(charaFile);
+                dialogueData = DialogueData.GetData(charaFile);
+                effectData1 = EffectData.GetDataFromHeader1(charaFile);
+                effectData2 = EffectData.GetDataFromHeader2(charaFile);
+                effectData3 = EffectData.GetDataFromHeader3(charaFile);
+                instructionData = InstructionData.GetData(charaFile);
+                prankNameData = PrankNameData.GetData(charaFile);
+                spaceData = SpaceData.GetData(stageBaseFile);
+                locationData = LocationData.GetData(stageBaseFile);
+                templeData = TempleData.GetData(stageBaseFile);
+                townCastleData = TownCastleData.GetData(stageBaseFile);
 
-                List<ObservableCollection<RandomLootData>> randomLootData = new List<ObservableCollection<RandomLootData>>();
+                randomLootData = new List<ObservableCollection<RandomLootData>>();
                 for (int i = 0; i < 69; i++)
                 {
                     randomLootData.Add(RandomLootData.GetData(charaFile, stageBaseFile, i));
@@ -209,6 +259,13 @@ namespace DokaponFileReader
             }
 
             fileReader.Close();
+        }
+
+        private void SaveStageBaseFile(string path)
+        {
+            DokaponFileWriter fileWriter = new DokaponFileWriter(path);
+
+            stageBaseFile.WriteStageBase(fileWriter);
         }
     }
 }

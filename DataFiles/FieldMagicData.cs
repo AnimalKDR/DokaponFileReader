@@ -7,9 +7,9 @@ namespace DokaponFileReader.DataFiles
         public string name { get; set; }
         public uint price { get; set; }
         public float power { get; set; }
-        public int iconID { get; set; }
+        public ushort iconID { get; set; }
         public string magicType { get; set; }
-        public int effectType { get; set; }
+        public ushort effectType { get; set; }
         public string description { get; set; }
 
         public FieldMagicData(string name)
@@ -27,9 +27,8 @@ namespace DokaponFileReader.DataFiles
                 FieldMagicData fieldMagicData = new FieldMagicData(fieldMagic.name);
                 fieldMagicData.price = fieldMagic.price;
                 fieldMagicData.power = (float)(fieldMagic.power / 100.0);
-                if (fieldMagic.magicType != 0)
-                    fieldMagicData.magicType = charFile.FieldMagicTypeNameHeaders[fieldMagic.magicType - 1].name;
-                fieldMagicData.iconID = fieldMagic.objectType;
+                fieldMagicData.magicType = charFile.GetFieldMagicTypeName(fieldMagic.magicType);
+                fieldMagicData.iconID = fieldMagic.iconID;
                 fieldMagicData.effectType = fieldMagic.effectType;
 
                 data.Add(fieldMagicData);
@@ -41,6 +40,24 @@ namespace DokaponFileReader.DataFiles
             }
 
             return data;
+        }
+
+        public static void SetData(ObservableCollection<FieldMagicData> fieldMagicData, ref CharaFile charaFile)
+        {
+            for (int i = 0; i < fieldMagicData.Count && i < charaFile.FieldMagicHeaders.Count; i++)
+            {
+                charaFile.FieldMagicHeaders[i].name = fieldMagicData[i].name;
+                charaFile.FieldMagicHeaders[i].price = fieldMagicData[i].price;
+                charaFile.FieldMagicHeaders[i].power = (ushort)(100 * fieldMagicData[i].power);
+                charaFile.FieldMagicHeaders[i].iconID = fieldMagicData[i].iconID;
+                charaFile.FieldMagicHeaders[i].magicType = charaFile.GetFieldMagicTypeID(fieldMagicData[i].magicType);
+                charaFile.FieldMagicHeaders[i].effectType = fieldMagicData[i].effectType;
+            }
+
+            for (int i = 0; i < fieldMagicData.Count && i < charaFile.FieldMagicDescriptionHeaders.Count; i++)
+            {
+                charaFile.FieldMagicDescriptionHeaders[0].description[i] = fieldMagicData[i].description;
+            }
         }
     }
 }

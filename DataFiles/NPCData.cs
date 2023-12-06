@@ -23,5 +23,13 @@ namespace DokaponFileReader.DataFiles
 
             return data;
         }
+
+        public static void SetData(ObservableCollection<NPCData> npcData, ref CharaFile charaFile)
+        {
+            for (int i = 0; i < npcData.Count && i < charaFile.NPCNameHeaders.Count; i++)
+            {
+                charaFile.NPCNameHeaders[i].name = npcData[i].name;
+            }
+        }
     }
 }

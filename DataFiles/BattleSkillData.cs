@@ -2,7 +2,7 @@
 
 namespace DokaponFileReader.DataFiles
 {
-    internal class BattleSkillData
+    public class BattleSkillData
     {
         public string name { get; set; }
         public int activationRate { get; set; }
@@ -31,6 +31,20 @@ namespace DokaponFileReader.DataFiles
             }
 
             return data;
+        }
+
+        public static void SetData(ObservableCollection<BattleSkillData> battleSkillData, ref CharaFile charaFile)
+        {
+            for (int i = 0; i < battleSkillData.Count && i < charaFile.BattleSkillHeaders.Count; i++)
+            {
+                charaFile.BattleSkillHeaders[i].name = battleSkillData[i].name;
+                charaFile.BattleSkillHeaders[i].activationRate = (byte)battleSkillData[i].activationRate;
+            }
+
+            for (int i = 0; i < battleSkillData.Count && i < charaFile.BattleSkillDescriptionHeaders.Count; i++)
+            {
+                charaFile.BattleSkillDescriptionHeaders[0].description[i] = battleSkillData[i].description;
+            }
         }
     }
 }

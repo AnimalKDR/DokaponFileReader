@@ -449,12 +449,39 @@ namespace DokaponFileReader
             }
         }
 
+        public string GetJobName(int jobIndex)
+        {
+            if (jobIndex >= JobNameHeaders.Count)
+                return "None";
+
+            return JobNameHeaders[jobIndex].name;
+        }
+
+        public byte GetJobIndex(string jobName)
+        { 
+            foreach (var header in JobNameHeaders)
+            {
+                if (header.name == jobName)
+                    return (byte)header.index;
+            }
+
+            return 0xFF;
+        }
+
         public string GetItemName(ItemType type, int id)
         {
             if (id == 0)
                 return ("None");
-            if (id >= 0x80)
-                return ("Clonus");
+            if (id == 0x80)
+                return ("Clonus 1");
+            if (id == 0x81)
+                return ("Clonus 2");
+            if (id == 0x82)
+                return ("Clonus 3");
+            if (id == 0x83)
+                return ("Clonus 4");
+//            if (type == ItemType.BagItem && id == 0x9d)
+ //               return ("Black Diamond");
 
             switch (type)
             {
@@ -462,13 +489,156 @@ namespace DokaponFileReader
                 case ItemType.Shield: return (ShieldHeaders[id - 1].name);
                 case ItemType.Accessory: return (AccessoryHeaders[id - 1].name);
                 case ItemType.Hairstyle: return (HairstyleHeaders[id - 1].name);
-                case ItemType.BagItem: return (BagItemHeaders[id - 1].name);
+                case ItemType.BagItem: 
+                    if (id - 1 >= BagItemHeaders.Count)
+                        return (LocalItemHeaders[id - BagItemHeaders.Count - 1].name);
+                    return (BagItemHeaders[id - 1].name);
                 case ItemType.OffensiveMagic: return (OffensiveMagicHeaders[id - 1].name);
                 case ItemType.DefensiveMagic: return (DefensiveMagicHeaders[id - 1].name);
                 case ItemType.FieldMagic: return (FieldMagicHeaders[id - 1].name);
                 case ItemType.BattleSkill: return (BattleSkillHeaders[id - 1].name);
                 default: return "None";
             }
+        }
+
+        public (byte, byte) GetItemTypeAndID(string itemName)
+        {
+            if (itemName == "Clonus 1")
+                return ((byte)ItemType.BattleSkill, 0x80);
+            if (itemName == "Clonus 2")
+                return ((byte)ItemType.BattleSkill, 0x81);
+            if (itemName == "Clonus 3")
+                return ((byte)ItemType.BattleSkill, 0x82);
+            if (itemName == "Clonus 4")
+                return ((byte)ItemType.BattleSkill, 0x83);
+
+            foreach (var header in WeaponHeaders)
+            {
+                if (header.name == itemName)
+                    return ((byte)ItemType.Weapon, (byte)(header.index + 1));
+            }
+
+            foreach (var header in ShieldHeaders)
+            {
+                if (header.name == itemName)
+                    return ((byte)ItemType.Shield, (byte)(header.index + 1));
+            }
+
+            foreach (var header in AccessoryHeaders)
+            {
+                if (header.name == itemName)
+                    return ((byte)ItemType.Accessory, (byte)(header.index + 1));
+            }
+
+            foreach (var header in HairstyleHeaders)
+            {
+                if (header.name == itemName)
+                    return ((byte)ItemType.Hairstyle, (byte)(header.index + 1));
+            }
+
+            foreach (var header in BagItemHeaders)
+            {
+                if (header.name == itemName)
+                    return ((byte)ItemType.BagItem, (byte)(header.index + 1));
+            }
+
+            foreach (var header in LocalItemHeaders)
+            {
+                if (header.name == itemName)
+                    return ((byte)ItemType.BagItem, (byte)(header.index + BagItemHeaders.Count + 1));
+            }
+
+            foreach (var header in OffensiveMagicHeaders)
+            {
+                if (header.name == itemName)
+                    return ((byte)ItemType.OffensiveMagic, (byte)(header.index + 1));
+            }
+
+            foreach (var header in DefensiveMagicHeaders)
+            {
+                if (header.name == itemName)
+                    return ((byte)ItemType.DefensiveMagic, (byte)(header.index + 1));
+            }
+
+            foreach (var header in FieldMagicHeaders)
+            {
+                if (header.name == itemName)
+                    return ((byte)ItemType.FieldMagic, (byte)(header.index + 1));
+            }
+
+            foreach (var header in BattleSkillHeaders)
+            {
+                if (header.name == itemName)
+                    return ((byte)ItemType.BattleSkill, (byte)(header.index + 1));
+            }
+
+            return ((byte)ItemType.None, 0);
+        }
+
+        public string GetBattleMagicTypeName(byte index)
+        {
+            foreach (var header in BattleMagicTypeNameHeaders)
+            {
+                if ((byte)header.index == index)
+                    return header.name;
+            }
+
+            return "None";
+        }
+
+        public byte GetBattleMagicTypeID(string itemType)
+        {
+            foreach (var header in BattleMagicTypeNameHeaders)
+            {
+                if (header.name == itemType)
+                    return (byte)header.index;
+            }
+
+            return 0;
+        }
+
+        public string GetFieldMagicTypeName(byte index)
+        {
+            foreach (var header in FieldMagicTypeNameHeaders)
+            {
+                if ((byte)header.index == index)
+                    return header.name;
+            }
+
+            return "None";
+        }
+
+        public byte GetFieldMagicTypeID(string itemType)
+        {
+            foreach (var header in FieldMagicTypeNameHeaders)
+            {
+                if (header.name == itemType)
+                    return (byte)header.index;
+            }
+
+            return 0;
+        }
+
+        public string GetBagItemTypeName(byte index)
+        {
+            foreach (var header in BagItemTypeNameHeaders)
+            {
+                if ((byte)header.index == index)
+                    return header.name;
+            }
+
+            return "None";
+        }
+
+        public byte GetBagItemTypeID(string itemType)
+        {
+            foreach (var header in BagItemTypeNameHeaders)
+            {
+                if (header.name == itemType)
+                    return (byte)header.index;
+            }
+
+            return 0;
         }
     }
 }

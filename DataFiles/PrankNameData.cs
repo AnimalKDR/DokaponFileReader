@@ -24,5 +24,13 @@ namespace DokaponFileReader.DataFiles
 
             return data;
         }
+
+        public static void SetData(ObservableCollection<PrankNameData> prankNameData, ref CharaFile charaFile)
+        {
+            for (int i = 0; i < prankNameData.Count && i < charaFile.PrankNameHeaders.Count; i++)
+            {
+                charaFile.PrankNameHeaders[i].name = prankNameData[i].name;
+            }
+        }
     }
 }

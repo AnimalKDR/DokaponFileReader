@@ -23,5 +23,13 @@ namespace DokaponFileReader.DataFiles
 
             return data;
         }
+
+        public static void SetData(ObservableCollection<LocationData> locationData, ref StageBaseFile stageBaseFile)
+        {
+            for (int i = 0; i < locationData.Count && i < stageBaseFile.LocationHeaders.Count; i++)
+            {
+                stageBaseFile.LocationHeaders[i].name = locationData[i].name;
+            }
+        }
     }
 }

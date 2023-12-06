@@ -6,14 +6,14 @@ namespace DokaponFileReader
     {
         public string name { get; set; }
         public uint price { get; set; }
-        public int attack { get; set; }
-        public int defense { get; set; }
-        public int magic { get; set; }
-        public int speed { get; set; }
+        public short attack { get; set; }
+        public short defense { get; set; }
+        public short magic { get; set; }
+        public short speed { get; set; }
         public int hp { get; set; }
         public WeaponHeader.BonusClass bonusClass { get; set; }
-        public int iconID { get; set; }
-        public int activationRate { get; set; }
+        public ushort iconID { get; set; }
+        public byte activationRate { get; set; }
         public WeaponHeader.AnimationType attackAnimation { get; set; }
         public string description { get; set; }
 
@@ -30,15 +30,15 @@ namespace DokaponFileReader
             {
                 WeaponData weaponData = new WeaponData(weapon.name);
                 weaponData.price = weapon.price;
-                weaponData.attack = (int)weapon.attack;
-                weaponData.defense = (int)weapon.defense;
-                weaponData.magic = (int)weapon.magic;
-                weaponData.speed = (int)weapon.speed;
-                weaponData.hp = 10 * (int)weapon.hp;
+                weaponData.attack = weapon.attack;
+                weaponData.defense = weapon.defense;
+                weaponData.magic = weapon.magic;
+                weaponData.speed = weapon.speed;
+                weaponData.hp = 10 * weapon.hp;
                 weaponData.bonusClass = (WeaponHeader.BonusClass)weapon.bonusClass;
-                weaponData.iconID = weapon.objectType;
+                weaponData.iconID = weapon.iconID;
                 weaponData.activationRate = weapon.activationRate;
-                weaponData.attackAnimation = (WeaponHeader.AnimationType)weapon.animationIndex;
+                weaponData.attackAnimation = (WeaponHeader.AnimationType)weapon.attackAnimation;
 
                 data.Add(weaponData);
             }
@@ -49,6 +49,29 @@ namespace DokaponFileReader
             }
 
             return data;
+        }
+
+        public static void SetData(ObservableCollection<WeaponData> weaponData, ref CharaFile charaFile)
+        {
+            for (int i = 0; i < weaponData.Count && i < charaFile.WeaponHeaders.Count; i++)
+            {
+                charaFile.WeaponHeaders[i].name = weaponData[i].name;
+                charaFile.WeaponHeaders[i].price = weaponData[i].price;
+                charaFile.WeaponHeaders[i].attack = weaponData[i].attack;
+                charaFile.WeaponHeaders[i].defense = weaponData[i].defense;
+                charaFile.WeaponHeaders[i].magic = weaponData[i].magic;
+                charaFile.WeaponHeaders[i].speed = weaponData[i].speed;
+                charaFile.WeaponHeaders[i].hp = (short)(weaponData[i].hp / 10);
+                charaFile.WeaponHeaders[i].bonusClass = (byte)weaponData[i].bonusClass;
+                charaFile.WeaponHeaders[i].iconID = weaponData[i].iconID;
+                charaFile.WeaponHeaders[i].activationRate = weaponData[i].activationRate;
+                charaFile.WeaponHeaders[i].attackAnimation = (byte)weaponData[i].attackAnimation;
+            }
+
+            for (int i = 0; i < weaponData.Count && i < charaFile.WeaponDescriptionHeaders.Count; i++)
+            {
+                charaFile.WeaponDescriptionHeaders[0].description[i] = weaponData[i].description;
+            }
         }
     }
 }

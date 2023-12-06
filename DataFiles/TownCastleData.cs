@@ -6,7 +6,7 @@ namespace DokaponFileReader.DataFiles
     {
         public string name { get; set; }
         public string continent { get; set; }
-        public int locationID { get; set; }
+        public ushort mapLocationID { get; set; }
         public uint townValue { get; set; }
 
         public TownCastleData(string name)
@@ -21,22 +21,25 @@ namespace DokaponFileReader.DataFiles
             foreach (var header in stageBaseFile.TownCastleHeaders)
             {
                 TownCastleData townCastle = new TownCastleData(header.name);
-                townCastle.locationID = header.mapLocationID;
+                townCastle.mapLocationID = header.mapLocationID;
                 townCastle.townValue = header.townValue;
-
-                foreach (var location in stageBaseFile.LocationHeaders)
-                {
-                    if (header.continent != location.index)
-                        continue;
-
-                    townCastle.continent = location.name;
-                    break;
-                }
+                townCastle.continent = stageBaseFile.GetLocationName(header.continent);
 
                 data.Add(townCastle);
             }
 
             return data;
+        }
+
+        public static void SetData(ObservableCollection<TownCastleData> townCastleData, ref StageBaseFile stageBaseFile)
+        {
+            for (int i = 0; i < townCastleData.Count && i < stageBaseFile.TownCastleHeaders.Count; i++)
+            {
+                stageBaseFile.TownCastleHeaders[i].name = townCastleData[i].name;
+                stageBaseFile.TownCastleHeaders[i].mapLocationID = townCastleData[i].mapLocationID;
+                stageBaseFile.TownCastleHeaders[i].townValue = townCastleData[i].townValue;
+                stageBaseFile.TownCastleHeaders[i].continent = stageBaseFile.GetLocationIndex(townCastleData[i].continent);
+            }
         }
     }
 }
