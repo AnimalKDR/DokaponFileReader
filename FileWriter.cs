@@ -66,7 +66,7 @@ namespace DokaponFileReader
         public void WriteStringList(List<string> data, int alignment = 4)
         {
             foreach (string str in data)
-                WriteString(str, 2);
+                WriteString(str, alignment);
 
             while (Position() % alignment != 0)
                 Write((byte)0);

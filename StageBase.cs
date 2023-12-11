@@ -24,12 +24,12 @@ namespace DokaponFileReader
         public List<UnknownCastleInfo> UnknownCastleInfos;
         public List<UnknownHeader_78> UnknownHeaders_78;
         public List<RandomLootHeader> RandomLootHeaders;
-        public RandomLootList_85 UnknownHeader_85;
+        public RandomLootList_85 RandomLootListHeader_85;
         public List<RandomEffectHeader> RandomEffectHeaders;
         public List<SpaceNameHeader> SpaceNameHeaders;
         public SpaceDescriptionHeader SpaceDescriptionHeader;
         public List<UnknownHeader_93> UnknownHeaders_93;
-        public RandomLootList_94 UnknownHeader_94;
+        public RandomLootList_94 RandomLootListHeader_94;
         public List<IGBListHeader> IGBListHeaders;
         public UnknownHeader_DB UnknownHeader_DB;
         public List<UnknownHeader_DA> UnknownHeaders_DA;
@@ -61,8 +61,8 @@ namespace DokaponFileReader
 
             EmptyHeader = new EndOfFileHeader(0);
             UnknownHeader_66 = new UnknownHeader_66(0);
-            UnknownHeader_85 = new RandomLootList_85(0);
-            UnknownHeader_94 = new RandomLootList_94(0);
+            RandomLootListHeader_85 = new RandomLootList_85(0);
+            RandomLootListHeader_94 = new RandomLootList_94(0);
             UnknownHeader_DB = new UnknownHeader_DB(0);
             UnknownHeader_E0 = new UnknownHeader_E0(0);
         }
@@ -106,22 +106,50 @@ namespace DokaponFileReader
 
                     case HeaderType.EndOfFile: EmptyHeader = EndOfFileHeader.ReadHeaderBlock(stageFile); break;
                     case HeaderType.Unknown_66: UnknownHeader_66 = UnknownHeader_66.ReadHeaderBlock(stageFile); break;
-                    case HeaderType.RandomLootList_85: UnknownHeader_85 = RandomLootList_85.ReadHeaderBlock(stageFile); break;
+                    case HeaderType.RandomLootList_85: RandomLootListHeader_85 = RandomLootList_85.ReadHeaderBlock(stageFile); break;
                     case HeaderType.SpaceDescription: SpaceDescriptionHeader = SpaceDescriptionHeader.ReadHeaderBlock(stageFile); break;
-                    case HeaderType.RandomLootList_94: UnknownHeader_94 = RandomLootList_94.ReadHeaderBlock(stageFile); break;
+                    case HeaderType.RandomLootList_94: RandomLootListHeader_94 = RandomLootList_94.ReadHeaderBlock(stageFile); break;
                     case HeaderType.Unknown_DB: UnknownHeader_DB = UnknownHeader_DB.ReadHeaderBlock(stageFile); break;
                     case HeaderType.Unknown_E0: UnknownHeader_E0 = UnknownHeader_E0.ReadHeaderBlock(stageFile); break;
 
                     default: Console.WriteLine("Unknown Header!"); break;
                 }
             }
+            SpaceNameHeaders[92].name = "????";
+            SpaceDescriptionHeader.description[45] = "Entrance to the Spring Cave. ";
+            RandomEffectHeaders[35].effectName = "fear";
+            RandomEffectHeaders[36].effectName = "seal";
+
+            FileNameHeader fileheader1 = new FileNameHeader(0);
+            fileheader1.fileName = "B09_Anim.IGB";
+            fileheader1.index = 4;
+            fileheader1.unknownUint16 = 0;
+            IGBListHeaders[9].IGBFiles.Insert(5, fileheader1);
+
+            FileNameHeader fileheader2 = new FileNameHeader(0);
+            fileheader2.fileName = "B09_Anim2.IGB";
+            fileheader2.index = 9;
+            fileheader2.unknownUint16 = 0;
+            IGBListHeaders[9].IGBFiles.Insert(10, fileheader2);
+
+            FileNameHeader fileheader3 = new FileNameHeader(0);
+            fileheader3.fileName = "\0\0\0\0";
+            fileheader3.index = 4;
+            fileheader3.unknownUint16 = 256;
+            IGBListHeaders[9].IGBFiles.Insert(16, fileheader3);
+
+            FileNameHeader fileheader4 = new FileNameHeader(0);
+            fileheader4.fileName = "\0\0\0\0";
+            fileheader4.index = 9;
+            fileheader4.unknownUint16 = 256;
+            IGBListHeaders[9].IGBFiles.Insert(21, fileheader4);
         }
 
         public void WriteStageBase(DokaponFileWriter stageFile)
         {
             stageFile.SetPosition(0);
             stageFile.Write(Encoding.GetEncoding(932).GetBytes(fileHeader));
-            stageFile.Write(fileSize); // must update later
+            stageFile.Write(fileSize);
             stageFile.Write(headerEnd);
 
             while (stageFile.Position() < headerEnd)
@@ -142,6 +170,124 @@ namespace DokaponFileReader
 
             foreach (var header in SpaceNameHeaders)
                 header.WriteHeaderBlock(stageFile);
+
+            foreach (var header in TempleNameHeaders)
+                header.WriteHeaderBlock(stageFile);
+
+            foreach (var header in UnknownHeaders_68)
+                header.WriteHeaderBlock(stageFile);
+
+            UnknownHeader_66.WriteHeaderBlock(stageFile);
+
+            foreach (var header in TownCastleHeaders)
+                header.WriteHeaderBlock(stageFile);
+
+            foreach (var header in UnknownCastleInfos)
+                header.WriteHeaderBlock(stageFile);
+
+            foreach (var header in UnknownHeaders_93)
+                header.WriteHeaderBlock(stageFile);
+
+            UnknownHeaders_03[0].WriteHeaderBlock(stageFile);
+            SpaceDescriptionHeader.WriteBlockData(stageFile);
+            UnknownHeaders_03[0].WriteEndDataBlock(stageFile);
+
+            foreach (var header in UnknownHeaders_2B)
+                header.WriteHeaderBlock(stageFile);
+
+            UnknownHeader_DB.WriteHeaderBlock(stageFile);
+            UnknownHeader_DB.WriteBlockData(stageFile);
+
+            foreach (var header in UnknownHeaders_DA)
+                header.WriteHeaderBlock(stageFile);
+
+            UnknownHeader_E0.WriteHeaderBlock(stageFile);
+            UnknownHeader_E0.WriteBlockData(stageFile);
+
+            foreach (var header in UnknownHeaders_2F)
+                header.WriteHeaderBlock(stageFile);
+
+            foreach (var header in RandomEffectHeaders)
+                header.WriteHeaderBlock(stageFile);
+
+            foreach (var header in RandomLootHeaders)
+                header.WriteHeaderBlock(stageFile);
+
+            RandomLootListHeader_94.WriteHeaderBlock(stageFile);
+            RandomLootListHeader_94.WriteBlockData(stageFile);
+
+            RandomLootListHeader_85.WriteHeaderBlock(stageFile);
+            RandomLootListHeader_85.WriteBlockData(stageFile);
+
+            foreach (var header in UnknownHeaders_78)
+                header.WriteHeaderBlock(stageFile);
+
+            UnknownHeaders_03[1].WriteHeaderBlock(stageFile);
+
+            foreach (var header in RandomLootHeaders)
+                header.WriteBlockData(stageFile);
+
+            bool b = true;
+            foreach (var header in UnknownHeaders_78)
+            {
+                header.WriteBlockData(stageFile);
+                if (b)
+                {
+                    stageFile.Write((UInt32)0);
+                    b = false;
+                }
+            }
+
+            stageFile.Write((UInt32)0);
+            UnknownHeaders_03[1].WriteEndDataBlock(stageFile);
+
+            foreach (var header in IGBListHeaders)
+                header.WriteHeaderBlock(stageFile);
+
+            UnknownHeaders_03[2].WriteHeaderBlock(stageFile);
+
+            foreach (var header in IGBListHeaders)
+                header.WriteBlockData(stageFile);
+
+            foreach (var header in IGBListHeaders)
+                header.WriteEndBlockAddresses(stageFile);
+
+            foreach (var header in IGBListHeaders)
+            {
+                if (header.IGBFiles.Count == 0)
+                {
+                    header.WriteEndBlockHeader(stageFile);
+                    break;
+                }
+            }
+
+            stageFile.Write((UInt32)0);
+            stageFile.Write((UInt32)0);
+            UnknownHeaders_03[2].WriteEndDataBlock(stageFile);
+
+            FileNameHeaders[1].WriteHeaderBlockWithPosition(stageFile);
+
+            // For test only
+            stageFile.Write((UInt32)0x79);
+            stageFile.Write((UInt32)0x73);
+
+            EmptyHeader.WriteHeaderBlock(stageFile);
+
+            for (int i = 0; i < StageFileHeaders.Count; i++)
+            {
+                if (i <= 23)
+                    StageFileHeaders[i].WriteBlockData(stageFile);
+                else
+                    StageFileHeaders[i].WriteBlockAddress(stageFile, StageFileHeaders[23].filePointer);
+            }
+
+            fileSize = (UInt32)stageFile.Position();
+            stageFile.SetPosition(4);
+            stageFile.Write(fileSize);
+            stageFile.SetPosition(fileSize);
+
+            while (stageFile.Position() % 16 != 0)
+                stageFile.Write((byte)0);
 
             stageFile.Close();
         }
