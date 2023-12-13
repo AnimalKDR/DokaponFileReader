@@ -696,7 +696,7 @@ namespace DokaponFileReader
             stageFile.Write(sex);
             stageFile.Write(filler);
 
-            for (int i = 0; i < header.jobFiles.Length; i++)
+            for (int i = 0; i < jobFiles.Length; i++)
                 stageFile.WriteString(jobFiles[i]);
         }
     }
@@ -1435,8 +1435,8 @@ namespace DokaponFileReader
             stageFile.Write(index);
             stageFile.Write(sex);
             stageFile.Write(filler);
-            for (int i = 0; i < header.jobFiles.Length; i++)
-                stageFile.WriteString(header.jobFiles[i]);
+            for (int i = 0; i < jobFiles.Length; i++)
+                stageFile.WriteString(jobFiles[i]);
         }
     }
 
@@ -1520,7 +1520,7 @@ namespace DokaponFileReader
             headerStart = stageFile.Position();
 
             stageFile.Write((UInt32)headerType);
-            stageFile.Write(unknownuint32);
+            stageFile.Write(unknownUint32);
         }
     }
 
@@ -1550,7 +1550,7 @@ namespace DokaponFileReader
 
             stageFile.Write((UInt32)headerType);
             stageFile.Write(index);
-            stageFile.Write(unknownuint32);
+            stageFile.Write(unknownUint32);
         }
     }
 
@@ -1645,7 +1645,7 @@ namespace DokaponFileReader
             startOfData = (UInt32)stageFile.Position();
 
             foreach (var v in dialog)
-                stageFile.WriteString(dialog);
+                stageFile.WriteString(v);
 
             endOfData = (UInt32)stageFile.Position();
             stageFile.SetPosition(headerStart);
@@ -1733,7 +1733,7 @@ namespace DokaponFileReader
             stageFile.SetPosition(currentPosition);
         }
 
-        public void WritePointerData(DokaponFileWriter stageFile)
+        public void WriteBlockData(DokaponFileWriter stageFile)
         {
             for (int i = 0; i < unknownBytes.Count; i++)
             {
@@ -1829,7 +1829,7 @@ namespace DokaponFileReader
             stageFile.SetPosition(currentPosition);
         }
 
-        public void WritePointerData(DokaponFileWriter stageFile)
+        public void WriteBlockData(DokaponFileWriter stageFile)
         {
             for (int i = 0; i < unknownBytes.Count; i++)
             {
@@ -1945,7 +1945,7 @@ namespace DokaponFileReader
             stageFile.Write(defensiveMagicID);
             stageFile.Write(battleSkillID);
             stageFile.Write(experience);
-            stageFile.WriteString(gold);
+            stageFile.Write(gold);
         }
     }
 
