@@ -119,10 +119,10 @@ namespace DokaponFileReader
             {
                 stageBaseFile.ReadStageBase(fileReader);
 
-                while (fileReader.Position() % 16 != 0)
+                while (fileReader.GetPosition() % 16 != 0)
                     fileReader.GetByte();
 
-                fileReader.fileOffset = (UInt32)fileReader.Position();
+                fileReader.fileOffset = (UInt32)fileReader.GetPosition();
 
                 charaFile.ReadCharaFile(fileReader);
 
@@ -267,7 +267,7 @@ namespace DokaponFileReader
 
             stageBaseFile.WriteStageBase(fileWriter);
 
-            fileWriter.fileOffset = (UInt32)fileWriter.Position();
+            fileWriter.fileOffset = (UInt32)fileWriter.GetPosition();
 
             charaFile.WriteCharaFile(fileWriter);
 

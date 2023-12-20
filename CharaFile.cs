@@ -1,4 +1,8 @@
-﻿using System.Text;
+﻿using System.IO;
+using System.Reflection;
+using System.Text;
+using System.Windows.Documents;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace DokaponFileReader
 {
@@ -309,7 +313,7 @@ namespace DokaponFileReader
             headerSize = stageFile.GetUInt32();
             stageFile.Read(ref filler);
 
-            while (stageFile.Position() < stageFile.fileOffset + fileSize && stageFile.Read(ref wordBuffer) > 0)
+            while (stageFile.GetRelativePosition() < fileSize && stageFile.Read(ref wordBuffer) > 0)
             {
                 var header = BitConverter.ToUInt32(wordBuffer);
 
@@ -554,6 +558,236 @@ namespace DokaponFileReader
             BattleSkillDescriptionHeader.WriteBlockData(stageFile);
             CharUnknownHeaders_03[5].WriteEndDataBlock(stageFile);
 
+            JobDescriptionHeader.WriteHeaderBlock(stageFile);
+            foreach (var header in JobNameHeaders)
+                header.WriteHeaderBlock(stageFile);
+            foreach (var header in JobBattleSkillHeaders)
+                header.WriteHeaderBlock(stageFile);
+            foreach (var header in JobStartingStatsHeaders)
+                header.WriteHeaderBlock(stageFile);
+            foreach (var header in JobLevelAndMasteryHeaders)
+                header.WriteHeaderBlock(stageFile);
+            foreach (var header in JobItemSpaceHeaders)
+                header.WriteHeaderBlock(stageFile);
+            foreach (var header in JobLevelUpRequirementHeaders)
+                header.WriteHeaderBlock(stageFile);
+            foreach (var header in JobSalaryHeaders)
+                header.WriteHeaderBlock(stageFile);
+            foreach (var header in JobRequirementHeaders)
+                header.WriteHeaderBlock(stageFile);
+            foreach (var header in JobUnknownInfoHeaders1)
+                header.WriteHeaderBlock(stageFile);
+            foreach (var header in JobFileHeaders1)
+                header.WriteHeaderBlock(stageFile);
+            foreach (var header in JobFileHeaders2)
+                header.WriteHeaderBlock(stageFile);
+            foreach (var header in JobUnknownInfoHeaders2)
+                header.WriteHeaderBlock(stageFile);
+            foreach (var header in UnknownHeaders_38)
+                header.WriteHeaderBlock(stageFile);
+            foreach (var header in UnknownHeaders_39)
+                header.WriteHeaderBlock(stageFile);
+            foreach (var header in UnknownHeaders_8F)
+                header.WriteHeaderBlock(stageFile);
+            CharUnknownHeaders_03[6].WriteHeaderBlock(stageFile);
+            foreach (var header in UnknownHeaders_39)
+                header.WriteBlockData(stageFile);
+            foreach (var header in UnknownHeaders_8F)
+                header.WriteBlockData(stageFile);
+            JobDescriptionHeader.WriteBlockData(stageFile);
+            CharUnknownHeaders_03[6].WriteEndDataBlock(stageFile);
+
+            CharFileNameHeaders[1].WriteHeaderBlockWithPosition(stageFile);
+
+            foreach (var header in EffectNameHeaders1)
+                header.WriteHeaderBlock(stageFile);
+            foreach (var header in EffectNameHeaders2)
+                header.WriteHeaderBlock(stageFile);
+            foreach (var header in EffectNameHeaders3)
+                header.WriteHeaderBlock(stageFile);
+            foreach (var header in UnknownHeaders_8E)
+                header.WriteHeaderBlock(stageFile);
+            foreach (var header in UnknownHeaders_9A)
+                header.WriteHeaderBlock(stageFile);
+            foreach (var header in UnknownHeaders_9B)
+                header.WriteHeaderBlock(stageFile);
+            UnknownHeader_9E.WriteHeaderBlock(stageFile);
+            UnknownHeader_9E.WriteBlockData(stageFile);
+            UnknownHeader_8C.WriteHeaderBlock(stageFile);
+
+            foreach (var header in CPUNamesHeaders)
+                header.WriteHeaderBlock(stageFile);
+            CharUnknownHeaders_03[7].WriteHeaderBlock(stageFile);
+            foreach (var header in CPUNamesHeaders)
+                header.WriteBlockData(stageFile);
+            CharUnknownHeaders_03[7].WriteEndDataBlock(stageFile);
+
+            foreach (var header in UnknownHeaders_17)
+                header.WriteHeaderBlock(stageFile);
+
+            MonsterDescriptionHeader.WriteHeaderBlock(stageFile);
+            foreach (var header in MonsterHeaders)
+                header.WriteHeaderBlock(stageFile);
+            foreach (var header in MonsterItemDropHeaders)
+                header.WriteHeaderBlock(stageFile);
+            foreach (var header in MonsterUnknownInfoHeaders1)
+                header.WriteHeaderBlock(stageFile);
+            foreach (var header in MonsterUnknownInfoHeaders2)
+                header.WriteHeaderBlock(stageFile);
+            foreach (var header in MonsterTypeHeaders)
+                header.WriteHeaderBlock(stageFile);
+            foreach (var header in MonsterAITableHeaders)
+                header.WriteHeaderBlock(stageFile);
+            foreach (var header in UnknownHeaders_52)
+                header.WriteHeaderBlock(stageFile);
+            foreach (var header in UnknownHeaders_54)
+                header.WriteHeaderBlock(stageFile);
+            CharUnknownHeaders_03[8].WriteHeaderBlock(stageFile);
+            foreach (var header in MonsterUnknownInfoHeaders2)
+                header.WriteBlockData(stageFile);
+            MonsterDescriptionHeader.WriteBlockData(stageFile);
+            CharUnknownHeaders_03[8].WriteEndDataBlock(stageFile);
+
+            foreach (var header in NPCNameHeaders)
+                header.WriteHeaderBlock(stageFile);
+            foreach (var header in NPCUnknownInfoHeaders)
+                header.WriteHeaderBlock(stageFile);
+            foreach (var header in NPCFileInfoHeaders)
+                header.WriteHeaderBlock(stageFile);
+            CharUnknownHeaders_03[9].WriteHeaderBlock(stageFile);
+            WriteNPCFileInfoHeaders(stageFile);
+            CharUnknownHeaders_03[9].WriteEndDataBlock(stageFile);
+
+            foreach (var header in EtcFileNameHeaders)
+                header.WriteHeaderBlock(stageFile);
+            foreach (var header in TextureFileNameHeaders)
+                header.WriteHeaderBlock(stageFile);
+            UnknownHeader_2C.WriteHeaderBlock(stageFile);
+            foreach (var header in UnknownHeaders_2D)
+                header.WriteHeaderBlock(stageFile);
+            UnknownHeader_9D.WriteHeaderBlock(stageFile);
+            UnknownHeader_9C.WriteHeaderBlock(stageFile);
+            UnknownHeader_E1.WriteHeaderBlock(stageFile);
+            UnknownHeader_4F.WriteHeaderBlock(stageFile);
+            foreach (var header in UnknownHeaders_4E)
+                header.WriteHeaderBlock(stageFile);
+            UnknownHeader_4D.WriteHeaderBlock(stageFile);
+            CharUnknownHeaders_03[10].WriteHeaderBlock(stageFile);
+            UnknownHeader_4D.WritePointerData(stageFile);
+            UnknownHeader_4D.WriteBlockData(stageFile);
+            UnknownHeader_4F.WritePointerData(stageFile);
+            UnknownHeader_4F.WriteBlockData(stageFile);
+        }
+
+        public void WriteNPCFileInfoHeaders(DokaponFileWriter stageFile)
+        {
+            for (int header = 0; header < NPCFileInfoHeaders.Count; header++)
+            {
+                for (int pointer1 = 0; pointer1 < NPCFileInfoHeaders[header].unknownPointers1.Count; pointer1++)
+                {
+                    // skip previous duplicates
+                    if (NPCFileInfoHeaders[header].duplicatePointers1[pointer1])
+                        continue;
+
+                    // search second set of pointers for duplicates
+                    for (int pointer2 = 0; pointer2 < NPCFileInfoHeaders[header].unknownPointers2.Count; pointer2++)
+                    {
+                        // skip previous duplicates
+                        if (NPCFileInfoHeaders[header].duplicatePointers2[pointer2])
+                            continue;
+
+                        if (NPCFileInfoHeaders[header].unknownPointers2[pointer2].pointer == NPCFileInfoHeaders[header].unknownPointers1[pointer1].pointer)
+                        {
+                            NPCFileInfoHeaders[header].unknownPointers2[pointer2].pointer = stageFile.GetRelativePosition();
+                            NPCFileInfoHeaders[header].duplicatePointers2[pointer2] = true;
+                        }
+                    }
+
+                    // check for duplicates in all additional headers
+                    for (int nextHeader = header + 1; nextHeader < NPCFileInfoHeaders.Count; nextHeader++)
+                    {
+                        // check first pointer set
+                        for (int nextPointer1 = 0; nextPointer1 < NPCFileInfoHeaders[nextHeader].unknownPointers1.Count; nextPointer1++)
+                        {
+                            // skip previous duplicates
+                            if (NPCFileInfoHeaders[nextHeader].duplicatePointers1[nextPointer1])
+                                continue;
+
+                            if (NPCFileInfoHeaders[nextHeader].unknownPointers1[nextPointer1].pointer == NPCFileInfoHeaders[header].unknownPointers1[pointer1].pointer)
+                            {
+                                NPCFileInfoHeaders[nextHeader].unknownPointers1[nextPointer1].pointer = stageFile.GetRelativePosition();
+                                NPCFileInfoHeaders[nextHeader].duplicatePointers1[nextPointer1] = true;
+                            }
+                        }
+
+                        // check second pointer set
+                        for (int nextPointer2 = 0; nextPointer2 < NPCFileInfoHeaders[nextHeader].unknownPointers2.Count; nextPointer2++)
+                        {
+                            // skip previous duplicates
+                            if (NPCFileInfoHeaders[nextHeader].duplicatePointers2[nextPointer2])
+                                continue;
+
+                            if (NPCFileInfoHeaders[nextHeader].unknownPointers2[nextPointer2].pointer == NPCFileInfoHeaders[header].unknownPointers1[pointer1].pointer)
+                            {
+                                NPCFileInfoHeaders[nextHeader].unknownPointers2[nextPointer2].pointer = stageFile.GetRelativePosition();
+                                NPCFileInfoHeaders[nextHeader].duplicatePointers2[nextPointer2] = true;
+                            }
+                        }
+                    }
+
+                    NPCFileInfoHeaders[header].unknownPointers1[pointer1].pointer = stageFile.GetRelativePosition();
+                    foreach (var v in NPCFileInfoHeaders[header].unknownUInt16s1[pointer1])
+                        stageFile.Write(v);
+                }
+
+                for (int pointer2 = 0; pointer2 < NPCFileInfoHeaders[header].unknownPointers2.Count; pointer2++)
+                {
+                    // skip previous duplicates
+                    if (NPCFileInfoHeaders[header].duplicatePointers2[pointer2])
+                        continue;
+
+                    // check for duplicates in all additional headers
+                    for (int nextHeader = header + 1; nextHeader < NPCFileInfoHeaders.Count; nextHeader++)
+                    {
+                        // check first pointer set
+                        for (int nextPointer1 = 0; nextPointer1 < NPCFileInfoHeaders[nextHeader].unknownPointers1.Count; nextPointer1++)
+                        {
+                            // skip previous duplicates
+                            if (NPCFileInfoHeaders[nextHeader].duplicatePointers1[nextPointer1])
+                                continue;
+
+                            if (NPCFileInfoHeaders[nextHeader].unknownPointers1[nextPointer1].pointer == NPCFileInfoHeaders[header].unknownPointers2[pointer2].pointer)
+                            {
+                                NPCFileInfoHeaders[nextHeader].unknownPointers1[nextPointer1].pointer = stageFile.GetRelativePosition();
+                                NPCFileInfoHeaders[nextHeader].duplicatePointers1[nextPointer1] = true;
+                            }
+                        }
+
+                        // check second pointer set
+                        for (int nextPointer2 = 0; nextPointer2 < NPCFileInfoHeaders[nextHeader].unknownPointers2.Count; nextPointer2++)
+                        {
+                            // skip previous duplicates
+                            if (NPCFileInfoHeaders[nextHeader].duplicatePointers2[nextPointer2])
+                                continue;
+
+                            if (NPCFileInfoHeaders[nextHeader].unknownPointers2[nextPointer2].pointer == NPCFileInfoHeaders[header].unknownPointers2[pointer2].pointer)
+                            {
+                                NPCFileInfoHeaders[nextHeader].unknownPointers2[nextPointer2].pointer = stageFile.GetRelativePosition();
+                                NPCFileInfoHeaders[nextHeader].duplicatePointers2[nextPointer2] = true;
+                            }
+                        }
+                    }
+
+                    NPCFileInfoHeaders[header].unknownPointers2[pointer2].pointer = stageFile.GetRelativePosition();
+                    foreach (var v in NPCFileInfoHeaders[header].unknownUInt16s2[pointer2])
+                        stageFile.Write(v);
+                }
+
+                var currentPosition = stageFile.GetPosition();
+                stageFile.SetPosition(NPCFileInfoHeaders[header].headerStart);
+                NPCFileInfoHeaders[header].WriteHeaderBlock(stageFile);
+                stageFile.SetPosition(currentPosition);
+            }
         }
 
         public string GetJobName(int jobIndex)

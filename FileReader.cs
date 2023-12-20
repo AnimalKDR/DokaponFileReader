@@ -90,9 +90,9 @@ namespace DokaponFileReader
         }
         public string GetStringAtPosition(UInt32 position, int bytesToRead = 4, bool reread = false)
         {
-            var currentPosition = Position();
+            var currentPosition = GetPosition();
 
-            SetPosition(position + fileOffset);
+            SetRelativePosition(position);
             string result = GetString(bytesToRead, reread);
             SetPosition(currentPosition);
 
@@ -104,14 +104,14 @@ namespace DokaponFileReader
             List<string> result = new List<string>();
             byte[] buffer = new byte[bytesToRead];
 
-            var currentPosition = Position();
-            SetPosition(position + fileOffset);
+            var currentPosition = GetPosition();
+            SetRelativePosition(position);
             do
             {
                 result.Add(GetString(2, reread));
             } while (result.Last().Length > bytesToRead);
 
-            while (Position() % 4 != 0)
+            while (GetPosition() % 4 != 0)
                 Read(ref buffer, reread);
 
             SetPosition(currentPosition);
@@ -123,10 +123,10 @@ namespace DokaponFileReader
         {
             List<string> result = new List<string>();
 
-            var currentPosition = Position();
-            SetPosition(sectionStart + fileOffset);
+            var currentPosition = GetPosition();
+            SetRelativePosition(sectionStart);
 
-            while (Position() < sectionEnd + fileOffset)
+            while (GetRelativePosition() < sectionEnd)
                 result.Add(GetString(bytesToRead, reread));
 
             SetPosition(currentPosition);
@@ -143,7 +143,7 @@ namespace DokaponFileReader
                 result.Add(GetByte(reread));
             } while (result.Last() != 0xFF);
 
-            while (Position() % 4 != 0)
+            while (GetPosition() % 4 != 0)
                 GetByte(reread);
 
             return result;
@@ -153,8 +153,8 @@ namespace DokaponFileReader
         {
             List<byte> result = new List<byte>();
             int count = 0;
-            var currentPosition = Position();
-            SetPosition(position + fileOffset);
+            var currentPosition = GetPosition();
+            SetRelativePosition(position);
 
             do
             {
@@ -165,7 +165,7 @@ namespace DokaponFileReader
 
             } while (count < tokenCount);
 
-            while (Position() % 4 != 0)
+            while (GetPosition() % 4 != 0)
                 GetByte();
 
             SetPosition(currentPosition);
@@ -175,8 +175,8 @@ namespace DokaponFileReader
 
         public List<byte> GetByteListAtPosition(UInt32 position, bool reread = false)
         {
-            var currentPosition = Position();
-            SetPosition(position + fileOffset);
+            var currentPosition = GetPosition();
+            SetRelativePosition(position);
 
             List<byte> result = GetByteList(reread);
 
@@ -189,13 +189,13 @@ namespace DokaponFileReader
         {
             List<byte> result = new List<byte>();
 
-            var currentPosition = Position();
-            SetPosition(setctionStart + fileOffset);
+            var currentPosition = GetPosition();
+            SetRelativePosition(setctionStart);
 
-            while (Position() < sectionEnd + fileOffset)
+            while (GetRelativePosition() < sectionEnd)
                 result.Add(GetByte(reread));
 
-            while (Position() % 4 != 0)
+            while (GetPosition() % 4 != 0)
                 GetByte(reread);
 
             SetPosition(currentPosition);
@@ -212,7 +212,7 @@ namespace DokaponFileReader
                 result.Add(GetUInt16(reread));
             } while (((byte)result.Last()) != 0xFF);
 
-            while (Position() % 4 != 0)
+            while (GetPosition() % 4 != 0)
                 result.Add(GetUInt16(reread));
 
             return result;
@@ -220,8 +220,8 @@ namespace DokaponFileReader
 
         public List<UInt16> GetUInt16ListAtPosition(UInt32 position, bool reread = false)
         {
-            var currentPosition = Position();
-            SetPosition(position + fileOffset);
+            var currentPosition = GetPosition();
+            SetRelativePosition(position);
 
             List<UInt16> result = GetUInt16List(reread);
 
@@ -244,8 +244,8 @@ namespace DokaponFileReader
 
         public List<UInt32> GetUInt32ListAtPosition(UInt32 position, bool reread = false)
         {
-            var currentPosition = Position();
-            SetPosition(position + fileOffset);
+            var currentPosition = GetPosition();
+            SetRelativePosition(position);
 
             List<UInt32> result = GetUInt32List(reread);
 
@@ -259,14 +259,24 @@ namespace DokaponFileReader
             fileStream.Close();
         }
 
-        public long Position()
+        public UInt32 GetPosition()
         {
-            return fileStream.Position;
+            return (UInt32)fileStream.Position;
         }
 
-        public void SetPosition(long position)
+        public UInt32 GetRelativePosition()
+        {
+            return (UInt32)fileStream.Position - fileOffset;
+        }
+
+        public void SetPosition(UInt32 position)
         {
             fileStream.Position = position;
+        }
+
+        public void SetRelativePosition(UInt32 position)
+        {
+            fileStream.Position = position + fileOffset;
         }
 
         public bool PositionAlreadyRead(long position)

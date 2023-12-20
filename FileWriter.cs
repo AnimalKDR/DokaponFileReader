@@ -68,29 +68,29 @@ namespace DokaponFileReader
             foreach (string str in data)
                 WriteString(str, alignment);
 
-            while (Position() % alignment != 0)
+            while (GetPosition() % alignment != 0)
                 Write((byte)0);
         }
 
         public void WriteStringAtPosition(string data, UInt32 position, int alignment = 4)
         {
-            var currentPosition = Position();
+            var currentPosition = GetPosition();
 
-            SetPosition(position + fileOffset);
+            SetRelativePosition(position);
             WriteString(data, alignment);
             SetPosition(currentPosition);
         }
 
         public void WriteStringListAtPosition(List<string> data, UInt32 position, int alignment = 4)
         {
-            var currentPosition = Position();
+            var currentPosition = GetPosition();
 
-            SetPosition(position + fileOffset);
+            SetRelativePosition(position);
 
             foreach (string str in data)
                 WriteString(str, 2);
 
-            while (Position() % alignment != 0)
+            while (GetPosition() % alignment != 0)
                 Write((byte)0);
 
             SetPosition(currentPosition);
@@ -101,14 +101,14 @@ namespace DokaponFileReader
             foreach(byte b in data)
                 Write(b);
 
-            while (Position() % alignment != 0)
+            while (GetPosition() % alignment != 0)
                 Write((byte)0);
         }
 
         public void WriteByteListAtPosition(List<byte> data, UInt32 position, int alignment = 4)
         {
-            var currentPosition = Position();
-            SetPosition(position + fileOffset);
+            var currentPosition = GetPosition();
+            SetRelativePosition(position);
             WriteByteList(data, alignment);
             SetPosition(currentPosition);
         }
@@ -118,14 +118,14 @@ namespace DokaponFileReader
             foreach(UInt16 v in data)
                 Write(v);
 
-            while (Position() % alignment != 0)
+            while (GetPosition() % alignment != 0)
                 Write((byte)0);
         }
 
         public void WriteUInt16ListAtPosition(List<UInt16> data, UInt32 position, int alignment = 4)
         {
-            var currentPosition = Position();
-            SetPosition(position + fileOffset);
+            var currentPosition = GetPosition();
+            SetRelativePosition(position);
             WriteUInt16List(data, alignment);
             SetPosition(currentPosition);
         }
@@ -138,8 +138,8 @@ namespace DokaponFileReader
 
         public void WriteUInt32ListAtPosition(List<UInt32> data, UInt32 position)
         {
-            var currentPosition = Position();
-            SetPosition(position + fileOffset);
+            var currentPosition = GetPosition();
+            SetRelativePosition(position);
             WriteUInt32List(data);
             SetPosition(currentPosition);
         }
@@ -150,14 +150,24 @@ namespace DokaponFileReader
             fileStream.Close();
         }
 
-        public long Position()
+        public UInt32 GetPosition()
         {
-            return fileStream.Position;
+            return (UInt32)fileStream.Position;
         }
 
-        public void SetPosition(long position)
+        public UInt32 GetRelativePosition()
+        {
+            return (UInt32)fileStream.Position - fileOffset;
+        }
+
+        public void SetPosition(UInt32 position)
         {
             fileStream.Position = position;
+        }
+
+        public void SetRelativePosition(UInt32 position)
+        {
+            fileStream.Position = position + fileOffset;
         }
     }
 }

@@ -81,7 +81,7 @@ namespace DokaponFileReader
             stageFile.Read(ref filler);
 
 
-            while (stageFile.Position() < fileSize && stageFile.Read(ref wordBuffer) > 0)
+            while (stageFile.GetPosition() < fileSize && stageFile.Read(ref wordBuffer) > 0)
             {
                 var header = BitConverter.ToUInt32(wordBuffer);
 
@@ -160,81 +160,60 @@ namespace DokaponFileReader
             stageFile.Write(fileSize);
             stageFile.Write(headerEnd);
 
-            while (stageFile.Position() < headerEnd)
+            while (stageFile.GetPosition() < headerEnd)
                 stageFile.Write((byte)0);
 
             FileNameHeaders[0].WriteHeaderBlock(stageFile);
 
             foreach (var header in StageFileHeaders)
                 header.WriteHeaderBlock(stageFile);
-
             foreach (var header in UnknownHeaders_6E)
                 header.WriteHeaderBlock(stageFile);
-
             foreach (var header in LocationHeaders)
                 header.WriteHeaderBlock(stageFile);
 
             SpaceDescriptionHeader.WriteHeaderBlock(stageFile);
-
             foreach (var header in SpaceNameHeaders)
                 header.WriteHeaderBlock(stageFile);
-
             foreach (var header in TempleNameHeaders)
                 header.WriteHeaderBlock(stageFile);
-
             foreach (var header in UnknownHeaders_68)
                 header.WriteHeaderBlock(stageFile);
-
             UnknownHeader_66.WriteHeaderBlock(stageFile);
-
             foreach (var header in TownCastleHeaders)
                 header.WriteHeaderBlock(stageFile);
-
             foreach (var header in UnknownCastleInfos)
                 header.WriteHeaderBlock(stageFile);
-
             foreach (var header in UnknownHeaders_93)
                 header.WriteHeaderBlock(stageFile);
-
             UnknownHeaders_03[0].WriteHeaderBlock(stageFile);
             SpaceDescriptionHeader.WriteBlockData(stageFile);
             UnknownHeaders_03[0].WriteEndDataBlock(stageFile);
 
             foreach (var header in UnknownHeaders_2B)
                 header.WriteHeaderBlock(stageFile);
-
             UnknownHeader_DB.WriteHeaderBlock(stageFile);
             UnknownHeader_DB.WriteBlockData(stageFile);
-
             foreach (var header in UnknownHeaders_DA)
                 header.WriteHeaderBlock(stageFile);
-
             UnknownHeader_E0.WriteHeaderBlock(stageFile);
             UnknownHeader_E0.WriteBlockData(stageFile);
-
             foreach (var header in UnknownHeaders_2F)
                 header.WriteHeaderBlock(stageFile);
-
             foreach (var header in RandomEffectHeaders)
                 header.WriteHeaderBlock(stageFile);
 
             foreach (var header in RandomLootHeaders)
                 header.WriteHeaderBlock(stageFile);
-
             RandomLootListHeader_94.WriteHeaderBlock(stageFile);
             RandomLootListHeader_94.WriteBlockData(stageFile);
-
             RandomLootListHeader_85.WriteHeaderBlock(stageFile);
             RandomLootListHeader_85.WriteBlockData(stageFile);
-
             foreach (var header in UnknownHeaders_78)
                 header.WriteHeaderBlock(stageFile);
-
             UnknownHeaders_03[1].WriteHeaderBlock(stageFile);
-
             foreach (var header in RandomLootHeaders)
                 header.WriteBlockData(stageFile);
-
             bool b = true;
             foreach (var header in UnknownHeaders_78)
             {
@@ -245,21 +224,16 @@ namespace DokaponFileReader
                     b = false;
                 }
             }
-
             stageFile.Write((UInt32)0);
             UnknownHeaders_03[1].WriteEndDataBlock(stageFile);
 
             foreach (var header in IGBListHeaders)
                 header.WriteHeaderBlock(stageFile);
-
             UnknownHeaders_03[2].WriteHeaderBlock(stageFile);
-
             foreach (var header in IGBListHeaders)
                 header.WriteBlockData(stageFile);
-
             foreach (var header in IGBListHeaders)
                 header.WriteEndBlockAddresses(stageFile);
-
             foreach (var header in IGBListHeaders)
             {
                 if (header.IGBFiles.Count == 0)
@@ -268,18 +242,14 @@ namespace DokaponFileReader
                     break;
                 }
             }
-
             stageFile.Write((UInt32)0);
             stageFile.Write((UInt32)0);
             UnknownHeaders_03[2].WriteEndDataBlock(stageFile);
 
             FileNameHeaders[1].WriteHeaderBlockWithPosition(stageFile);
-
             if (UnknownHeader_79.headerStart > 0)
                 UnknownHeader_79.WriteHeaderBlock(stageFile);
-
             EmptyHeader.WriteHeaderBlock(stageFile);
-
             for (int i = 0; i < StageFileHeaders.Count; i++)
             {
                 if (i <= 23)
@@ -288,12 +258,12 @@ namespace DokaponFileReader
                     StageFileHeaders[i].WriteBlockAddress(stageFile, StageFileHeaders[23].filePointer);
             }
 
-            fileSize = (UInt32)stageFile.Position();
+            fileSize = (UInt32)stageFile.GetPosition();
             stageFile.SetPosition(4);
             stageFile.Write(fileSize);
             stageFile.SetPosition(fileSize);
 
-            while (stageFile.Position() % 16 != 0)
+            while (stageFile.GetPosition() % 16 != 0)
                 stageFile.Write((byte)0);
         }
 
