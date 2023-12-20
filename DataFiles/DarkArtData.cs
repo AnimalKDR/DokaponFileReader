@@ -25,9 +25,9 @@ namespace DokaponFileReader.DataFiles
                 data.Add(darkArtData);
             }
 
-            for (int i = 0; i < charaFile.DarkArtDescritpionHeaders[0].description.Count && i < data.Count; i++)
+            for (int i = 0; i < charaFile.DarkArtDescriptionHeader.description.Count && i < data.Count; i++)
             {
-                data[i].description = charaFile.DarkArtDescritpionHeaders[0].description[i];
+                data[i].description = charaFile.DarkArtDescriptionHeader.description[i];
             }
 
             return data;
@@ -41,9 +41,9 @@ namespace DokaponFileReader.DataFiles
                 charaFile.DarkArtHeaders[i].pointCost = darkArtData[i].cost;
             }
 
-            for (int i = 0; i < darkArtData.Count && i < charaFile.DarkArtDescritpionHeaders.Count; i++)
+            for (int i = 0; i < darkArtData.Count && i < charaFile.DarkArtDescriptionHeader.description.Count; i++)
             {
-                charaFile.DarkArtDescritpionHeaders[0].description[i] = darkArtData[i].description;
+                charaFile.DarkArtDescriptionHeader.description[i] = darkArtData[i].description;
             }
         }
     }

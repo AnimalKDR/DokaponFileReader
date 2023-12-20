@@ -25,9 +25,9 @@ namespace DokaponFileReader.DataFiles
                 data.Add(battlerSkillData);
             }
 
-            for (int i = 0; i < charaFile.BattleSkillDescriptionHeaders[0].description.Count && i < data.Count; i++)
+            for (int i = 0; i < charaFile.BattleSkillDescriptionHeader.description.Count && i < data.Count; i++)
             {
-                data[i].description = charaFile.BattleSkillDescriptionHeaders[0].description[i];
+                data[i].description = charaFile.BattleSkillDescriptionHeader.description[i];
             }
 
             return data;
@@ -41,9 +41,9 @@ namespace DokaponFileReader.DataFiles
                 charaFile.BattleSkillHeaders[i].activationRate = (byte)battleSkillData[i].activationRate;
             }
 
-            for (int i = 0; i < battleSkillData.Count && i < charaFile.BattleSkillDescriptionHeaders.Count; i++)
+            for (int i = 0; i < battleSkillData.Count && i < charaFile.BattleSkillDescriptionHeader.description.Count; i++)
             {
-                charaFile.BattleSkillDescriptionHeaders[0].description[i] = battleSkillData[i].description;
+                charaFile.BattleSkillDescriptionHeader.description[i] = battleSkillData[i].description;
             }
         }
     }

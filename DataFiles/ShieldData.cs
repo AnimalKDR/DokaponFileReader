@@ -40,9 +40,9 @@ namespace DokaponFileReader
                 data.Add(shieldData);
             }
 
-            for (int i = 0; i < charaFile.ShieldDescriptionHeaders[0].description.Count && i < data.Count; i++)
+            for (int i = 0; i < charaFile.ShieldDescriptionHeader.description.Count && i < data.Count; i++)
             {
-                data[i].description = charaFile.ShieldDescriptionHeaders[0].description[i];
+                data[i].description = charaFile.ShieldDescriptionHeader.description[i];
             }
 
             return data;
@@ -63,9 +63,9 @@ namespace DokaponFileReader
                 charaFile.ShieldHeaders[i].activationRate = shieldData[i].activationRate;
             }
 
-            for (int i = 0; i < shieldData.Count && i < charaFile.WeaponDescriptionHeaders.Count; i++)
+            for (int i = 0; i < shieldData.Count && i < charaFile.ShieldDescriptionHeader.description.Count; i++)
             {
-                charaFile.WeaponDescriptionHeaders[0].description[i] = shieldData[i].description;
+                charaFile.ShieldDescriptionHeader.description[i] = shieldData[i].description;
             }
         }
     }

@@ -43,9 +43,9 @@ namespace DokaponFileReader
                 data.Add(weaponData);
             }
 
-            for (int i = 0; i < charaFile.WeaponDescriptionHeaders[0].description.Count && i < data.Count; i++)
+            for (int i = 0; i < charaFile.WeaponDescriptionHeader.description.Count && i < data.Count; i++)
             {
-                data[i].description = charaFile.WeaponDescriptionHeaders[0].description[i];
+                data[i].description = charaFile.WeaponDescriptionHeader.description[i];
             }
 
             return data;
@@ -68,9 +68,9 @@ namespace DokaponFileReader
                 charaFile.WeaponHeaders[i].attackAnimation = (byte)weaponData[i].attackAnimation;
             }
 
-            for (int i = 0; i < weaponData.Count && i < charaFile.WeaponDescriptionHeaders.Count; i++)
+            for (int i = 0; i < weaponData.Count && i < charaFile.WeaponDescriptionHeader.description.Count; i++)
             {
-                charaFile.WeaponDescriptionHeaders[0].description[i] = weaponData[i].description;
+                charaFile.WeaponDescriptionHeader.description[i] = weaponData[i].description;
             }
         }
     }

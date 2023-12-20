@@ -40,9 +40,9 @@ namespace DokaponFileReader
                 data.Add(accessoryData);
             }
 
-            for (int i = 0; i < charaFile.AccessoryDescriptionHeaders[0].description.Count && i < data.Count; i++)
+            for (int i = 0; i < charaFile.AccessoryDescriptionHeader.description.Count && i < data.Count; i++)
             {
-                data[i].description = charaFile.AccessoryDescriptionHeaders[0].description[i];
+                data[i].description = charaFile.AccessoryDescriptionHeader.description[i];
             }
 
             return data;
@@ -63,9 +63,9 @@ namespace DokaponFileReader
                 charaFile.AccessoryHeaders[i].activationRate = accesoryData[i].activationRate;
             }
 
-            for (int i = 0; i < accesoryData.Count && i < charaFile.AccessoryDescriptionHeaders.Count; i++)
+            for (int i = 0; i < accesoryData.Count && i < charaFile.AccessoryDescriptionHeader.description.Count; i++)
             {
-                charaFile.AccessoryDescriptionHeaders[0].description[i] = accesoryData[i].description;
+                charaFile.AccessoryDescriptionHeader.description[i] = accesoryData[i].description;
             }
         }
     }

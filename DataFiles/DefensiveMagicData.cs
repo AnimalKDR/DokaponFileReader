@@ -37,9 +37,9 @@ namespace DokaponFileReader
                 data.Add(defensiveMagicData);
             }
 
-            for (int i = 0; i < charaFile.DefensiveMagicDescriptionHeaders[0].description.Count && i < data.Count; i++)
+            for (int i = 0; i < charaFile.DefensiveMagicDescriptionHeader.description.Count && i < data.Count; i++)
             {
-                data[i].description = charaFile.DefensiveMagicDescriptionHeaders[0].description[i];
+                data[i].description = charaFile.DefensiveMagicDescriptionHeader.description[i];
             }
 
             return data;
@@ -58,9 +58,9 @@ namespace DokaponFileReader
                 charaFile.DefensiveMagicHeaders[i].sortIndex = defensiveMagicData[i].sortIndex;
             }
 
-            for (int i = 0; i < defensiveMagicData.Count && i < charaFile.DefensiveMagicDescriptionHeaders.Count; i++)
+            for (int i = 0; i < defensiveMagicData.Count && i < charaFile.DefensiveMagicDescriptionHeader.description.Count; i++)
             {
-                charaFile.DefensiveMagicDescriptionHeaders[0].description[i] = defensiveMagicData[i].description;
+                charaFile.DefensiveMagicDescriptionHeader.description[i] = defensiveMagicData[i].description;
             }
         }
     }

@@ -30,7 +30,7 @@ namespace DokaponFileReader.DataFiles
                 itemData.spawnRate = item.spawnRate;
                 itemData.localItemValue = item.localItemValue;
                 itemData.townName = stageBaseFile.GetTownCastleName(item.townCastleIndex);
-                itemData.description = charaFile.BagItemDescriptionHeaders[0].description[item.index - 1];
+                itemData.description = charaFile.BagItemDescriptionHeader.description[item.index - 1];
 
                 data.Add(itemData);
             }
@@ -48,7 +48,7 @@ namespace DokaponFileReader.DataFiles
                 charaFile.LocalItemHeaders[i].spawnRate = localItemData[i].spawnRate;
                 charaFile.LocalItemHeaders[i].localItemValue = localItemData[i].localItemValue;
                 charaFile.LocalItemHeaders[i].townCastleIndex = stageBaseFile.GetTownCastleIndex(localItemData[i].townName);
-                charaFile.BagItemDescriptionHeaders[0].description[charaFile.LocalItemHeaders[i].index - 1] = localItemData[i].description;
+                charaFile.BagItemDescriptionHeader.description[charaFile.LocalItemHeaders[i].index - 1] = localItemData[i].description;
             }
         }
     }

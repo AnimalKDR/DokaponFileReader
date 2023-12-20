@@ -266,6 +266,12 @@ namespace DokaponFileReader
             DokaponFileWriter fileWriter = new DokaponFileWriter(path);
 
             stageBaseFile.WriteStageBase(fileWriter);
+
+            fileWriter.fileOffset = (UInt32)fileWriter.Position();
+
+            charaFile.WriteCharaFile(fileWriter);
+
+            fileWriter.Close();
         }
     }
 }

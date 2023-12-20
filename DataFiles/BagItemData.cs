@@ -30,9 +30,9 @@ namespace DokaponFileReader
                 data.Add(bagItemData);
             }
 
-            for (int i = 0; i < charaFile.BagItemDescriptionHeaders[0].description.Count && i < data.Count; i++)
+            for (int i = 0; i < charaFile.BagItemDescriptionHeader.description.Count && i < data.Count; i++)
             {
-                data[i].description = charaFile.BagItemDescriptionHeaders[0].description[i];
+                data[i].description = charaFile.BagItemDescriptionHeader.description[i];
             }
 
             return data;
@@ -48,9 +48,9 @@ namespace DokaponFileReader
                 charaFile.BagItemHeaders[i].itemType = charaFile.GetBagItemTypeID(bagItemData[i].itemType); 
             }
 
-            for (int i = 0; i < bagItemData.Count && i < charaFile.BagItemDescriptionHeaders.Count; i++)
+            for (int i = 0; i < bagItemData.Count && i < charaFile.BagItemDescriptionHeader.description.Count; i++)
             {
-                charaFile.BagItemDescriptionHeaders[0].description[i] = bagItemData[i].description;
+                charaFile.BagItemDescriptionHeader.description[i] = bagItemData[i].description;
             }
         }
     }

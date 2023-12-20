@@ -14,14 +14,12 @@ namespace DokaponFileReader.DataFiles
         public static ObservableCollection<InstructionData> GetData(CharaFile charaFile)
         {
             ObservableCollection<InstructionData> data = new ObservableCollection<InstructionData>();
-            foreach (var header in charaFile.InstructionListHeaders)
-            {
-                foreach (var instruction in header.instructions)
-                {
-                    InstructionData instructionData = new InstructionData(instruction);
 
-                    data.Add(instructionData);
-                }
+            foreach (var instruction in charaFile.InstructionListHeader.instructions)
+            {
+                InstructionData instructionData = new InstructionData(instruction);
+
+                data.Add(instructionData);
             }
 
             return data;
@@ -29,14 +27,9 @@ namespace DokaponFileReader.DataFiles
 
         public static void SetData(ObservableCollection<InstructionData> instructionData, ref CharaFile charaFile)
         {
-            int k = 0;
-
-            for (int i = 0; i < charaFile.InstructionListHeaders.Count; i++)
+            for (int i = 0; i < charaFile.InstructionListHeader.instructions.Count && i < instructionData.Count; i++)
             {
-                for (int j = 0; j < charaFile.InstructionListHeaders[i].instructions.Count; j++)
-                {
-                    charaFile.InstructionListHeaders[i].instructions[j] = instructionData[k++].instruction;
-                }
+                charaFile.InstructionListHeader.instructions[i] = instructionData[i].instruction;
             }
         }
     }

@@ -119,12 +119,12 @@ namespace DokaponFileReader
             return result;
         }
 
-        public List<string> GetStringListAtSection(UInt32 setctionStart, UInt32 sectionEnd, int bytesToRead = 4, bool reread = false)
+        public List<string> GetStringListAtSection(UInt32 sectionStart, UInt32 sectionEnd, int bytesToRead = 4, bool reread = false)
         {
             List<string> result = new List<string>();
 
             var currentPosition = Position();
-            SetPosition(setctionStart + fileOffset);
+            SetPosition(sectionStart + fileOffset);
 
             while (Position() < sectionEnd + fileOffset)
                 result.Add(GetString(bytesToRead, reread));

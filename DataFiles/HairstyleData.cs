@@ -34,7 +34,7 @@ namespace DokaponFileReader
                 hairstyleData.descriptionIndex = hairstyle.descriptionIndex;
 
                 if (hairstyleData.descriptionIndex != 0)
-                    hairstyleData.description = charaFile.HairstyleDescriptionHeaders[0].description[hairstyleData.descriptionIndex - 1];
+                    hairstyleData.description = charaFile.HairstyleDescriptionHeader.description[hairstyleData.descriptionIndex - 1];
 
                 data.Add(hairstyleData);
             }
@@ -54,7 +54,7 @@ namespace DokaponFileReader
                 if (hairstyleData[i].descriptionIndex == 0)
                     continue;
 
-                charaFile.HairstyleDescriptionHeaders[0].description[hairstyleData[i].descriptionIndex - 1] = hairstyleData[i].description;
+                charaFile.HairstyleDescriptionHeader.description[hairstyleData[i].descriptionIndex - 1] = hairstyleData[i].description;
             }
         }
     }

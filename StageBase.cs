@@ -17,6 +17,7 @@ namespace DokaponFileReader
         public List<UnknownHeader_2F> UnknownHeaders_2F;
         public List<LocationHeader> LocationHeaders;
         public UnknownHeader_66 UnknownHeader_66;
+        public UnknownHeader_79 UnknownHeader_79;
         public List<TempleNameHeader> TempleNameHeaders;
         public List<UnknownHeader_68> UnknownHeaders_68;
         public List<TownCastleHeader> TownCastleHeaders;
@@ -51,6 +52,7 @@ namespace DokaponFileReader
             UnknownHeaders_6E = new List<UnknownHeader_6E>();
             UnknownCastleInfos = new List<UnknownCastleInfo>();
             UnknownHeaders_78 = new List<UnknownHeader_78>();
+            
             RandomLootHeaders = new List<RandomLootHeader>();
             RandomEffectHeaders = new List<RandomEffectHeader>();
             SpaceNameHeaders = new List<SpaceNameHeader>();
@@ -59,12 +61,13 @@ namespace DokaponFileReader
             IGBListHeaders = new List<IGBListHeader>();
             UnknownHeaders_DA = new List<UnknownHeader_DA>();
 
-            EmptyHeader = new EndOfFileHeader(0);
-            UnknownHeader_66 = new UnknownHeader_66(0);
-            RandomLootListHeader_85 = new RandomLootList_85(0);
-            RandomLootListHeader_94 = new RandomLootList_94(0);
-            UnknownHeader_DB = new UnknownHeader_DB(0);
-            UnknownHeader_E0 = new UnknownHeader_E0(0);
+            EmptyHeader = new EndOfFileHeader(4);
+            UnknownHeader_66 = new UnknownHeader_66(4);
+            UnknownHeader_79 = new UnknownHeader_79(4);
+            RandomLootListHeader_85 = new RandomLootList_85(4);
+            RandomLootListHeader_94 = new RandomLootList_94(4);
+            UnknownHeader_DB = new UnknownHeader_DB(4);
+            UnknownHeader_E0 = new UnknownHeader_E0(4);
         }
 
         public void ReadStageBase(DokaponFileReader stageFile)
@@ -106,6 +109,7 @@ namespace DokaponFileReader
 
                     case HeaderType.EndOfFile: EmptyHeader = EndOfFileHeader.ReadHeaderBlock(stageFile); break;
                     case HeaderType.Unknown_66: UnknownHeader_66 = UnknownHeader_66.ReadHeaderBlock(stageFile); break;
+                    case HeaderType.Unknown_79: UnknownHeader_79 = UnknownHeader_79.ReadHeaderBlock(stageFile); break;
                     case HeaderType.RandomLootList_85: RandomLootListHeader_85 = RandomLootList_85.ReadHeaderBlock(stageFile); break;
                     case HeaderType.SpaceDescription: SpaceDescriptionHeader = SpaceDescriptionHeader.ReadHeaderBlock(stageFile); break;
                     case HeaderType.RandomLootList_94: RandomLootListHeader_94 = RandomLootList_94.ReadHeaderBlock(stageFile); break;
@@ -115,6 +119,7 @@ namespace DokaponFileReader
                     default: Console.WriteLine("Unknown Header!"); break;
                 }
             }
+/*
             SpaceNameHeaders[92].name = "????";
             SpaceDescriptionHeader.description[45] = "Entrance to the Spring Cave. ";
             RandomEffectHeaders[35].effectName = "fear";
@@ -143,6 +148,9 @@ namespace DokaponFileReader
             fileheader4.index = 9;
             fileheader4.unknownUint16 = 256;
             IGBListHeaders[9].IGBFiles.Insert(21, fileheader4);
+
+            UnknownHeader_79.headerStart = 0x1000;
+            UnknownHeader_79.unknownUint32 = 0x73;*/
         }
 
         public void WriteStageBase(DokaponFileWriter stageFile)
@@ -267,9 +275,8 @@ namespace DokaponFileReader
 
             FileNameHeaders[1].WriteHeaderBlockWithPosition(stageFile);
 
-            // For test only
-            stageFile.Write((UInt32)0x79);
-            stageFile.Write((UInt32)0x73);
+            if (UnknownHeader_79.headerStart > 0)
+                UnknownHeader_79.WriteHeaderBlock(stageFile);
 
             EmptyHeader.WriteHeaderBlock(stageFile);
 
@@ -288,8 +295,6 @@ namespace DokaponFileReader
 
             while (stageFile.Position() % 16 != 0)
                 stageFile.Write((byte)0);
-
-            stageFile.Close();
         }
 
         public string GetEffectName(int type, int id)

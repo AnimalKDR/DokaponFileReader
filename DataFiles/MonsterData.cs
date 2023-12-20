@@ -68,9 +68,9 @@ namespace DokaponFileReader
                 data.Add(monsterData);
             }
 
-            for (int i = 0; i < charaFile.MonsterDescriptionHeaders[0].description.Count && i < data.Count; i++)
+            for (int i = 0; i < charaFile.MonsterDescriptionHeader.description.Count && i < data.Count; i++)
             {
-                data[i].description = charaFile.MonsterDescriptionHeaders[0].description[i];
+                data[i].description = charaFile.MonsterDescriptionHeader.description[i];
             }
 
             foreach (var monsterDrop in charaFile.MonsterItemDropHeaders)
@@ -116,9 +116,9 @@ namespace DokaponFileReader
                 (_, charaFile.MonsterHeaders[i].defensiveMagicID) = charaFile.GetItemTypeAndID(monsterData[i].defensiveMagic);
             }
 
-            for (int i = 0; i < monsterData.Count && i < charaFile.MonsterDescriptionHeaders[0].description.Count; i++)
+            for (int i = 0; i < monsterData.Count && i < charaFile.MonsterDescriptionHeader.description.Count; i++)
             {
-                charaFile.MonsterDescriptionHeaders[0].description[i] = monsterData[i].description;
+                charaFile.MonsterDescriptionHeader.description[i] = monsterData[i].description;
             }
 
             for (int i = 0; i < monsterData.Count && i < charaFile.MonsterItemDropHeaders.Count; i++)

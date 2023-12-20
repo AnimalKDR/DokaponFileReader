@@ -34,9 +34,9 @@ namespace DokaponFileReader.DataFiles
                 data.Add(fieldMagicData);
             }
 
-            for (int i = 0; i < charFile.FieldMagicDescriptionHeaders[0].description.Count && i < data.Count; i++)
+            for (int i = 0; i < charFile.FieldMagicDescriptionHeader.description.Count && i < data.Count; i++)
             {
-                data[i].description = charFile.FieldMagicDescriptionHeaders[0].description[i];
+                data[i].description = charFile.FieldMagicDescriptionHeader.description[i];
             }
 
             return data;
@@ -54,9 +54,9 @@ namespace DokaponFileReader.DataFiles
                 charaFile.FieldMagicHeaders[i].effectType = fieldMagicData[i].effectType;
             }
 
-            for (int i = 0; i < fieldMagicData.Count && i < charaFile.FieldMagicDescriptionHeaders.Count; i++)
+            for (int i = 0; i < fieldMagicData.Count && i < charaFile.FieldMagicDescriptionHeader.description.Count; i++)
             {
-                charaFile.FieldMagicDescriptionHeaders[0].description[i] = fieldMagicData[i].description;
+                charaFile.FieldMagicDescriptionHeader.description[i] = fieldMagicData[i].description;
             }
         }
     }

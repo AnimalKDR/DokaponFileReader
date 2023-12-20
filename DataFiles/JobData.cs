@@ -99,11 +99,11 @@ namespace DokaponFileReader
 
                 data[(int)(2 * index)].jobPassiveName = jobSkill.name;
                 data[(int)(2 * index)].jobPassiveActivationRate = jobSkill.activationRate;
-                data[(int)(2 * index)].jobPassiveDescription = charaFile.JobSkillDescriptionHeaders[0].description[index];
+                data[(int)(2 * index)].jobPassiveDescription = charaFile.JobSkillDescriptionHeader.description[index];
 
                 data[(int)(2 * index) + 1].jobPassiveName = jobSkill.name;
                 data[(int)(2 * index) + 1].jobPassiveActivationRate = jobSkill.activationRate;
-                data[(int)(2 * index) + 1].jobPassiveDescription = charaFile.JobSkillDescriptionHeaders[0].description[index];
+                data[(int)(2 * index) + 1].jobPassiveDescription = charaFile.JobSkillDescriptionHeader.description[index];
             }
 
             foreach (var jobStartingStats in charaFile.JobStartingStatsHeaders)
@@ -124,9 +124,9 @@ namespace DokaponFileReader
                 data[(int)(2 * jobBattleSkill.index) + 1].level6BattleSkill = charaFile.GetItemName(ItemType.BattleSkill, jobBattleSkill.secondBattleSkillIndex);
             }
 
-            for (int i = 0; i < charaFile.JobDescriptionHeaders[0].description.Count; i++)
+            for (int i = 0; i < charaFile.JobDescriptionHeader.description.Count; i++)
             {
-                data[i].jobDescription = charaFile.JobDescriptionHeaders[0].description[i];
+                data[i].jobDescription = charaFile.JobDescriptionHeader.description[i];
             }
 
             foreach (var levelUp in charaFile.JobLevelAndMasteryHeaders)
@@ -187,7 +187,7 @@ namespace DokaponFileReader
             {
                 charaFile.JobSkillHeaders[i].name = jobData[2 * i].jobPassiveName;
                 charaFile.JobSkillHeaders[i].activationRate = jobData[2 * i].jobPassiveActivationRate;
-                charaFile.JobSkillDescriptionHeaders[0].description[i] = jobData[2 * i].jobPassiveDescription;
+                charaFile.JobSkillDescriptionHeader.description[i] = jobData[2 * i].jobPassiveDescription;
             }
 
             for (int i = 0; i < jobData.Count && i < charaFile.JobStartingStatsHeaders.Count; i++)
@@ -208,7 +208,7 @@ namespace DokaponFileReader
 
             for (int i = 0; i < jobData.Count && i < charaFile.JobBattleSkillHeaders.Count; i++)
             {
-                charaFile.JobDescriptionHeaders[0].description[i] = jobData[i].jobDescription;
+                charaFile.JobDescriptionHeader.description[i] = jobData[i].jobDescription;
             }
 
             for (int i = 0; i < jobData.Count && i < charaFile.JobLevelAndMasteryHeaders.Count; i++)
