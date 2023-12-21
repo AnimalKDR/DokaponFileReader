@@ -254,6 +254,35 @@ namespace DokaponFileReader
             return result;
         }
 
+        public List<UInt32> GetUInt32ListAtSection(UInt32 setctionStart, UInt32 sectionEnd, bool reread = false)
+        {
+            List<UInt32> result = new List<UInt32>();
+
+            var currentPosition = GetPosition();
+            SetRelativePosition(setctionStart);
+
+            while (GetRelativePosition() < sectionEnd)
+                result.Add(GetUInt32(reread));
+
+            SetPosition(currentPosition);
+
+            return result;
+        }
+
+        public List<Attributes> GetAttributeListAtPosition(UInt32 position, bool reread = false)
+        {
+            var currentPosition = GetPosition();
+            SetRelativePosition(position);
+
+            List<Attributes> result = new List<Attributes>();
+            for (int i = 0; i < 98; i++)
+                result.Add(new Attributes(GetUInt16(reread), GetUInt16(reread), GetUInt16(reread), GetUInt16(reread), GetUInt16(reread)));
+
+            SetPosition(currentPosition);
+
+            return result;
+        }
+
         public void Close()
         {
             fileStream.Close();

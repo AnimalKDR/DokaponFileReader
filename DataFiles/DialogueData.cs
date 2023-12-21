@@ -14,14 +14,12 @@ namespace DokaponFileReader.DataFiles
         public static ObservableCollection<DialogueData> GetData(CharaFile charaFile)
         {
             ObservableCollection<DialogueData> data = new ObservableCollection<DialogueData>();
-            foreach (var header in charaFile.DialogListHeaders)
-            {
-                foreach (var dialogue in header.dialog)
-                {
-                    DialogueData dialogueData = new DialogueData(dialogue);
 
-                    data.Add(dialogueData);
-                }
+            foreach (var dialogue in charaFile.DialogListHeader.dialog)
+            {
+                DialogueData dialogueData = new DialogueData(dialogue);
+
+                data.Add(dialogueData);
             }
 
             return data;
@@ -29,14 +27,9 @@ namespace DokaponFileReader.DataFiles
 
         public static void SetData(ObservableCollection<DialogueData> dialogueData, ref CharaFile charaFile)
         {
-            int k = 0;
-
-            for (int i = 0; i < charaFile.DialogListHeaders.Count; i++)
+            for (int i = 0; i < charaFile.DialogListHeader.dialog.Count && i < dialogueData.Count; i++)
             {
-                for (int j = 0; j< charaFile.DialogListHeaders[i].dialog.Count; j++)
-                {
-                    charaFile.DialogListHeaders[i].dialog[j] = dialogueData[k++].dialogue;
-                }
+                charaFile.DialogListHeader.dialog[i] = dialogueData[i].dialogue;
             }
         }
     }

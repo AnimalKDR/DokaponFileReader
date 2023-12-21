@@ -158,7 +158,7 @@
                                 <DataGrid x:Name="RewardData" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
-                                        <DataGridTextColumn Header="XP"  Binding="{Binding xp}"/>
+                                        <DataGridTextColumn Header="XP"  Binding="{Binding experience}"/>
                                         <DataGridTextColumn Header="Gold"  Binding="{Binding gold}"/>
                                         <DataGridTextColumn Header="Times Week?"  Binding="{Binding dynamicGold}"/>
                                         <DataGridTextColumn Header="Item 1"  Binding="{Binding dropItem[0]}"/>

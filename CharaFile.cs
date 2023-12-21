@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Text;
 using System.Windows.Documents;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace DokaponFileReader
 {
@@ -27,8 +28,8 @@ namespace DokaponFileReader
         public JobSkillDescriptionHeader JobSkillDescriptionHeader;
         public JobDescriptionHeader JobDescriptionHeader;
         public MonsterDescriptionHeader MonsterDescriptionHeader;
-        public DialogPointerListHeader DialogPointerListHeader;
-        public InstuctionListHeader InstructionListHeader;
+        public DialogListHeader DialogListHeader;
+        public InstructionListHeader InstructionListHeader;
 
         public UnknownHeader_1D UnknownHeader_1D;
         public UnknownHeader_1E UnknownHeader_1E;
@@ -36,8 +37,8 @@ namespace DokaponFileReader
         public UnknownHeader_47 UnknownHeader_47;
         public UnknownHeader_4D UnknownHeader_4D;
         public UnknownHeader_4F UnknownHeader_4F;
-        public UnknownHeader_76 UnknownHeader_76;
-        public UnknownHeader_77 UnknownHeader_77;
+        public ExperienceRequirementHeader ExperienceRequirementHeader;
+        public CPULevelUpHeader CPULevelUpHeader;
         public UnknownHeader_8C UnknownHeader_8C;
         public UnknownHeader_9C UnknownHeader_9C;
         public UnknownHeader_9D UnknownHeader_9D;
@@ -106,7 +107,7 @@ namespace DokaponFileReader
         public List<NPCFileInfoHeader> NPCFileInfoHeaders;
         public List<EtcFileNameHeader> EtcFileNameHeaders;
         public List<TextureFileNameHeader> TextureFileNameHeaders;
-        public List<DialogListHeader> DialogListHeaders;
+        public List<DialogPointerListHeader> DialogPointerListHeaders;
         public List<PrankNameHeader> PrankNameHeaders;
         public List<HitFormulaHeader> HitFormulaHeaders;
         public List<AttackFormulaHeader> AttackFormulaHeaders;
@@ -176,8 +177,8 @@ namespace DokaponFileReader
             JobSkillDescriptionHeader = new JobSkillDescriptionHeader(4);
             JobDescriptionHeader = new JobDescriptionHeader(4);
             MonsterDescriptionHeader = new MonsterDescriptionHeader(4);
-            DialogPointerListHeader = new DialogPointerListHeader(4);
-            InstructionListHeader = new InstuctionListHeader(4);
+            DialogListHeader = new DialogListHeader(4);
+            InstructionListHeader = new InstructionListHeader(4);
 
             UnknownHeader_1D = new UnknownHeader_1D(4);
             UnknownHeader_1E = new UnknownHeader_1E(4);
@@ -185,8 +186,8 @@ namespace DokaponFileReader
             UnknownHeader_47 = new UnknownHeader_47(4);
             UnknownHeader_4D = new UnknownHeader_4D(4);
             UnknownHeader_4F = new UnknownHeader_4F(4);
-            UnknownHeader_76 = new UnknownHeader_76(4);
-            UnknownHeader_77 = new UnknownHeader_77(4);
+            ExperienceRequirementHeader = new ExperienceRequirementHeader(4);
+            CPULevelUpHeader = new CPULevelUpHeader(4);
             UnknownHeader_8C = new UnknownHeader_8C(4);
             UnknownHeader_9C = new UnknownHeader_9C(4);
             UnknownHeader_9D = new UnknownHeader_9D(4);
@@ -256,7 +257,7 @@ namespace DokaponFileReader
             NPCFileInfoHeaders = new List<NPCFileInfoHeader>();
             EtcFileNameHeaders = new List<EtcFileNameHeader>();
             TextureFileNameHeaders = new List<TextureFileNameHeader>();
-            DialogListHeaders = new List<DialogListHeader>();
+            DialogPointerListHeaders = new List<DialogPointerListHeader>();
             PrankNameHeaders = new List<PrankNameHeader>();
             HitFormulaHeaders = new List<HitFormulaHeader>();
             AttackFormulaHeaders = new List<AttackFormulaHeader>();
@@ -410,11 +411,11 @@ namespace DokaponFileReader
                     case HeaderType.Unknown_4D: UnknownHeader_4D=UnknownHeader_4D.ReadHeaderBlock(stageFile); break;
                     case HeaderType.Unknown_4E: UnknownHeaders_4E.Add(UnknownHeader_4E.ReadHeaderBlock(stageFile)); break;
                     case HeaderType.Unknown_4F: UnknownHeader_4F=UnknownHeader_4F.ReadHeaderBlock(stageFile); break;
-                    case HeaderType.Unknown_76: UnknownHeader_76=UnknownHeader_76.ReadHeaderBlock(stageFile); break;
-                    case HeaderType.Unknown_77: UnknownHeader_77=UnknownHeader_77.ReadHeaderBlock(stageFile); break;
-                    case HeaderType.DialogList: DialogListHeaders.Add(DialogListHeader.ReadHeaderBlock(stageFile)); break;
+                    case HeaderType.ExperienceRequirement: ExperienceRequirementHeader = ExperienceRequirementHeader.ReadHeaderBlock(stageFile); break;
+                    case HeaderType.CPULevelUp: CPULevelUpHeader = CPULevelUpHeader.ReadHeaderBlock(stageFile);  break;
+                    case HeaderType.DialogList: DialogListHeader = DialogListHeader.ReadHeaderBlock(stageFile); break;
                     case HeaderType.Unknown_E2: UnknownHeaders_E2.Add(UnknownHeader_E2.ReadHeaderBlock(stageFile)); break;
-                    case HeaderType.DialogPointerList: DialogPointerListHeader = DialogPointerListHeader.ReadHeaderBlock(stageFile); break;
+                    case HeaderType.DialogPointerList: DialogPointerListHeaders.Add(DialogPointerListHeader.ReadHeaderBlock(stageFile)); break;
                     case HeaderType.Unknown_46: UnknownHeaders_46.Add(UnknownHeader_46.ReadHeaderBlock(stageFile)); break;
                     case HeaderType.Unknown_47: UnknownHeader_47 = UnknownHeader_47.ReadHeaderBlock(stageFile); break;
                     case HeaderType.Unknown_4C: UnknownHeaders_4C.Add(UnknownHeader_4C.ReadHeaderBlock(stageFile)); break;
@@ -427,7 +428,7 @@ namespace DokaponFileReader
                     case HeaderType.Unknown_DF: UnknownHeaders_DF.Add(UnknownHeader_DF.ReadHeaderBlock(stageFile)); break;
                     case HeaderType.Unknown_D3: UnknownHeaders_D3.Add(UnknownHeader_D3.ReadHeaderBlock(stageFile)); break;
                     case HeaderType.Unknown_D2: UnknownHeaders_D2.Add(UnknownHeader_D2.ReadHeaderBlock(stageFile)); break;
-                    case HeaderType.InstructionsList: InstructionListHeader=InstuctionListHeader.ReadHeaderBlock(stageFile); break;
+                    case HeaderType.InstructionsList: InstructionListHeader=InstructionListHeader.ReadHeaderBlock(stageFile); break;
                     case HeaderType.PrankName: PrankNameHeaders.Add(PrankNameHeader.ReadHeaderBlock(stageFile)); break;
                     case HeaderType.Unknown_A0: UnknownHeader_A0=UnknownHeader_A0.ReadHeaderBlock(stageFile); break;
                     case HeaderType.Unknown_A1: UnknownHeader_A1=UnknownHeader_A1.ReadHeaderBlock(stageFile); break;
@@ -677,6 +678,99 @@ namespace DokaponFileReader
             UnknownHeader_4D.WriteBlockData(stageFile);
             UnknownHeader_4F.WritePointerData(stageFile);
             UnknownHeader_4F.WriteBlockData(stageFile);
+            CharUnknownHeaders_03[10].WriteEndDataBlock(stageFile);
+
+            ExperienceRequirementHeader.WriteHeaderBlock(stageFile);
+            CharUnknownHeaders_03[11].WriteHeaderBlock(stageFile);
+            ExperienceRequirementHeader.WriteBlockData(stageFile);
+            CharUnknownHeaders_03[11].WriteEndDataBlock(stageFile);
+
+            CPULevelUpHeader.WriteHeaderBlock(stageFile);
+            CharUnknownHeaders_03[12].WriteHeaderBlock(stageFile);
+            CPULevelUpHeader.WritePointerData(stageFile);
+            CPULevelUpHeader.WriteBlockData(stageFile);
+            CharUnknownHeaders_03[12].WriteEndDataBlock(stageFile);
+
+            foreach (var header in UnknownHeaders_E2)
+                header.WriteHeaderBlock(stageFile);
+            foreach (var header in UnknownHeaders_49)
+                header.WriteHeaderBlock(stageFile);
+            foreach (var header in UnknownHeaders_5C)
+                header.WriteHeaderBlock(stageFile);
+
+            DialogListHeader.WriteHeaderBlock(stageFile);
+            foreach (var header in DialogPointerListHeaders)
+                header.WriteHeaderBlock(stageFile);
+            CharUnknownHeaders_03[13].WriteHeaderBlock(stageFile);
+            WriteDialogHeaders(stageFile);
+            CharUnknownHeaders_03[13].WriteEndDataBlock(stageFile);
+
+            UnknownHeader_47.WriteHeaderBlock(stageFile);
+            foreach (var header in UnknownHeaders_84)
+                header.WriteHeaderBlock(stageFile);
+            foreach (var header in UnknownHeaders_1C)
+                header.WriteHeaderBlock(stageFile);
+            UnknownHeader_1D.WriteHeaderBlock(stageFile);
+            UnknownHeader_1E.WriteHeaderBlock(stageFile);
+            foreach (var header in UnknownHeaders_46)
+                header.WriteHeaderBlock(stageFile);
+            foreach (var header in UnknownHeaders_4C)
+                header.WriteHeaderBlock(stageFile);
+            for (int i = 0; i < 6; i++)
+                UnknownHeaders_48[i].WriteHeaderBlock(stageFile);
+            foreach (var header in UnknownHeaders_3F)
+                header.WriteHeaderBlock(stageFile);
+            for (int i = 6; i < UnknownHeaders_48.Count; i++)
+                UnknownHeaders_48[i].WriteHeaderBlock(stageFile);
+            CharFileNameHeaders[2].WriteHeaderBlockWithPosition(stageFile);
+
+            foreach (var header in UnknownHeaders_DF)
+                header.WriteHeaderBlock(stageFile);
+            foreach (var header in UnknownHeaders_D2)
+                header.WriteHeaderBlock(stageFile);
+            foreach (var header in UnknownHeaders_D3)
+                header.WriteHeaderBlock(stageFile);
+
+            InstructionListHeader.WriteHeaderBlock(stageFile);
+            CharUnknownHeaders_03[14].WriteHeaderBlock(stageFile);
+            InstructionListHeader.WriteBlockData(stageFile);
+            CharUnknownHeaders_03[14].WriteEndDataBlock(stageFile);
+
+            foreach (var header in PrankNameHeaders)
+                header.WriteHeaderBlock(stageFile);
+            CharFileNameHeaders[3].WriteHeaderBlockWithPosition(stageFile);
+
+            UnknownHeader_AE.WriteHeaderBlock(stageFile);
+        }
+
+        public void WriteDialogHeaders(DokaponFileWriter stageFile)
+        {
+            DialogListHeader.startOfData = stageFile.GetRelativePosition();
+
+            for (int i = 0; i < DialogListHeader.dialog.Count; i++)
+            {
+                foreach (var header in DialogPointerListHeaders)
+                {
+                    for (int j = 0; j < header.dialogPointer.Count; j++)
+                    {
+                        if (header.dialogPointer[j] == DialogListHeader.dialogPointer[i])
+                            header.dialogPointer[j] = stageFile.GetRelativePosition();
+                    }
+                }
+
+                DialogListHeader.dialogPointer[i] = stageFile.GetRelativePosition();
+                stageFile.WriteString(DialogListHeader.dialog[i]);
+            }
+
+            DialogListHeader.endOfData = stageFile.GetRelativePosition();
+            var currentPosition = stageFile.GetPosition();
+            stageFile.SetPosition(DialogListHeader.headerStart);
+            DialogListHeader.WriteHeaderBlock(stageFile);
+
+            foreach (var header in DialogPointerListHeaders)
+                header.WriteHeaderBlock(stageFile);
+
+            stageFile.SetPosition(currentPosition);
         }
 
         public void WriteNPCFileInfoHeaders(DokaponFileWriter stageFile)
