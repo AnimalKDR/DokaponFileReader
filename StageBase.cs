@@ -119,7 +119,7 @@ namespace DokaponFileReader
                     default: Console.WriteLine("Unknown Header!"); break;
                 }
             }
-/*
+            /*
             SpaceNameHeaders[92].name = "????";
             SpaceDescriptionHeader.description[45] = "Entrance to the Spring Cave. ";
             RandomEffectHeaders[35].effectName = "fear";
@@ -258,10 +258,11 @@ namespace DokaponFileReader
                     StageFileHeaders[i].WriteBlockAddress(stageFile, StageFileHeaders[23].filePointer);
             }
 
-            fileSize = (UInt32)stageFile.GetPosition();
-            stageFile.SetPosition(4);
+            var currentPosition = stageFile.GetPosition();
+            fileSize = stageFile.GetRelativePosition();
+            stageFile.SetPosition(stageFile.fileOffset + 4);
             stageFile.Write(fileSize);
-            stageFile.SetPosition(fileSize);
+            stageFile.SetPosition(currentPosition);
 
             while (stageFile.GetPosition() % 16 != 0)
                 stageFile.Write((byte)0);

@@ -1537,11 +1537,13 @@ namespace DokaponFileReader
     public class DialogPointerListHeader : Header
     {
         public UInt32 index;
+        public List<bool> dialogPointerAdjusted;
         public List<UInt32> dialogPointer;
         public List<string> dialog;
 
         public DialogPointerListHeader(UInt32 headerStart) : base(HeaderType.DialogPointerList, headerStart)
         {
+            dialogPointerAdjusted = new List<bool>();
             dialogPointer = new List<UInt32>();
             dialog = new List<string>();
         }
@@ -1555,6 +1557,8 @@ namespace DokaponFileReader
 
             foreach (var pointer in header.dialogPointer)
             {
+                header.dialogPointerAdjusted.Add(false);
+
                 if (pointer == 0)
                     continue;
 
@@ -5316,12 +5320,12 @@ namespace DokaponFileReader
         public UInt32 startOfData;
         public UInt32 endOfData;
         public List<UInt32> unknownPointers;
-        public List<byte> unknownBytes;
+        public List<UInt32> unknownUInt32s;
 
         public UnknownHeader_AD(UInt32 headerStart) : base(HeaderType.Unknown_AD, headerStart)
         {
             unknownPointers = new List<UInt32>();
-            unknownBytes = new List<byte>();
+            unknownUInt32s = new List<UInt32>();
         }
 
         public static UnknownHeader_AD ReadHeaderBlock(DokaponFileReader stageFile)
@@ -5331,7 +5335,7 @@ namespace DokaponFileReader
             header.startOfData = stageFile.GetUInt32();
             header.endOfData = stageFile.GetUInt32();
             header.unknownPointers = stageFile.GetUInt32List();
-            header.unknownBytes = stageFile.GetByteListAtSection(header.startOfData, header.endOfData);
+            header.unknownUInt32s = stageFile.GetUInt32ListAtSection(header.startOfData, header.endOfData);
 
             return header;
         }
@@ -5346,11 +5350,37 @@ namespace DokaponFileReader
                 stageFile.Write(v);
         }
 
-        public void WriteBlockData(DokaponFileWriter stageFile)
+        public void WriteBlockData(DokaponFileWriter stageFile, UInt32 originalFileOffset)
         {
+            var currentRelativePosition = stageFile.GetRelativePosition();
+            for (int i = 0; i < unknownPointers.Count; i++)
+            {
+                if (unknownPointers[i] == 0)
+                    continue;
+                unknownPointers[i] = unknownPointers[i] + currentRelativePosition - startOfData;
+            }
+
+            string res = "D:\\Users\\anima\\Source\\Repos\\DokaponFileReader\\pointerIndexes.bin";
+            var fileStreamRes = File.Open(res, FileMode.Open);
+
+            List<UInt32> pointerIndexList = new List<UInt32>();
+            byte[] buffer = new byte[4];
+
+            while (fileStreamRes.Position < fileStreamRes.Length)
+            {
+                fileStreamRes.Read(buffer);
+                pointerIndexList.Add(BitConverter.ToUInt32(buffer));
+            }
+            fileStreamRes.Close();
+            
+            foreach (var index in pointerIndexList)
+            {
+                unknownUInt32s[(int)index] = unknownUInt32s[(int)index] + currentRelativePosition - startOfData;
+            }
+            
             startOfData = stageFile.GetRelativePosition();
 
-            foreach(var v in unknownBytes)
+            foreach(var v in unknownUInt32s)
                 stageFile.Write(v);
 
             endOfData = stageFile.GetRelativePosition();
@@ -5365,11 +5395,11 @@ namespace DokaponFileReader
     {
         public UInt32 startOfData;
         public UInt32 endOfData;
-        public List<byte> unknownBytes;
+        public List<UInt32> unknownUInt32s;
 
         public UnknownHeader_AE(UInt32 headerStart) : base(HeaderType.Unknown_AE, headerStart)
         {
-            unknownBytes = new List<byte>();
+            unknownUInt32s = new List<UInt32>();
         }
 
         public static UnknownHeader_AE ReadHeaderBlock(DokaponFileReader stageFile)
@@ -5378,7 +5408,7 @@ namespace DokaponFileReader
 
             header.startOfData = stageFile.GetUInt32();
             header.endOfData = stageFile.GetUInt32();
-            header.unknownBytes = stageFile.GetByteListAtSection(header.startOfData, header.endOfData);
+            header.unknownUInt32s = stageFile.GetUInt32ListAtSection(header.startOfData, header.endOfData);
 
             return header;
         }
@@ -5391,10 +5421,18 @@ namespace DokaponFileReader
         }
 
         public void WriteBlockData(DokaponFileWriter stageFile)
-        {
+        {         
+            var currentRelativePosition = stageFile.GetRelativePosition();
+
+            for (int i = 0; i < unknownUInt32s.Count; i++)
+            {
+                if ((unknownUInt32s[i] % 4 == 0) && (unknownUInt32s[i] >= startOfData && unknownUInt32s[i] < endOfData) && (unknownUInt32s[i] % 0x00010000 != 0))
+                    unknownUInt32s[i] = unknownUInt32s[i] + currentRelativePosition - startOfData;
+            }
+
             startOfData = stageFile.GetRelativePosition();
 
-            foreach(var v in unknownBytes)
+            foreach (var v in unknownUInt32s)
                 stageFile.Write(v);
 
             endOfData = stageFile.GetRelativePosition();
@@ -5409,11 +5447,11 @@ namespace DokaponFileReader
     {
         public UInt32 startOfData;
         public UInt32 endOfData;
-        public List<byte> unknownBytes;
+        public List<UInt32> unknownUInt32s;
 
         public UnknownHeader_AF(UInt32 headerStart) : base(HeaderType.Unknown_AF, headerStart)
         {
-            unknownBytes = new List<byte>();
+            unknownUInt32s = new List<UInt32>();
         }
 
         public static UnknownHeader_AF ReadHeaderBlock(DokaponFileReader stageFile)
@@ -5422,7 +5460,7 @@ namespace DokaponFileReader
 
             header.startOfData = stageFile.GetUInt32();
             header.endOfData = stageFile.GetUInt32();
-            header.unknownBytes = stageFile.GetByteListAtSection(header.startOfData, header.endOfData);
+            header.unknownUInt32s = stageFile.GetUInt32ListAtSection(header.startOfData, header.endOfData);
 
             return header;
         }
@@ -5436,9 +5474,17 @@ namespace DokaponFileReader
 
         public void WriteBlockData(DokaponFileWriter stageFile)
         {
+            var currentRelativePosition = stageFile.GetRelativePosition();
+
+            for (int i = 0; i < unknownUInt32s.Count; i++)
+            {
+                if ((unknownUInt32s[i] % 4 == 0) && (unknownUInt32s[i] >= startOfData && unknownUInt32s[i] < endOfData))
+                    unknownUInt32s[i] = unknownUInt32s[i] + currentRelativePosition - startOfData;
+            }
+
             startOfData = stageFile.GetRelativePosition();
 
-            foreach(var v in unknownBytes)
+            foreach (var v in unknownUInt32s)
                 stageFile.Write(v);
 
             endOfData = stageFile.GetRelativePosition();
@@ -5946,6 +5992,8 @@ namespace DokaponFileReader
                 header.instructions.Add(dialog);
             }
 
+            stageFile.SetPosition(currentPosition);
+
             return header;
         }
 
@@ -5984,7 +6032,7 @@ namespace DokaponFileReader
             var currentPostion = stageFile.GetPosition();
             stageFile.SetRelativePosition(startOfData);
             WriteBlockPointers(stageFile);
-            stageFile.SetRelativePosition(headerStart);
+            stageFile.SetPosition(headerStart);
             WriteHeaderBlock(stageFile);
             stageFile.SetPosition(currentPostion);
         }
