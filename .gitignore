@@ -362,3 +362,5 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /Chara_EN.DAT
+/stageBase_EN.DAT
+/stageBase_Test.DAT
