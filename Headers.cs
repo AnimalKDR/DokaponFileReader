@@ -1,7 +1,5 @@
 ﻿using System.IO;
-using System.Net.NetworkInformation;
 using System.Text;
-using System.Threading;
 
 namespace DokaponFileReader
 {
@@ -372,18 +370,26 @@ namespace DokaponFileReader
         Doom = 0x040A
     }
 
-    public enum ItemType
+    public enum EffectItemType
     {
-        None = 0,
-        Weapon = 1,
-        Shield = 2,
-        Accessory = 3,
-        Hairstyle = 4,
-        BagItem = 5,
-        OffensiveMagic = 6,
-        DefensiveMagic = 7,
-        FieldMagic = 8,
-        BattleSkill = 9
+        None = 0x00,
+        Weapon = 0x01,
+        Shield = 0x02,
+        Accessory = 0x03,
+        Hairstyle = 0x04,
+        BagItem = 0x05,
+        OffensiveMagic = 0x06,
+        DefensiveMagic = 0x07,
+        FieldMagic = 0x08,
+        BattleSkill = 0x09,
+        GainGold = 0x80,
+        LoseHP = 0x81,
+        Status = 0x82,
+        Warp = 0x83,
+        Bankrupt = 0x84,
+        LoseItem = 0x85,
+        LoseMagic = 0x86,
+        LoseGold = 0x87
     }
 
     public partial class Header
@@ -1897,16 +1903,17 @@ namespace DokaponFileReader
         }
     }
 
+    public enum SpecialStatType
+    {
+        None = 0x00,
+        Average = 0x80, // second byte is multiplier (divide by 10 and add 1)
+        Highest = 0x81, // second byte is multiplier (divide by 10 and add 1)
+        Clonus = 0x82, // second byte is player to clone
+        Lowest = 0x84  // second byte is multiplier (divide by 10 and add 1)  
+    }
+
     public class MonsterHeader : Header
     {
-        public enum SpecialStatType
-        {
-            Average = 0x80, // second byte is multiplier (divide by 10 and add 1)
-            Highest = 0x81, // second byte is multiplier (divide by 10 and add 1)
-            Clonus = 0x82, // second byte is player to clone
-            Lowest = 0x84  // second byte is multiplier (divide by 10 and add 1)  
-        }
-
         public byte index;
         public byte monsterID;
         public UInt16 level;
@@ -2568,23 +2575,25 @@ namespace DokaponFileReader
         }
     }
 
+    public enum MonsterType
+    {
+        Chimpy = 0x00,
+        Worm = 0x01,
+        Giant = 0x02,
+        Beast = 0x03,
+        Humanoid = 0x05,
+        Medusa = 0x06,
+        Human = 0x07,
+        Magical = 0x08,
+        Spellcaster = 0x0A,
+        Demon = 0x0C,
+        Wabbit = 0x14,
+        Wallace = 0x28,
+        Special = 0x64
+    }
+
     public class MonsterTypeHeader : Header
     {
-        public enum MonsterType
-        {
-            Chimpy = 0x00,
-            Worm = 0x01,
-            Giant = 0x02,
-            Beast = 0x03,
-            Humanoid = 0x05,
-            Human = 0x07,
-            Magical = 0x08,
-            Spellcaster = 0x0A,
-            Demon = 0x0C,
-            Wabbit = 0x28,
-            Special = 0x64
-        }
-
         public byte index;
         public byte voiceID;
         public byte aiIndex;
@@ -2614,7 +2623,7 @@ namespace DokaponFileReader
             stageFile.Write(aiIndex);
             stageFile.Write(monsterType);
         }
-
+/*
         public static string GetMonsterType(MonsterType type)
         {
             switch (type)
@@ -2624,11 +2633,13 @@ namespace DokaponFileReader
                 case MonsterType.Giant: return "Giant";
                 case MonsterType.Beast: return "Beast";
                 case MonsterType.Humanoid: return "Humanoid";
+                case MonsterType.Medusa: return "Medusa";
                 case MonsterType.Human: return "Human";
                 case MonsterType.Magical: return "Magical";
                 case MonsterType.Spellcaster: return "Spellcaster";
                 case MonsterType.Demon: return "Demon";
                 case MonsterType.Wabbit: return "Wabbit";
+                case MonsterType.Wallace: return "Wallace";
                 case MonsterType.Special: return "Special";
                 default: return "Unknown";
             }
@@ -2643,15 +2654,17 @@ namespace DokaponFileReader
                 case "Giant": return (byte)MonsterType.Giant;
                 case "Beast": return (byte)MonsterType.Beast;
                 case "Humanoid": return (byte)MonsterType.Humanoid;
+                case "Medusa": return (byte)MonsterType.Medusa;
                 case "Human": return (byte)MonsterType.Human;
                 case "Magical": return (byte)MonsterType.Magical;
                 case "Spellcaster": return (byte)MonsterType.Spellcaster;
                 case "Demon": return (byte)MonsterType.Demon;
                 case "Wabbit": return (byte)MonsterType.Wabbit;
+                case "Wallace": return (byte)MonsterType.Wallace;
                 case "Special": return (byte)MonsterType.Special;
                 default: return 0;
             }
-        }
+        }*/
     }
 
     public class UnknownHeader_5C : Header
@@ -4364,18 +4377,6 @@ namespace DokaponFileReader
         public UInt32 effectQuantity;
         public string effectName;
 
-        public enum EffectType
-        {
-            GainGold = 0x80,
-            LoseHP = 0x81,
-            Status = 0x82,
-            Warp = 0x83,
-            Bankrupt = 0x84,
-            LoseItem = 0x85,
-            LoseMagic = 0x86,
-            LoseGold = 0x87
-        }
-
         public enum EffectStatusType
         {
             LoseItem = 0x01,
@@ -5301,7 +5302,7 @@ namespace DokaponFileReader
         {
             if (IGBFiles.Count != 0)
                 return;
-
+             
             startOfData = stageFile.GetRelativePosition();
             var currentPostion = stageFile.GetPosition();
             stageFile.SetPosition(headerStart);
@@ -5350,7 +5351,7 @@ namespace DokaponFileReader
                 stageFile.Write(v);
         }
 
-        public void WriteBlockData(DokaponFileWriter stageFile, UInt32 originalFileOffset)
+        public void WriteBlockData(DokaponFileWriter stageFile)
         {
             var currentRelativePosition = stageFile.GetRelativePosition();
             for (int i = 0; i < unknownPointers.Count; i++)
@@ -5360,24 +5361,14 @@ namespace DokaponFileReader
                 unknownPointers[i] = unknownPointers[i] + currentRelativePosition - startOfData;
             }
 
-            string res = "D:\\Users\\anima\\Source\\Repos\\DokaponFileReader\\pointerIndexes.bin";
-            var fileStreamRes = File.Open(res, FileMode.Open);
-
-            List<UInt32> pointerIndexList = new List<UInt32>();
-            byte[] buffer = new byte[4];
-
-            while (fileStreamRes.Position < fileStreamRes.Length)
+            foreach (var index in PointerIndexList.pointerIndexList)
             {
-                fileStreamRes.Read(buffer);
-                pointerIndexList.Add(BitConverter.ToUInt32(buffer));
-            }
-            fileStreamRes.Close();
-            
-            foreach (var index in pointerIndexList)
-            {
+                if (index >= unknownUInt32s.Count)
+                    break;
+
                 unknownUInt32s[(int)index] = unknownUInt32s[(int)index] + currentRelativePosition - startOfData;
             }
-            
+
             startOfData = stageFile.GetRelativePosition();
 
             foreach(var v in unknownUInt32s)

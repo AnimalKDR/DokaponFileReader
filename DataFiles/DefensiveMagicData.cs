@@ -51,7 +51,7 @@ namespace DokaponFileReader
             {
                 charaFile.DefensiveMagicHeaders[i].name = defensiveMagicData[i].name;
                 charaFile.DefensiveMagicHeaders[i].price = defensiveMagicData[i].price;
-                charaFile.DefensiveMagicHeaders[i].power = (ushort)(100 * defensiveMagicData[i].power);
+                charaFile.DefensiveMagicHeaders[i].power = (ushort)(100 * defensiveMagicData[i].power + 0.5);
                 charaFile.DefensiveMagicHeaders[i].magicType = charaFile.GetBattleMagicTypeID(defensiveMagicData[i].magicType);
                 charaFile.DefensiveMagicHeaders[i].iconID = defensiveMagicData[i].iconID;
                 charaFile.DefensiveMagicHeaders[i].effectType = defensiveMagicData[i].effectType;

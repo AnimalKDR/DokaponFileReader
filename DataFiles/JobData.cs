@@ -81,8 +81,8 @@ namespace DokaponFileReader
                     data[(int)(2 * jobRequirement.jobIndex) + 1].masteryRequirement[i] = charaFile.GetJobName(jobRequirement.jobRequirementIndexes[i]);
                 }
 
-                data[(int)(2 * jobRequirement.jobIndex)].itemRequirement = charaFile.GetItemName(ItemType.BagItem, jobRequirement.itemRequiredIndex);
-                data[(int)(2 * jobRequirement.jobIndex) + 1].itemRequirement = charaFile.GetItemName(ItemType.BagItem, jobRequirement.itemRequiredIndex);
+                data[(int)(2 * jobRequirement.jobIndex)].itemRequirement = charaFile.GetItemName(EffectItemType.BagItem, jobRequirement.itemRequiredIndex);
+                data[(int)(2 * jobRequirement.jobIndex) + 1].itemRequirement = charaFile.GetItemName(EffectItemType.BagItem, jobRequirement.itemRequiredIndex);
             }
 
             foreach (var jobSalary in charaFile.JobSalaryHeaders)
@@ -117,11 +117,8 @@ namespace DokaponFileReader
 
             foreach (var jobBattleSkill in charaFile.JobBattleSkillHeaders)
             {
-                data[(int)(2 * jobBattleSkill.index)].level4BattleSkill = charaFile.GetItemName(ItemType.BattleSkill, jobBattleSkill.firstBattleSkillIndex);
-                data[(int)(2 * jobBattleSkill.index) + 1].level4BattleSkill = charaFile.GetItemName(ItemType.BattleSkill, jobBattleSkill.firstBattleSkillIndex);
-
-                data[(int)(2 * jobBattleSkill.index)].level6BattleSkill = charaFile.GetItemName(ItemType.BattleSkill, jobBattleSkill.secondBattleSkillIndex);
-                data[(int)(2 * jobBattleSkill.index) + 1].level6BattleSkill = charaFile.GetItemName(ItemType.BattleSkill, jobBattleSkill.secondBattleSkillIndex);
+                data[2 * jobBattleSkill.index + jobBattleSkill.sex].level4BattleSkill = charaFile.GetItemName(EffectItemType.BattleSkill, jobBattleSkill.firstBattleSkillIndex);
+                data[2 * jobBattleSkill.index + jobBattleSkill.sex].level6BattleSkill = charaFile.GetItemName(EffectItemType.BattleSkill, jobBattleSkill.secondBattleSkillIndex);
             }
 
             for (int i = 0; i < charaFile.JobDescriptionHeader.description.Count; i++)
@@ -172,7 +169,7 @@ namespace DokaponFileReader
                     jobRequirement.jobRequirementIndexes[i] = charaFile.GetJobIndex(jobData[2 * jobRequirement.jobIndex].masteryRequirement[i]);
                 }
 
-                (_, jobRequirement.itemRequiredIndex) = charaFile.GetItemTypeAndID(jobData[2 * jobRequirement.jobIndex].itemRequirement);
+                jobRequirement.itemRequiredIndex = charaFile.GetItemID(EffectItemType.BagItem, jobData[2 * jobRequirement.jobIndex].itemRequirement);
             }
 
             for (int i = 0; i < jobData.Count && i < charaFile.JobSalaryHeaders.Count; i++)
@@ -180,7 +177,7 @@ namespace DokaponFileReader
                 charaFile.JobSalaryHeaders[i].startingSalary = jobData[i].startingSalary;
                 charaFile.JobSalaryHeaders[i].levelUpSalaryMultiplier = jobData[i].levelUpSalaryMultiplier;
                 charaFile.JobSalaryHeaders[i].bonusRequirementCount = jobData[i].bonusRequirementCount;
-                charaFile.JobSalaryHeaders[i].bonusMultiplier = (ushort)(100 * jobData[i].bonusMultiplier);
+                charaFile.JobSalaryHeaders[i].bonusMultiplier = (ushort)(100 * jobData[i].bonusMultiplier + 0.5);
             }
 
             for (int i = 0; i < jobData.Count / 2 && i < charaFile.JobSkillHeaders.Count; i++)
@@ -199,12 +196,11 @@ namespace DokaponFileReader
                 charaFile.JobStartingStatsHeaders[i].hp = (ushort)(jobData[i].startingHP / 10);
             }
 
-            for (int i = 0; i < jobData.Count / 2 && i < charaFile.JobBattleSkillHeaders.Count; i++)
+            for (int i = 0; i < jobData.Count; i++)
             {
-                (_, charaFile.JobBattleSkillHeaders[i].firstBattleSkillIndex) = charaFile.GetItemTypeAndID(jobData[2 * i].level4BattleSkill);
-                (_, charaFile.JobBattleSkillHeaders[i].secondBattleSkillIndex) = charaFile.GetItemTypeAndID(jobData[2 * i].level6BattleSkill);
+                charaFile.JobBattleSkillHeaders[i].firstBattleSkillIndex = charaFile.GetItemID(EffectItemType.BattleSkill, jobData[i].level4BattleSkill);
+                charaFile.JobBattleSkillHeaders[i].secondBattleSkillIndex = charaFile.GetItemID(EffectItemType.BattleSkill, jobData[i].level6BattleSkill);
             }
-
 
             for (int i = 0; i < jobData.Count && i < charaFile.JobBattleSkillHeaders.Count; i++)
             {
@@ -223,7 +219,7 @@ namespace DokaponFileReader
                 charaFile.JobLevelAndMasteryHeaders[i].masteryDefense = jobData[i].masteryDefense;
                 charaFile.JobLevelAndMasteryHeaders[i].masteryMagic = jobData[i].masteryMagic;
                 charaFile.JobLevelAndMasteryHeaders[i].masterySpeed = jobData[i].masterySpeed;
-                charaFile.JobLevelAndMasteryHeaders[i].masteryHP = (ushort)(jobData[i].masteryHP);
+                charaFile.JobLevelAndMasteryHeaders[i].masteryHP = (ushort)(jobData[i].masteryHP / 10);
             }
 
             for (int i = 0; i < jobData.Count && i < charaFile.JobLevelUpRequirementHeaders.Count; i++)

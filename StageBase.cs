@@ -283,15 +283,15 @@ namespace DokaponFileReader
             return ("None");
         }
 
-        public (byte, byte) GetEffectTypeAndID(string effectName)
+        public byte GetEffectTypeIndex(string effectName)
         {
             foreach (var header in RandomEffectHeaders)
             {
                 if (header.effectName == effectName)
-                    return (header.effectType, header.effectTypeIndex);
+                    return (header.effectTypeIndex);
             }
 
-            return (0,0);
+            return (0xFF);
         }
 
         public string GetLocationName(byte locationIndex)
@@ -339,7 +339,7 @@ namespace DokaponFileReader
                     return townCastle.index;
             }
 
-            return (0);
+            return (0xFF);
         }
     }
 }

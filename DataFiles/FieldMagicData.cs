@@ -48,7 +48,7 @@ namespace DokaponFileReader.DataFiles
             {
                 charaFile.FieldMagicHeaders[i].name = fieldMagicData[i].name;
                 charaFile.FieldMagicHeaders[i].price = fieldMagicData[i].price;
-                charaFile.FieldMagicHeaders[i].power = (ushort)(100 * fieldMagicData[i].power);
+                charaFile.FieldMagicHeaders[i].power = (ushort)(100 * fieldMagicData[i].power + 0.5);
                 charaFile.FieldMagicHeaders[i].iconID = fieldMagicData[i].iconID;
                 charaFile.FieldMagicHeaders[i].magicType = charaFile.GetFieldMagicTypeID(fieldMagicData[i].magicType);
                 charaFile.FieldMagicHeaders[i].effectType = fieldMagicData[i].effectType;

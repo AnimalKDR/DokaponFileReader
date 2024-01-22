@@ -38,9 +38,9 @@ namespace DokaponFileReader.DataFiles
             for (int i = 0; i < cpuNameData.Count; i++)
             {
                 if (cpuNameData[i].sex == 0)
-                    charaFile.CPUNamesHeaders[0].names[i] = cpuNameData[maleNames++].name;
+                    charaFile.CPUNamesHeaders[0].names[maleNames++] = cpuNameData[i].name;
                 else
-                    charaFile.CPUNamesHeaders[1].names[i] = cpuNameData[femaleNames++].name;
+                    charaFile.CPUNamesHeaders[1].names[femaleNames++] = cpuNameData[i].name;
             }
         }
     }

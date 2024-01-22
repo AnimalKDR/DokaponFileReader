@@ -5,9 +5,11 @@ namespace DokaponFileReader.DataFiles
     public class RandomLootData
     {
         public string itemName { get; set; }
+        public EffectItemType itemType { get; set; }
 
-        public RandomLootData(string itemName)
+        public RandomLootData(EffectItemType itemType, string itemName)
         {
+            this.itemType = itemType;
             this.itemName = itemName;
         }
 
@@ -23,11 +25,11 @@ namespace DokaponFileReader.DataFiles
                 string itemName;
 
                 if (item.type < 0x80)
-                    itemName = charaFile.GetItemName((ItemType)item.type, item.index);
+                    itemName = charaFile.GetItemName((EffectItemType)item.type, item.index);
                 else
                     itemName = stageBaseFile.GetEffectName(item.type, item.index);
 
-                data.Add(new RandomLootData(itemName));
+                data.Add(new RandomLootData((EffectItemType)item.type, itemName));
             }
 
             return data;
@@ -40,12 +42,14 @@ namespace DokaponFileReader.DataFiles
 
             for (int i = 0; i < randomLootData.Count; i++)
             {
-                (byte type, byte id) = charaFile.GetItemTypeAndID(randomLootData[i].itemName);
-
-                if (type == (byte)ItemType.None)
-                    (type, id) = stageBaseFile.GetEffectTypeAndID(randomLootData[i].itemName);
-
-                stageBaseFile.RandomLootHeaders[index].itemList[i] = (id, type);
+                if (randomLootData[i].itemType >= EffectItemType.GainGold)
+                {
+                    stageBaseFile.RandomLootHeaders[index].itemList[i] = (stageBaseFile.GetEffectTypeIndex(randomLootData[i].itemName), (byte)randomLootData[i].itemType);
+                }
+                else
+                {
+                    stageBaseFile.RandomLootHeaders[index].itemList[i] = (charaFile.GetItemID(randomLootData[i].itemType, randomLootData[i].itemName), (byte)randomLootData[i].itemType);
+                }
             }
         }
     }
