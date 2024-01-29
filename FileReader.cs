@@ -86,6 +86,9 @@ namespace DokaponFileReader
                 result += Encoding.GetEncoding(932).GetString(buffer);
             } while (!buffer.ToList().Contains(0));
 
+            var endOfString = result.ToList().FindIndex(0, x => x == 0);
+            result = result.Remove(endOfString);
+
             return result;
         }
         public string GetStringAtPosition(UInt32 position, int bytesToRead = 4, bool reread = false)

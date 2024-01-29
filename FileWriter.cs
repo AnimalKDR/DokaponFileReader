@@ -53,13 +53,15 @@ namespace DokaponFileReader
 
             foreach (byte b in buffer)
             {
-                Write(b);
-
                 if (b == 0)
                     break;
+
+                Write(b);
             }
 
-            while(fileStream.Position % alignment != 0)
+            Write((byte)0);
+
+            while (fileStream.Position % alignment != 0)
                 Write((byte)0);
         }
 

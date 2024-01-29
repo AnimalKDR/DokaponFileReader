@@ -437,7 +437,7 @@ namespace DokaponFileReader
             base.WriteHeaderBlock(stageFile);
             stageFile.Write(index);
             stageFile.Write(unknownUint16);
-            if (fileName == "\0\0\0\0")
+            if (fileName == "")
             {
                 stageFile.Write((UInt32)0);
                 stageFile.Write((UInt32)0);
@@ -5284,7 +5284,7 @@ namespace DokaponFileReader
 
             foreach (var file in IGBFiles)
             {
-                if (file.index == 0 && file.fileName == "\0\0\0\0")
+                if (file.index == 0 && file.fileName == "")
                     stageFile.Write((UInt32)0);
 
                 file.WriteHeaderBlock(stageFile);
