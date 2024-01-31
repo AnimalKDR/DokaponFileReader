@@ -17,6 +17,7 @@ namespace DokaponFileReader
 
         public ObservableCollection<JobData> jobData = new ObservableCollection<JobData>();
         public ObservableCollection<MonsterData> monsterData = new ObservableCollection<MonsterData>();
+        public ObservableCollection<MonsterAIData> monsterAIData = new ObservableCollection<MonsterAIData>();
         public ObservableCollection<WeaponData> weaponData = new ObservableCollection<WeaponData>();
         public ObservableCollection<ShieldData> shieldData = new ObservableCollection<ShieldData>();
         public ObservableCollection<AccessoryData> accessorydData = new ObservableCollection<AccessoryData>();
@@ -265,6 +266,7 @@ namespace DokaponFileReader
         {
             jobData = JobData.GetData(charaFile);
             monsterData = MonsterData.GetData(charaFile);
+            monsterAIData = MonsterAIData.GetData(charaFile);
             weaponData = WeaponData.GetData(charaFile);
             shieldData = ShieldData.GetData(charaFile);
             accessorydData = AccessoryData.GetData(charaFile);
@@ -304,6 +306,7 @@ namespace DokaponFileReader
         {
             JobData.SetData(jobData, ref charaFile);
             MonsterData.SetData(monsterData, ref charaFile);
+            MonsterAIData.SetData(monsterAIData, ref charaFile);
             WeaponData.SetData(weaponData, ref charaFile);
             ShieldData.SetData(shieldData, ref charaFile);
             AccessoryData.SetData(accessorydData, ref charaFile);
@@ -339,6 +342,7 @@ namespace DokaponFileReader
         {
             JobDataTab.DataContext = jobData;
             MonsterDataTab.DataContext = monsterData;
+            MonsterAIDataTab.DataContext = monsterAIData;
             WeaponDataTab.DataContext = weaponData;
             ShieldDataTab.DataContext = shieldData;
             AccessoryDataTab.DataContext = accessorydData;

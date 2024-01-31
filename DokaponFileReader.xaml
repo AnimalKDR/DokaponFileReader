@@ -20,16 +20,16 @@
                             <Grid Background="#FFE5E5E5">
                                 <DataGrid x:Name="JobStartingStats" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Job Name"  Binding="{Binding jobName}"/>
-                                        <DataGridTextColumn Header="Sex"  Binding="{Binding sex}"/>
-                                        <DataGridTextColumn Header="AT"  Binding="{Binding startingAttack}"/>
-                                        <DataGridTextColumn Header="DF"  Binding="{Binding startingDefense}"/>
-                                        <DataGridTextColumn Header="MG"  Binding="{Binding startingMagic}"/>
-                                        <DataGridTextColumn Header="SP"  Binding="{Binding startingSpeed}"/>
-                                        <DataGridTextColumn Header="HP"  Binding="{Binding startingHP}"/>
-                                        <DataGridTextColumn Header="Items"  Binding="{Binding bagItemSpace}"/>
-                                        <DataGridTextColumn Header="Field Magic"  Binding="{Binding fieldMagicSpace}"/>
-                                        <DataGridTextColumn Header="Description"  Binding="{Binding jobDescription}"/>
+                                        <DataGridTextColumn Header="Job Name"  Binding="{Binding jobName, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Sex"  Binding="{Binding sex, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="AT"  Binding="{Binding startingAttack, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="DF"  Binding="{Binding startingDefense, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="MG"  Binding="{Binding startingMagic, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="SP"  Binding="{Binding startingSpeed, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="HP"  Binding="{Binding startingHP, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Items"  Binding="{Binding bagItemSpace, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Field Magic"  Binding="{Binding fieldMagicSpace, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Description"  Binding="{Binding jobDescription, UpdateSourceTrigger=PropertyChanged}"/>
 
                                     </DataGrid.Columns>
                                 </DataGrid>
@@ -39,14 +39,14 @@
                             <Grid Background="#FFE5E5E5">
                                 <DataGrid x:Name="JobLevelUpStats" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Job Name"  Binding="{Binding jobName}"/>
-                                        <DataGridTextColumn Header="Sex"  Binding="{Binding sex}"/>
-                                        <DataGridTextColumn Header="AT"  Binding="{Binding levelUpAttack}"/>
-                                        <DataGridTextColumn Header="DF"  Binding="{Binding levelUpDefense}"/>
-                                        <DataGridTextColumn Header="MG"  Binding="{Binding levelUpMagic}"/>
-                                        <DataGridTextColumn Header="SP"  Binding="{Binding levelUpSpeed}"/>
-                                        <DataGridTextColumn Header="HP"  Binding="{Binding levelUpHP}"/>
-                                        <DataGridTextColumn Header="Battles to Level"  Binding="{Binding battlesToLevel}"/>
+                                        <DataGridTextColumn Header="Job Name"  Binding="{Binding jobName, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Sex"  Binding="{Binding sex, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="AT"  Binding="{Binding levelUpAttack, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="DF"  Binding="{Binding levelUpDefense, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="MG"  Binding="{Binding levelUpMagic, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="SP"  Binding="{Binding levelUpSpeed, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="HP"  Binding="{Binding levelUpHP, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Battles to Level"  Binding="{Binding battlesToLevel, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -55,13 +55,13 @@
                             <Grid Background="#FFE5E5E5">
                                 <DataGrid x:Name="JobMasteryStats" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Job Name"  Binding="{Binding jobName}"/>
-                                        <DataGridTextColumn Header="Sex"  Binding="{Binding sex}"/>
-                                        <DataGridTextColumn Header="AT"  Binding="{Binding masteryAttack}"/>
-                                        <DataGridTextColumn Header="DF"  Binding="{Binding masteryDefense}"/>
-                                        <DataGridTextColumn Header="MG"  Binding="{Binding masteryMagic}"/>
-                                        <DataGridTextColumn Header="SP"  Binding="{Binding masterySpeed}"/>
-                                        <DataGridTextColumn Header="HP"  Binding="{Binding masteryHP}"/>
+                                        <DataGridTextColumn Header="Job Name"  Binding="{Binding jobName, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Sex"  Binding="{Binding sex, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="AT"  Binding="{Binding masteryAttack, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="DF"  Binding="{Binding masteryDefense, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="MG"  Binding="{Binding masteryMagic, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="SP"  Binding="{Binding masterySpeed, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="HP"  Binding="{Binding masteryHP, UpdateSourceTrigger=PropertyChanged}"/>
 
                                     </DataGrid.Columns>
                                 </DataGrid>
@@ -71,12 +71,12 @@
                             <Grid Background="#FFE5E5E5">
                                 <DataGrid x:Name="SalaryStats" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Job Name"  Binding="{Binding jobName}"/>
-                                        <DataGridTextColumn Header="Sex"  Binding="{Binding sex}"/>
-                                        <DataGridTextColumn Header="Salary"  Binding="{Binding startingSalary}"/>
-                                        <DataGridTextColumn Header="Salary Multiplier"  Binding="{Binding levelUpSalaryMultiplier}"/>
-                                        <DataGridTextColumn Header="Bonus Count"  Binding="{Binding bonusRequirementCount}"/>
-                                        <DataGridTextColumn Header="Bonus Multiplier"  Binding="{Binding bonusMultiplier}"/>
+                                        <DataGridTextColumn Header="Job Name"  Binding="{Binding jobName, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Sex"  Binding="{Binding sex, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Salary"  Binding="{Binding startingSalary, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Salary Multiplier"  Binding="{Binding levelUpSalaryMultiplier, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Bonus Count"  Binding="{Binding bonusRequirementCount, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Bonus Multiplier"  Binding="{Binding bonusMultiplier, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -85,13 +85,13 @@
                             <Grid Background="#FFE5E5E5">
                                 <DataGrid x:Name="SkillStats" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Job Name"  Binding="{Binding jobName}"/>
-                                        <DataGridTextColumn Header="Sex"  Binding="{Binding sex}"/>
-                                        <DataGridTextColumn Header="Level 4 Skill"  Binding="{Binding level4BattleSkill}"/>
-                                        <DataGridTextColumn Header="Level 6 Skill"  Binding="{Binding level6BattleSkill}"/>
-                                        <DataGridTextColumn Header="Passive"  Binding="{Binding jobPassiveName}"/>
-                                        <DataGridTextColumn Header="Activation Rate"  Binding="{Binding jobPassiveActivationRate}"/>
-                                        <DataGridTextColumn Header="Passive Effect"  Binding="{Binding jobPassiveDescription}"/>
+                                        <DataGridTextColumn Header="Job Name"  Binding="{Binding jobName, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Sex"  Binding="{Binding sex, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Level 4 Skill"  Binding="{Binding level4BattleSkill, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Level 6 Skill"  Binding="{Binding level6BattleSkill, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Passive"  Binding="{Binding jobPassiveName, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Activation Rate"  Binding="{Binding jobPassiveActivationRate, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Passive Effect"  Binding="{Binding jobPassiveDescription, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -100,12 +100,12 @@
                             <Grid Background="#FFE5E5E5">
                                 <DataGrid x:Name="Requirements" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Job Name"  Binding="{Binding jobName}"/>
-                                        <DataGridTextColumn Header="Sex"  Binding="{Binding sex}"/>
-                                        <DataGridTextColumn Header="Mastery 1"  Binding="{Binding masteryRequirement[0]}"/>
-                                        <DataGridTextColumn Header="Mastery 2"  Binding="{Binding masteryRequirement[1]}"/>
-                                        <DataGridTextColumn Header="Mastery 3"  Binding="{Binding masteryRequirement[2]}"/>
-                                        <DataGridTextColumn Header="Item Required"  Binding="{Binding itemRequirement}"/>
+                                        <DataGridTextColumn Header="Job Name"  Binding="{Binding jobName, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Sex"  Binding="{Binding sex, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Mastery 1"  Binding="{Binding masteryRequirement[0], UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Mastery 2"  Binding="{Binding masteryRequirement[1], UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Mastery 3"  Binding="{Binding masteryRequirement[2], UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Item Required"  Binding="{Binding itemRequirement, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -120,20 +120,20 @@
                             <Grid Background="#FFE5E5E5">
                                 <DataGrid x:Name="GeneralData" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
-                                        <DataGridTextColumn Header="Level"  Binding="{Binding level}"/>
-                                        <DataGridTextColumn Header="AT"  Binding="{Binding attack}"/>
-                                        <DataGridTextColumn Header="DF"  Binding="{Binding defense}"/>
-                                        <DataGridTextColumn Header="MG"  Binding="{Binding magic}"/>
-                                        <DataGridTextColumn Header="SP"  Binding="{Binding speed}"/>
-                                        <DataGridTextColumn Header="HP"  Binding="{Binding hp}"/>
-                                        <DataGridTextColumn Header="AT"  Binding="{Binding specialTypeAttack}"/>
-                                        <DataGridTextColumn Header="DF"  Binding="{Binding specialTypeDefense}"/>
-                                        <DataGridTextColumn Header="MG"  Binding="{Binding specialTypeMagic}"/>
-                                        <DataGridTextColumn Header="SP"  Binding="{Binding specialTypeSpeed}"/>
-                                        <DataGridTextColumn Header="HP"  Binding="{Binding specialTypeHP}"/>
-                                        <DataGridTextColumn Header="Monster Type"  Binding="{Binding monsterType}"/>
-                                        <DataGridTextColumn Header="Voice ID"  Binding="{Binding voiceID}"/>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Level"  Binding="{Binding level, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="AT"  Binding="{Binding attack, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="DF"  Binding="{Binding defense, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="MG"  Binding="{Binding magic, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="SP"  Binding="{Binding speed, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="HP"  Binding="{Binding hp, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="AT"  Binding="{Binding specialTypeAttack, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="DF"  Binding="{Binding specialTypeDefense, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="MG"  Binding="{Binding specialTypeMagic, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="SP"  Binding="{Binding specialTypeSpeed, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="HP"  Binding="{Binding specialTypeHP, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Monster Type"  Binding="{Binding monsterType, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Voice ID"  Binding="{Binding voiceID, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -142,17 +142,11 @@
                             <Grid Background="#FFE5E5E5">
                                 <DataGrid x:Name="CombatData" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
-                                        <DataGridTextColumn Header="Offensive Magic"  Binding="{Binding offensiveMagic}"/>
-                                        <DataGridTextColumn Header="Defensive Magic"  Binding="{Binding defensiveMagic}"/>
-                                        <DataGridTextColumn Header="Battle Skill"  Binding="{Binding battleSkill}"/>
-                                        <DataGridTextColumn Header="Attack Rate"  Binding="{Binding attackRate}"/>
-                                        <DataGridTextColumn Header="Magic Rate"  Binding="{Binding magicRate}"/>
-                                        <DataGridTextColumn Header="Skill Rate"  Binding="{Binding skillRate}"/>
-                                        <DataGridTextColumn Header="Strike Rate"  Binding="{Binding strikeRate}"/>
-                                        <DataGridTextColumn Header="Defend Rate"  Binding="{Binding defendRate}"/>
-                                        <DataGridTextColumn Header="Magic Guard Rate"  Binding="{Binding magicGuardRate}"/>
-                                        <DataGridTextColumn Header="Counter Rate"  Binding="{Binding counterRate}"/>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Offensive Magic"  Binding="{Binding offensiveMagic, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Defensive Magic"  Binding="{Binding defensiveMagic, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Battle Skill"  Binding="{Binding battleSkill, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="AI Table"  Binding="{Binding aiIndex, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -161,16 +155,16 @@
                             <Grid Background="#FFE5E5E5">
                                 <DataGrid x:Name="RewardData" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
-                                        <DataGridTextColumn Header="XP"  Binding="{Binding experience}"/>
-                                        <DataGridTextColumn Header="Gold"  Binding="{Binding gold}"/>
-                                        <DataGridTextColumn Header="Times Week?"  Binding="{Binding dynamicGold}"/>
-                                        <DataGridTextColumn Header="Item 1 Type"  Binding="{Binding dropItemType[0]}"/>
-                                        <DataGridTextColumn Header="Item 1"  Binding="{Binding dropItem[0]}"/>
-                                        <DataGridTextColumn Header="Item 1 Chance"  Binding="{Binding dropItemChance[0]}"/>
-                                        <DataGridTextColumn Header="Item 2 Type"  Binding="{Binding dropItemType[1]}"/>
-                                        <DataGridTextColumn Header="Item 2"  Binding="{Binding dropItem[1]}"/>
-                                        <DataGridTextColumn Header="Item 2 Chance"  Binding="{Binding dropItemChance[1]}"/>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="XP"  Binding="{Binding experience, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Gold"  Binding="{Binding gold, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Times Week?"  Binding="{Binding dynamicGold, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Item 1 Type"  Binding="{Binding dropItemType[0], UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Item 1"  Binding="{Binding dropItem[0], UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Item 1 Chance"  Binding="{Binding dropItemChance[0], UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Item 2 Type"  Binding="{Binding dropItemType[1], UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Item 2"  Binding="{Binding dropItem[1], UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Item 2 Chance"  Binding="{Binding dropItemChance[1], UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -179,8 +173,8 @@
                             <Grid Background="#FFE5E5E5">
                                 <DataGrid x:Name="DescriptionData" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
-                                        <DataGridTextColumn Header="Description"  Binding="{Binding description}"/>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Description"  Binding="{Binding description, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -195,18 +189,18 @@
                             <Grid Background="#FFE5E5E5">
                                 <DataGrid x:Name="WeaponsData" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
-                                        <DataGridTextColumn Header="Price"  Binding="{Binding price}"/>
-                                        <DataGridTextColumn Header="AT"  Binding="{Binding attack}"/>
-                                        <DataGridTextColumn Header="DF"  Binding="{Binding defense}"/>
-                                        <DataGridTextColumn Header="MG"  Binding="{Binding magic}"/>
-                                        <DataGridTextColumn Header="SP"  Binding="{Binding speed}"/>
-                                        <DataGridTextColumn Header="HP"  Binding="{Binding hp}"/>
-                                        <DataGridTextColumn Header="Bonus Class"  Binding="{Binding bonusClass}"/>
-                                        <DataGridTextColumn Header="Activation Rate"  Binding="{Binding activationRate}"/>
-                                        <DataGridTextColumn Header="Icon ID"  Binding="{Binding iconID}"/>
-                                        <DataGridTextColumn Header="Attack Type"  Binding="{Binding attackAnimation}"/>
-                                        <DataGridTextColumn Header="Description"  Binding="{Binding description}"/>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Price"  Binding="{Binding price, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="AT"  Binding="{Binding attack, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="DF"  Binding="{Binding defense, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="MG"  Binding="{Binding magic, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="SP"  Binding="{Binding speed, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="HP"  Binding="{Binding hp, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Bonus Class"  Binding="{Binding bonusClass, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Activation Rate"  Binding="{Binding activationRate, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Icon ID"  Binding="{Binding iconID, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Attack Type"  Binding="{Binding attackAnimation, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Description"  Binding="{Binding description, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -215,16 +209,16 @@
                             <Grid Background="#FFE5E5E5">
                                 <DataGrid x:Name="ShieldDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
-                                        <DataGridTextColumn Header="Price"  Binding="{Binding price}"/>
-                                        <DataGridTextColumn Header="AT"  Binding="{Binding attack}"/>
-                                        <DataGridTextColumn Header="DF"  Binding="{Binding defense}"/>
-                                        <DataGridTextColumn Header="MG"  Binding="{Binding magic}"/>
-                                        <DataGridTextColumn Header="SP"  Binding="{Binding speed}"/>
-                                        <DataGridTextColumn Header="HP"  Binding="{Binding hp}"/>
-                                        <DataGridTextColumn Header="Activation Rate"  Binding="{Binding activationRate}"/>
-                                        <DataGridTextColumn Header="Icon ID"  Binding="{Binding iconID}"/>
-                                        <DataGridTextColumn Header="Description"  Binding="{Binding description}"/>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Price"  Binding="{Binding price, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="AT"  Binding="{Binding attack, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="DF"  Binding="{Binding defense, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="MG"  Binding="{Binding magic, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="SP"  Binding="{Binding speed, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="HP"  Binding="{Binding hp, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Activation Rate"  Binding="{Binding activationRate, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Icon ID"  Binding="{Binding iconID, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Description"  Binding="{Binding description, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -233,16 +227,16 @@
                             <Grid Background="#FFE5E5E5">
                                 <DataGrid x:Name="AccessoryDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
-                                        <DataGridTextColumn Header="Price"  Binding="{Binding price}"/>
-                                        <DataGridTextColumn Header="AT"  Binding="{Binding attack}"/>
-                                        <DataGridTextColumn Header="DF"  Binding="{Binding defense}"/>
-                                        <DataGridTextColumn Header="MG"  Binding="{Binding magic}"/>
-                                        <DataGridTextColumn Header="SP"  Binding="{Binding speed}"/>
-                                        <DataGridTextColumn Header="HP"  Binding="{Binding hp}"/>
-                                        <DataGridTextColumn Header="Activation Rate"  Binding="{Binding activationRate}"/>
-                                        <DataGridTextColumn Header="Icon ID"  Binding="{Binding iconID}"/>
-                                        <DataGridTextColumn Header="Description"  Binding="{Binding description}"/>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Price"  Binding="{Binding price, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="AT"  Binding="{Binding attack, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="DF"  Binding="{Binding defense, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="MG"  Binding="{Binding magic, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="SP"  Binding="{Binding speed, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="HP"  Binding="{Binding hp, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Activation Rate"  Binding="{Binding activationRate, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Icon ID"  Binding="{Binding iconID, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Description"  Binding="{Binding description, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -251,11 +245,11 @@
                             <Grid Background="#FFE5E5E5">
                                 <DataGrid x:Name="HairstyleDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
-                                        <DataGridTextColumn Header="Sex"  Binding="{Binding sex}"/>
-                                        <DataGridTextColumn Header="Hair Type ID"  Binding="{Binding hairTypeID}"/>
-                                        <DataGridTextColumn Header="Icon ID"  Binding="{Binding iconID}"/>
-                                        <DataGridTextColumn Header="Description"  Binding="{Binding description}"/>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Sex"  Binding="{Binding sex, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Hair Type ID"  Binding="{Binding hairTypeID, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Icon ID"  Binding="{Binding iconID, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Description"  Binding="{Binding description, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -264,11 +258,11 @@
                             <Grid Background="#FFE5E5E5">
                                 <DataGrid x:Name="BagItemDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
-                                        <DataGridTextColumn Header="Price"  Binding="{Binding price}"/>
-                                        <DataGridTextColumn Header="Item Type"  Binding="{Binding itemType}"/>
-                                        <DataGridTextColumn Header="Icon ID"  Binding="{Binding iconID}"/>
-                                        <DataGridTextColumn Header="Description"  Binding="{Binding description}"/>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Price"  Binding="{Binding price, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Icon ID"  Binding="{Binding iconID, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Description"  Binding="{Binding description, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -277,13 +271,13 @@
                             <Grid Background="#FFE5E5E5">
                                 <DataGrid x:Name="LocalItemDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
-                                        <DataGridTextColumn Header="Location"  Binding="{Binding location}"/>
-                                        <DataGridTextColumn Header="Price"  Binding="{Binding price}"/>
-                                        <DataGridTextColumn Header="Gift Value"  Binding="{Binding giftValue}"/>
-                                        <DataGridTextColumn Header="Spawn Rate"  Binding="{Binding spawnRate}"/>
-                                        <DataGridTextColumn Header="Icon ID"  Binding="{Binding iconID}"/>
-                                        <DataGridTextColumn Header="Description"  Binding="{Binding description}"/>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Location"  Binding="{Binding location, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Price"  Binding="{Binding price, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Gift Value"  Binding="{Binding giftValue, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Spawn Rate"  Binding="{Binding spawnRate, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Icon ID"  Binding="{Binding iconID, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Description"  Binding="{Binding description, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -292,14 +286,14 @@
                             <Grid Background="#FFE5E5E5">
                                 <DataGrid x:Name="OffensiveMagicDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
-                                        <DataGridTextColumn Header="Price"  Binding="{Binding price}"/>
-                                        <DataGridTextColumn Header="Power"  Binding="{Binding power}"/>
-                                        <DataGridTextColumn Header="Magic Type"  Binding="{Binding magicType}"/>
-                                        <DataGridTextColumn Header="Effect Type"  Binding="{Binding effectType, StringFormat={}0x{0:X4}}"/>
-                                        <DataGridTextColumn Header="Icon ID"  Binding="{Binding iconID}"/>
-                                        <DataGridTextColumn Header="Sort Index"  Binding="{Binding sortIndex}"/>
-                                        <DataGridTextColumn Header="Description"  Binding="{Binding description}"/>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Price"  Binding="{Binding price, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Power"  Binding="{Binding power, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Magic Type"  Binding="{Binding magicType, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Effect Type"  Binding="{Binding effectType, StringFormat={}0x{0:X4}, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Icon ID"  Binding="{Binding iconID, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Sort Index"  Binding="{Binding sortIndex, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Description"  Binding="{Binding description, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -308,14 +302,14 @@
                             <Grid Background="#FFE5E5E5">
                                 <DataGrid x:Name="DefensiveMagicDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
-                                        <DataGridTextColumn Header="Price"  Binding="{Binding price}"/>
-                                        <DataGridTextColumn Header="Power"  Binding="{Binding power}"/>
-                                        <DataGridTextColumn Header="Magic Type"  Binding="{Binding magicType}"/>
-                                        <DataGridTextColumn Header="Effect Type"  Binding="{Binding effectType, StringFormat={}0x{0:X4}}"/>
-                                        <DataGridTextColumn Header="Icon ID"  Binding="{Binding iconID}"/>
-                                        <DataGridTextColumn Header="Sort Index"  Binding="{Binding sortIndex}"/>
-                                        <DataGridTextColumn Header="Description"  Binding="{Binding description}"/>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Price"  Binding="{Binding price, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Power"  Binding="{Binding power, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Magic Type"  Binding="{Binding magicType, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Effect Type"  Binding="{Binding effectType, StringFormat={}0x{0:X4}, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Icon ID"  Binding="{Binding iconID, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Sort Index"  Binding="{Binding sortIndex, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Description"  Binding="{Binding description, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -324,13 +318,13 @@
                             <Grid Background="#FFE5E5E5">
                                 <DataGrid x:Name="FieldMagicDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
-                                        <DataGridTextColumn Header="Price"  Binding="{Binding price}"/>
-                                        <DataGridTextColumn Header="Power"  Binding="{Binding power}"/>
-                                        <DataGridTextColumn Header="Magic Type"  Binding="{Binding magicType}"/>
-                                        <DataGridTextColumn Header="Effect Type"  Binding="{Binding effectType, StringFormat={}0x{0:X4}}"/>
-                                        <DataGridTextColumn Header="Icon ID"  Binding="{Binding iconID}"/>
-                                        <DataGridTextColumn Header="Description"  Binding="{Binding description}"/>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Price"  Binding="{Binding price, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Power"  Binding="{Binding power, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Magic Type"  Binding="{Binding magicType, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Effect Type"  Binding="{Binding effectType, StringFormat={}0x{0:X4}, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Icon ID"  Binding="{Binding iconID, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Description"  Binding="{Binding description, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -338,18 +332,18 @@
                         <TabItem x:Name="BattleSkillDataTab" HorizontalAlignment="Center" Height="20" Header="Battle Skills" VerticalAlignment="Top" Width="82" Margin="0,-1,0,0">
                             <DataGrid x:Name="BattleSkillDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
-                                    <DataGridTextColumn Header="Activation Rate"  Binding="{Binding activationRate}"/>
-                                    <DataGridTextColumn Header="Description"  Binding="{Binding description}"/>
+                                    <DataGridTextColumn Header="Name"  Binding="{Binding name, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <DataGridTextColumn Header="Activation Rate"  Binding="{Binding activationRate, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <DataGridTextColumn Header="Description"  Binding="{Binding description, UpdateSourceTrigger=PropertyChanged}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </TabItem>
                         <TabItem x:Name="DarkArtDataTab" HorizontalAlignment="Center" Height="20" Header="Dark Arts" VerticalAlignment="Top" Width="82" Margin="0,-1,0,0">
                             <DataGrid x:Name="DarkArtDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
-                                    <DataGridTextColumn Header="Cost"  Binding="{Binding cost}"/>
-                                    <DataGridTextColumn Header="Description"  Binding="{Binding description}"/>
+                                    <DataGridTextColumn Header="Name"  Binding="{Binding name, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <DataGridTextColumn Header="Cost"  Binding="{Binding cost, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <DataGridTextColumn Header="Description"  Binding="{Binding description, UpdateSourceTrigger=PropertyChanged}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </TabItem>
@@ -362,14 +356,14 @@
                         <TabItem x:Name="NPCNameDataTab" Header="NPC Names">
                             <DataGrid x:Name="NPCNameDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
+                                    <DataGridTextColumn Header="Name"  Binding="{Binding name, UpdateSourceTrigger=PropertyChanged}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </TabItem>
                         <TabItem x:Name="DialogueDataTab" Header="Dialogue">
                             <DataGrid x:Name="DialogueDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Dialogue"  Binding="{Binding dialogue}"/>
+                                    <DataGridTextColumn Header="Dialogue"  Binding="{Binding dialogue, UpdateSourceTrigger=PropertyChanged}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </TabItem>
@@ -383,9 +377,25 @@
                             <Grid Background="#FFE5E5E5">
                                 <DataGrid x:Name="CombatFormulaDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
-                                        <DataGridTextColumn Header="Index"  Binding="{Binding index}"/>
-                                        <DataGridTextColumn Header="Formula"  Binding="{Binding formula}"/>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Index"  Binding="{Binding index, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Formula"  Binding="{Binding formula, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+                        <TabItem x:Name="MonsterAIDataTab" Header="Monster AI">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid x:Name="MonsterAIDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Index"  Binding="{Binding index, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Attack Rate"  Binding="{Binding attackRate, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Magic Rate"  Binding="{Binding magicRate, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Skill Rate"  Binding="{Binding skillRate, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Strike Rate"  Binding="{Binding strikeRate, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Defend Rate"  Binding="{Binding defendRate, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Magic Defend Rate"  Binding="{Binding magicDefendRate, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Counter Rate"  Binding="{Binding counterRate, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -394,8 +404,8 @@
                             <Grid Background="#FFE5E5E5">
                                 <DataGrid x:Name="ExperienceDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Level"  Binding="{Binding level}"/>
-                                        <DataGridTextColumn Header="Experience"  Binding="{Binding experience}"/>
+                                        <DataGridTextColumn Header="Level"  Binding="{Binding level, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Experience"  Binding="{Binding experience, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -404,8 +414,8 @@
                             <Grid Background="#FFE5E5E5">
                                 <DataGrid x:Name="CPUNameDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Sex"  Binding="{Binding sex}"/>
-                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
+                                        <DataGridTextColumn Header="Sex"  Binding="{Binding sex, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -414,7 +424,7 @@
                             <Grid Background="#FFE5E5E5">
                                 <DataGrid x:Name="PrankNameDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -423,8 +433,8 @@
                             <Grid Background="#FFE5E5E5">
                                 <DataGrid x:Name="EffectDatas1" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
-                                        <DataGridTextColumn Header="Icon ID"  Binding="{Binding iconID}"/>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Icon ID"  Binding="{Binding iconID, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -433,10 +443,10 @@
                             <Grid Background="#FFE5E5E5">
                                 <DataGrid x:Name="EffectDatas2" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
-                                        <DataGridTextColumn Header="Min Duration"  Binding="{Binding minDuration}"/>
-                                        <DataGridTextColumn Header="Max Duration"  Binding="{Binding maxDuration}"/>
-                                        <DataGridTextColumn Header="Icon ID"  Binding="{Binding iconID}"/>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Min Duration"  Binding="{Binding minDuration, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Max Duration"  Binding="{Binding maxDuration, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Icon ID"  Binding="{Binding iconID, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -445,10 +455,10 @@
                             <Grid Background="#FFE5E5E5">
                                 <DataGrid x:Name="EffectDatas3" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
-                                        <DataGridTextColumn Header="Min Duration"  Binding="{Binding minDuration}"/>
-                                        <DataGridTextColumn Header="Max Duration"  Binding="{Binding maxDuration}"/>
-                                        <DataGridTextColumn Header="Icon ID"  Binding="{Binding iconID}"/>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Min Duration"  Binding="{Binding minDuration, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Max Duration"  Binding="{Binding maxDuration, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Icon ID"  Binding="{Binding iconID, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -457,7 +467,7 @@
                             <Grid Background="#FFE5E5E5">
                                 <DataGrid x:Name="InstructionDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Instruction"  Binding="{Binding instruction}"/>
+                                        <DataGridTextColumn Header="Instruction"  Binding="{Binding instruction, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -472,8 +482,8 @@
                             <Grid Background="#FFE5E5E5">
                                 <DataGrid x:Name="SpaceDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
-                                        <DataGridTextColumn Header="Description"  Binding="{Binding description}"/>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Description"  Binding="{Binding description, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -482,7 +492,7 @@
                             <Grid Background="#FFE5E5E5">
                                 <DataGrid x:Name="LocationDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -491,10 +501,10 @@
                             <Grid Background="#FFE5E5E5">
                                 <DataGrid x:Name="TownCastleDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
-                                        <DataGridTextColumn Header="Continent"  Binding="{Binding continent}"/>
-                                        <DataGridTextColumn Header="Location ID"  Binding="{Binding mapLocationID}"/>
-                                        <DataGridTextColumn Header="Town Value"  Binding="{Binding townValue}"/>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Continent"  Binding="{Binding continent, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Location ID"  Binding="{Binding mapLocationID, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Town Value"  Binding="{Binding townValue, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -503,9 +513,9 @@
                             <Grid Background="#FFE5E5E5">
                                 <DataGrid x:Name="TempleDatas" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Name"  Binding="{Binding name}"/>
-                                        <DataGridTextColumn Header="Continent"  Binding="{Binding continent}"/>
-                                        <DataGridTextColumn Header="Location ID"  Binding="{Binding mapLocationID}"/>
+                                        <DataGridTextColumn Header="Name"  Binding="{Binding name, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Continent"  Binding="{Binding continent, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridTextColumn Header="Location ID"  Binding="{Binding mapLocationID, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -517,8 +527,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData0" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -527,8 +537,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData1" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -537,8 +547,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData2" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -547,8 +557,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData3" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -557,8 +567,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData4" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -567,8 +577,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData5" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -577,8 +587,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData6" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -587,8 +597,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData7" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -597,8 +607,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData8" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -607,8 +617,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData9" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -617,8 +627,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData10" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -627,8 +637,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData11" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -637,8 +647,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData12" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -647,8 +657,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData13" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -657,8 +667,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData14" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -667,8 +677,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData15" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -677,8 +687,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData16" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -687,8 +697,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData17" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -697,8 +707,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData18" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -707,8 +717,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData19" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -717,8 +727,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData20" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -727,8 +737,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData21" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -737,8 +747,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData22" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -747,8 +757,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData23" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -757,8 +767,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData24" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -767,8 +777,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData25" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -777,8 +787,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData26" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -787,8 +797,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData27" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -797,8 +807,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData28" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -807,8 +817,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData29" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -817,8 +827,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData30" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -827,8 +837,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData31" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -837,8 +847,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData32" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -847,8 +857,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData33" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -857,8 +867,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData34" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -867,8 +877,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData35" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -877,8 +887,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData36" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -887,8 +897,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData37" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -897,8 +907,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData38" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -907,8 +917,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData39" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -917,8 +927,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData40" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -927,8 +937,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData41" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -937,8 +947,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData42" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -947,8 +957,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData43" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -957,8 +967,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData44" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -967,8 +977,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData45" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -977,8 +987,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData46" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -987,8 +997,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData47" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -997,8 +1007,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData48" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -1007,8 +1017,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData49" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -1017,8 +1027,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData50" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -1027,8 +1037,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData51" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -1037,8 +1047,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData52" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -1047,8 +1057,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData53" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -1057,8 +1067,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData54" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -1067,8 +1077,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData55" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -1077,8 +1087,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData56" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -1087,8 +1097,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData57" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -1097,8 +1107,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData58" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -1107,8 +1117,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData59" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -1117,8 +1127,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData60" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -1127,8 +1137,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData61" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -1137,8 +1147,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData62" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -1147,8 +1157,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData63" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -1157,8 +1167,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData64" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -1167,8 +1177,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData65" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -1177,8 +1187,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData66" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -1187,8 +1197,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData67" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>
@@ -1197,8 +1207,8 @@
                                         <Grid Background="#FFE5E5E5">
                                             <DataGrid x:Name="TableData68" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType}"/>
-                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName}"/>
+                                                    <DataGridTextColumn Header="Effect/Item Type"  Binding="{Binding itemType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <DataGridTextColumn Header="Effect/Item"  Binding="{Binding itemName, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </Grid>

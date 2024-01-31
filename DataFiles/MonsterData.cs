@@ -25,19 +25,25 @@ namespace DokaponFileReader
         public string [] dropItem { get; set; }
         public byte[] dropItemChance { get; set; }
         public byte aiIndex { get; set; }
-        public int attackRate { get; set; }
-        public int magicRate { get; set; }
-        public int skillRate { get; set; }
-        public int strikeRate { get; set; }
-        public int defendRate { get; set; }
-        public int magicGuardRate { get; set; }
-        public int counterRate { get; set; }
 
         public SpecialStatType specialTypeAttack { get; set; }
         public SpecialStatType specialTypeDefense { get; set; }
         public SpecialStatType specialTypeMagic { get; set; }
         public SpecialStatType specialTypeSpeed { get; set; }
         public SpecialStatType specialTypeHP { get; set; }
+
+        public enum AIType
+        {
+            Normal,
+            NoMagic,
+            LowMagic,
+            HighMagicNoSkill,
+            HighMagic,
+            NoMagicOrDefense,
+            NoMagicDefense,
+            Bandit,
+
+        }
 
         public MonsterData(string name)
         {
@@ -127,13 +133,6 @@ namespace DokaponFileReader
                 data[monsterType.index].voiceID = monsterType.voiceID;
                 data[monsterType.index].monsterType = (MonsterType)monsterType.monsterType;
                 data[monsterType.index].aiIndex = monsterType.aiIndex;
-                data[monsterType.index].attackRate = charaFile.MonsterAITableHeaders[monsterType.aiIndex].attackRate;
-                data[monsterType.index].magicRate = charaFile.MonsterAITableHeaders[monsterType.aiIndex].magicRate;
-                data[monsterType.index].skillRate = charaFile.MonsterAITableHeaders[monsterType.aiIndex].skillRate;
-                data[monsterType.index].strikeRate = charaFile.MonsterAITableHeaders[monsterType.aiIndex].strikeRate;
-                data[monsterType.index].defendRate = charaFile.MonsterAITableHeaders[monsterType.aiIndex].defendRate;
-                data[monsterType.index].magicGuardRate = charaFile.MonsterAITableHeaders[monsterType.aiIndex].magicDefendRate;
-                data[monsterType.index].counterRate = charaFile.MonsterAITableHeaders[monsterType.aiIndex].counterRate;
             }
 
             return data;
