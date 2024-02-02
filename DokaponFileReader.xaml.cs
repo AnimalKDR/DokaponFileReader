@@ -442,3 +442,73 @@ namespace DokaponFileReader
         }
     }
 }
+
+/*
+         <DataGrid x:Name="StartingStats" ItemsSource="{Binding}" AutoGenerateColumns="False" Margin="0,0,400,0">
+            <DataGrid.Columns>
+                <DataGridComboBoxColumn x:Name="JobNameColumn" Header="Job Name"  SelectedValueBinding="{Binding jobName}" ItemsSource="{Binding JobName}" DisplayMemberPath="jobName"/>
+                <DataGridTextColumn x:Name="JobIndexColumn" Header="Job Index" Binding="{Binding jobIndex}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="JobNames" ItemsSource="{Binding NotifyOnSourceUpdated=True}" AutoGenerateColumns="False" Margin="405,0,0,0">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="JobNameCol" Header="Job Name" Binding="{Binding jobName}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+    public partial class Window1 : Window
+    {
+        public ObservableCollection<JobData> data { get; set; }
+        public ObservableCollection<JobName> jobNames { get; set; }
+
+        public Window1()
+        {
+            InitializeComponent();
+
+            data = new ObservableCollection<JobData>();
+            jobNames = new ObservableCollection<JobName>();
+
+            jobNames.Add(new JobName("Warrior"));
+            jobNames.Add(new JobName("Thief"));
+            jobNames.Add(new JobName("Wizard"));
+
+            data.Add(new JobData(jobNames[0], 0));
+            data.Add(new JobData(jobNames[0], 1));
+            data.Add(new JobData(jobNames[1], 2));
+            data.Add(new JobData(jobNames[1], 3));
+
+            JobNameColumn.ItemsSource = jobNames;
+            JobNames.DataContext = jobNames;
+            StartingStats.DataContext = data;
+        }
+
+        private void CmdCollectionChangedExecute(object sender, ExecutedRoutedEventArgs e)
+        {
+            Console.WriteLine("break");
+        }
+    }
+
+    public class JobData
+    {
+        public JobName jobName { get; set; }
+        public int jobIndex { get; set; }
+
+        public JobData(JobName jobName, int jobIndex)
+        {
+            this.jobName = jobName;
+            this.jobIndex = jobIndex;
+        }
+    }
+
+    public class JobName
+    {
+        public string jobName { get; set; }
+
+        public JobName(string jobName)
+        {
+            this.jobName = jobName;
+        }
+    }
+
+ */
