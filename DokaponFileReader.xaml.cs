@@ -264,8 +264,10 @@ namespace DokaponFileReader
 
         private void GetData()
         {
-            jobData = JobData.GetData(charaFile);
-            monsterData = MonsterData.GetData(charaFile);
+            battleSkillData = BattleSkillData.GetData(charaFile);
+            offensiveMagicData = OffensiveMagicData.GetData(charaFile);
+            jobData = JobData.GetData(charaFile, battleSkillData);
+            monsterData = MonsterData.GetData(charaFile, battleSkillData, offensiveMagicData);
             monsterAIData = MonsterAIData.GetData(charaFile);
             weaponData = WeaponData.GetData(charaFile);
             shieldData = ShieldData.GetData(charaFile);
@@ -273,10 +275,8 @@ namespace DokaponFileReader
             hairstyleData = HairstyleData.GetData(charaFile);
             bagItemData = BagItemData.GetData(charaFile);
             localItemData = LocalItemData.GetData(charaFile, stageBaseFile);
-            offensiveMagicData = OffensiveMagicData.GetData(charaFile);
             defensiveMagicData = DefensiveMagicData.GetData(charaFile);
             fieldMagicData = FieldMagicData.GetData(charaFile);
-            battleSkillData = BattleSkillData.GetData(charaFile);
             darkArtData = DarkArtData.GetData(charaFile);
             combatFormulaData = CombatFormulaData.GetData(charaFile);
             cpuNameData = CPUNameData.GetData(charaFile);
@@ -439,6 +439,11 @@ namespace DokaponFileReader
             TableData66.DataContext = randomLootData[66];
             TableData67.DataContext = randomLootData[67];
             TableData68.DataContext = randomLootData[68];
+
+            Level4BattleSkill.ItemsSource = battleSkillData;
+            Level6BattleSkill.ItemsSource = battleSkillData;
+            MonsterBattleSkill.ItemsSource = battleSkillData;
+            MonsterOffensiveMagic.ItemsSource = offensiveMagicData;
         }
     }
 }

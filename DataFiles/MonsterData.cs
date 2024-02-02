@@ -1,10 +1,10 @@
-﻿using System.Collections.ObjectModel;
+﻿using DokaponFileReader.DataFiles;
+using System.Collections.ObjectModel;
 
 namespace DokaponFileReader
 {
     public class MonsterData
     {
-
         public string name { get; set; }
         public string description { get; set; }
         public ushort level { get; set; }
@@ -15,9 +15,9 @@ namespace DokaponFileReader
         public float hp { get; set; }
         public byte voiceID { get; set; }
         public MonsterType monsterType { get; set; }
-        public string offensiveMagic { get; set; }
+        public OffensiveMagicData offensiveMagic { get; set; }
         public string defensiveMagic { get; set; }
-        public string battleSkill { get; set; }
+        public BattleSkillData battleSkill { get; set; }
         public ushort experience { get; set; }
         public short gold { get; set; }
         public bool dynamicGold { get; set; }
@@ -32,19 +32,6 @@ namespace DokaponFileReader
         public SpecialStatType specialTypeSpeed { get; set; }
         public SpecialStatType specialTypeHP { get; set; }
 
-        public enum AIType
-        {
-            Normal,
-            NoMagic,
-            LowMagic,
-            HighMagicNoSkill,
-            HighMagic,
-            NoMagicOrDefense,
-            NoMagicDefense,
-            Bandit,
-
-        }
-
         public MonsterData(string name)
         {
             this.name = name;
@@ -53,9 +40,9 @@ namespace DokaponFileReader
             dropItemChance = new byte[2] { 0, 0 };
             description = String.Empty;
             monsterType = MonsterType.Special;
-            offensiveMagic = "None";
+            offensiveMagic = new OffensiveMagicData();
             defensiveMagic = "None";
-            battleSkill = "None";
+            battleSkill = new BattleSkillData();
         }
 
         public static (SpecialStatType, float) SetStatTypeAndValue(ushort stat)
@@ -89,7 +76,7 @@ namespace DokaponFileReader
             return (ushort)value3;
         }
 
-        public static ObservableCollection<MonsterData> GetData(CharaFile charaFile)
+        public static ObservableCollection<MonsterData> GetData(CharaFile charaFile, ObservableCollection<BattleSkillData> battleSkillData, ObservableCollection<OffensiveMagicData> offensiveMagicData)
         {
             ObservableCollection<MonsterData> data = new ObservableCollection<MonsterData>();
             foreach (var monster in charaFile.MonsterHeaders)
@@ -106,8 +93,8 @@ namespace DokaponFileReader
                 monsterData.experience = monster.experience;
                 monsterData.gold = Math.Abs(monster.gold);
                 monsterData.dynamicGold = monster.gold < 0 ? true : false;
-                monsterData.battleSkill = charaFile.GetItemName(EffectItemType.BattleSkill, monster.battleSkillID);
-                monsterData.offensiveMagic = charaFile.GetItemName(EffectItemType.OffensiveMagic, monster.offensiveMagicID);
+                monsterData.battleSkill = BattleSkillData.GetBattleSkillDataByIndex(battleSkillData, (byte)monster.battleSkillID);
+                monsterData.offensiveMagic = OffensiveMagicData.GetOffensiveMagicDataByIndex(offensiveMagicData, monster.offensiveMagicID);
                 monsterData.defensiveMagic = charaFile.GetItemName(EffectItemType.DefensiveMagic, monster.defensiveMagicID);
 
                 data.Add(monsterData);
@@ -151,8 +138,8 @@ namespace DokaponFileReader
                 charaFile.MonsterHeaders[i].hp = GetStatWriteValue(monsterData[i].specialTypeHP, monsterData[i].hp);
                 charaFile.MonsterHeaders[i].experience = monsterData[i].experience;
                 charaFile.MonsterHeaders[i].gold = monsterData[i].dynamicGold ? (short)-monsterData[i].gold : monsterData[i].gold;
-                charaFile.MonsterHeaders[i].battleSkillID = charaFile.GetItemID(EffectItemType.BattleSkill, monsterData[i].battleSkill);
-                charaFile.MonsterHeaders[i].offensiveMagicID = charaFile.GetItemID(EffectItemType.OffensiveMagic, monsterData[i].offensiveMagic);
+                charaFile.MonsterHeaders[i].battleSkillID = monsterData[i].battleSkill.index;
+                charaFile.MonsterHeaders[i].offensiveMagicID = monsterData[i].offensiveMagic.index;
                 charaFile.MonsterHeaders[i].defensiveMagicID = charaFile.GetItemID(EffectItemType.DefensiveMagic, monsterData[i].defensiveMagic);
             }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using DokaponFileReader.DataFiles;
+using System.Collections.ObjectModel;
 
 namespace DokaponFileReader
 {
@@ -23,8 +24,8 @@ namespace DokaponFileReader
         public int masteryHP { get; set; }
         public byte bagItemSpace { get; set; }
         public byte fieldMagicSpace { get; set; }
-        public string level4BattleSkill { get; set; }
-        public string level6BattleSkill { get; set; }
+        public BattleSkillData level4BattleSkill { get; set; }
+        public BattleSkillData level6BattleSkill { get; set; }
         public uint startingSalary { get; set; }
         public ushort levelUpSalaryMultiplier { get; set; }
         public byte bonusRequirementCount { get; set; }
@@ -45,14 +46,14 @@ namespace DokaponFileReader
                 "None", "None", "None" 
             };
             itemRequirement = "None";
-            level4BattleSkill = "None";
-            level6BattleSkill = "None";
+            level4BattleSkill = new BattleSkillData("None");
+            level6BattleSkill = new BattleSkillData("None");
             jobPassiveName = String.Empty;
             jobPassiveDescription = String.Empty;
             jobDescription = String.Empty;
         }
 
-        public static ObservableCollection<JobData> GetData(CharaFile charaFile)
+        public static ObservableCollection<JobData> GetData(CharaFile charaFile, ObservableCollection<BattleSkillData> battleSkillData)
         {
             ObservableCollection<JobData> data = new ObservableCollection<JobData>();
 
@@ -117,8 +118,8 @@ namespace DokaponFileReader
 
             foreach (var jobBattleSkill in charaFile.JobBattleSkillHeaders)
             {
-                data[2 * jobBattleSkill.index + jobBattleSkill.sex].level4BattleSkill = charaFile.GetItemName(EffectItemType.BattleSkill, jobBattleSkill.firstBattleSkillIndex);
-                data[2 * jobBattleSkill.index + jobBattleSkill.sex].level6BattleSkill = charaFile.GetItemName(EffectItemType.BattleSkill, jobBattleSkill.secondBattleSkillIndex);
+                data[2 * jobBattleSkill.index + jobBattleSkill.sex].level4BattleSkill = BattleSkillData.GetBattleSkillDataByIndex(battleSkillData, jobBattleSkill.firstBattleSkillIndex);
+                data[2 * jobBattleSkill.index + jobBattleSkill.sex].level6BattleSkill = BattleSkillData.GetBattleSkillDataByIndex(battleSkillData, jobBattleSkill.secondBattleSkillIndex);
             }
 
             for (int i = 0; i < charaFile.JobDescriptionHeader.description.Count; i++)
@@ -198,8 +199,8 @@ namespace DokaponFileReader
 
             for (int i = 0; i < jobData.Count; i++)
             {
-                charaFile.JobBattleSkillHeaders[i].firstBattleSkillIndex = charaFile.GetItemID(EffectItemType.BattleSkill, jobData[i].level4BattleSkill);
-                charaFile.JobBattleSkillHeaders[i].secondBattleSkillIndex = charaFile.GetItemID(EffectItemType.BattleSkill, jobData[i].level6BattleSkill);
+                charaFile.JobBattleSkillHeaders[i].firstBattleSkillIndex = jobData[i].level4BattleSkill.index;
+                charaFile.JobBattleSkillHeaders[i].secondBattleSkillIndex = jobData[i].level6BattleSkill.index;
             }
 
             for (int i = 0; i < jobData.Count && i < charaFile.JobBattleSkillHeaders.Count; i++)

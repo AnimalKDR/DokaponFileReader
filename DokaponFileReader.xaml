@@ -87,8 +87,8 @@
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Job Name"  Binding="{Binding jobName, UpdateSourceTrigger=PropertyChanged}"/>
                                         <DataGridTextColumn Header="Sex"  Binding="{Binding sex, UpdateSourceTrigger=PropertyChanged}"/>
-                                        <DataGridTextColumn Header="Level 4 Skill"  Binding="{Binding level4BattleSkill, UpdateSourceTrigger=PropertyChanged}"/>
-                                        <DataGridTextColumn Header="Level 6 Skill"  Binding="{Binding level6BattleSkill, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridComboBoxColumn x:Name="Level4BattleSkill" Header="Level 4 Skill" SelectedValueBinding="{Binding level4BattleSkill, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="name"/>
+                                        <DataGridComboBoxColumn x:Name="Level6BattleSkill" Header="Level 6 Skill" SelectedValueBinding="{Binding level6BattleSkill, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="name"/>
                                         <DataGridTextColumn Header="Passive"  Binding="{Binding jobPassiveName, UpdateSourceTrigger=PropertyChanged}"/>
                                         <DataGridTextColumn Header="Activation Rate"  Binding="{Binding jobPassiveActivationRate, UpdateSourceTrigger=PropertyChanged}"/>
                                         <DataGridTextColumn Header="Passive Effect"  Binding="{Binding jobPassiveDescription, UpdateSourceTrigger=PropertyChanged}"/>
@@ -143,9 +143,9 @@
                                 <DataGrid x:Name="CombatData" ItemsSource="{Binding}" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Name"  Binding="{Binding name, UpdateSourceTrigger=PropertyChanged}"/>
-                                        <DataGridTextColumn Header="Offensive Magic"  Binding="{Binding offensiveMagic, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridComboBoxColumn x:Name="MonsterOffensiveMagic" Header="Offensive Magic" SelectedValueBinding="{Binding offensiveMagic, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="name"/>
                                         <DataGridTextColumn Header="Defensive Magic"  Binding="{Binding defensiveMagic, UpdateSourceTrigger=PropertyChanged}"/>
-                                        <DataGridTextColumn Header="Battle Skill"  Binding="{Binding battleSkill, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DataGridComboBoxColumn x:Name="MonsterBattleSkill" Header="Battle Skill" SelectedValueBinding="{Binding battleSkill, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="name"/>
                                         <DataGridTextColumn Header="AI Table"  Binding="{Binding aiIndex, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
