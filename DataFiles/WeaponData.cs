@@ -4,6 +4,7 @@ namespace DokaponFileReader
 {
     public class WeaponData
     {
+        public byte index { get; set; }
         public string name { get; set; }
         public uint price { get; set; }
         public short attack { get; set; }
@@ -17,9 +18,10 @@ namespace DokaponFileReader
         public WeaponHeader.AnimationType attackAnimation { get; set; }
         public string description { get; set; }
 
-        public WeaponData(string name)
+        public WeaponData(string name = "None", byte index = 0)
         {
             this.name = name;
+            this.index = index;
             description = "None";
         }
 
@@ -28,7 +30,7 @@ namespace DokaponFileReader
             ObservableCollection<WeaponData> data = new ObservableCollection<WeaponData>();
             foreach (var weapon in charaFile.WeaponHeaders)
             {
-                WeaponData weaponData = new WeaponData(weapon.name);
+                WeaponData weaponData = new WeaponData(weapon.name, (byte)weapon.index);
                 weaponData.price = weapon.price;
                 weaponData.attack = weapon.attack;
                 weaponData.defense = weapon.defense;
@@ -55,6 +57,7 @@ namespace DokaponFileReader
         {
             for (int i = 0; i < weaponData.Count && i < charaFile.WeaponHeaders.Count; i++)
             {
+                charaFile.WeaponHeaders[i].index = weaponData[i].index;
                 charaFile.WeaponHeaders[i].name = weaponData[i].name;
                 charaFile.WeaponHeaders[i].price = weaponData[i].price;
                 charaFile.WeaponHeaders[i].attack = weaponData[i].attack;

@@ -15,6 +15,8 @@ namespace DokaponFileReader
         public StageBaseFile stageBaseFile = new StageBaseFile();
         public CharaFile charaFile = new CharaFile();
 
+        public ObservableCollection<ItemData> itemData = new ObservableCollection<ItemData>();
+        public ObservableCollection<JobNameData> jobNameData = new ObservableCollection<JobNameData>();
         public ObservableCollection<JobData> jobData = new ObservableCollection<JobData>();
         public ObservableCollection<MonsterData> monsterData = new ObservableCollection<MonsterData>();
         public ObservableCollection<MonsterAIData> monsterAIData = new ObservableCollection<MonsterAIData>();
@@ -28,6 +30,7 @@ namespace DokaponFileReader
         public ObservableCollection<DefensiveMagicData> defensiveMagicData = new ObservableCollection<DefensiveMagicData>();
         public ObservableCollection<FieldMagicData> fieldMagicData = new ObservableCollection<FieldMagicData>();
         public ObservableCollection<BattleSkillData> battleSkillData = new ObservableCollection<BattleSkillData>();
+        public ObservableCollection<JobSkillData> jobSkillData = new ObservableCollection<JobSkillData>();
         public ObservableCollection<DarkArtData> darkArtData = new ObservableCollection<DarkArtData>();
         public ObservableCollection<CombatFormulaData> combatFormulaData = new ObservableCollection<CombatFormulaData>();
         public ObservableCollection<ExperienceData> experienceData = new ObservableCollection<ExperienceData>();
@@ -45,120 +48,122 @@ namespace DokaponFileReader
         public ObservableCollection<TownCastleData> townCastleData = new ObservableCollection<TownCastleData>();
 
         public List<ObservableCollection<RandomLootData>> randomLootData = new List<ObservableCollection<RandomLootData>>();
+        public ObservableCollection<EffectItemType> itemTypeData = new ObservableCollection<EffectItemType>();
 
         public MainWindow()
         {
             InitializeComponent();
-/*
-            string eng = "D:\\Users\\anima\\Source\\Repos\\CriPakTools\\CriPakTools\\bin\\Debug\\Data_eng\\dataSeq_EN\\STAGEBASE-EN-English.DAT";
-            string tst = "D:\\Users\\anima\\Source\\Repos\\DokaponFileReader\\stageBase_TEST.DAT";
 
-            var fileStreamEng = File.Open(eng, FileMode.Open);
-            var fileStreamTst = File.Open(tst, FileMode.Open);
+            /*
+                        string eng = "D:\\Users\\anima\\Source\\Repos\\CriPakTools\\CriPakTools\\bin\\Debug\\Data_eng\\dataSeq_EN\\STAGEBASE-EN-English.DAT";
+                        string tst = "D:\\Users\\anima\\Source\\Repos\\DokaponFileReader\\stageBase_TEST.DAT";
 
-            fileStreamEng.Position = 0x4C9F0;
-            fileStreamTst.Position = 0x4C9F0;
+                        var fileStreamEng = File.Open(eng, FileMode.Open);
+                        var fileStreamTst = File.Open(tst, FileMode.Open);
 
-            List<UInt32> engList = new List<UInt32>();
-            List<UInt32> tstList = new List<UInt32>();
+                        fileStreamEng.Position = 0x4C9F0;
+                        fileStreamTst.Position = 0x4C9F0;
 
-            List<(int, int, UInt32)> differences = new List<(int, int, UInt32)>();
+                        List<UInt32> engList = new List<UInt32>();
+                        List<UInt32> tstList = new List<UInt32>();
 
-            byte[] buffer = new byte[4];
+                        List<(int, int, UInt32)> differences = new List<(int, int, UInt32)>();
 
-            while (fileStreamEng.Position < 0xB1BC0)
-            {
-                fileStreamEng.Read(buffer);
-                engList.Add(BitConverter.ToUInt32(buffer));
-            }
+                        byte[] buffer = new byte[4];
 
-            while (fileStreamTst.Position < 0xB1BC0)
-            {
-                fileStreamTst.Read(buffer);
-                tstList.Add(BitConverter.ToUInt32(buffer));
-            }
+                        while (fileStreamEng.Position < 0xB1BC0)
+                        {
+                            fileStreamEng.Read(buffer);
+                            engList.Add(BitConverter.ToUInt32(buffer));
+                        }
 
-            for (int i = 0; i < engList.Count; i++)
-            {
-                if (tstList[i] == engList[i])
-                    continue;
+                        while (fileStreamTst.Position < 0xB1BC0)
+                        {
+                            fileStreamTst.Read(buffer);
+                            tstList.Add(BitConverter.ToUInt32(buffer));
+                        }
 
-                var difference = tstList[i] - engList[i];
+                        for (int i = 0; i < engList.Count; i++)
+                        {
+                            if (tstList[i] == engList[i])
+                                continue;
 
-                if (engList[i] < 0x4C9F0 - 0x8390  || engList[i] > 0xB1BC0 - 0x8390)
-                    continue;
+                            var difference = tstList[i] - engList[i];
 
-                if (difference > 0xFFFFF520 || difference < 0xFFFFF470)
-                    continue;
+                            if (engList[i] < 0x4C9F0 - 0x8390  || engList[i] > 0xB1BC0 - 0x8390)
+                                continue;
 
-                if (difference % 4 != 0)
-                    continue;
+                            if (difference > 0xFFFFF520 || difference < 0xFFFFF470)
+                                continue;
 
-                if (i < 409)
-                    continue;
+                            if (difference % 4 != 0)
+                                continue;
 
-                var address = i - 409;
+                            if (i < 409)
+                                continue;
 
-                if (address >= 107) // UnknownHeader_AD.unknownUInt32s.RemoveAt(107);
-                    address++;
-                if (address >= 583) // UnknownHeader_AD.unknownUInt32s.RemoveAt(583);
-                    address++;
-                if (address >= 788) // UnknownHeader_AD.unknownUInt32s.RemoveAt(788);
-                    address++;
-                if (address >= 2491) // UnknownHeader_AD.unknownUInt32s.Insert(2491, 0x00000E10);
-                    address--;
-                if (address >= 7011) // UnknownHeader_AD.unknownUInt32s.RemoveRange(7011, 20);
-                    address += 20;
-                if (address >= 8540) //  UnknownHeader_AD.unknownUInt32s.RemoveAt(8516);
-                    address++;
-                if (address >= 18141) // UnknownHeader_AD.unknownUInt32s.Insert(18132, 0x01020509); UnknownHeader_AD.unknownUInt32s.Insert(18133, 0x000000FF); UnknownHeader_AD.unknownUInt32s.Insert(18134, 0x00056830);
-                    address -= 3;
-                if (address >= 70990) // UnknownHeader_AD.unknownUInt32s.RemoveRange(70982, 6);
-                    address += 6;
-                if (address >= 71010) // UnknownHeader_AD.unknownUInt32s.RemoveRange(70989, 2);
-                    address += 2;
-                if (address >= 71019) // UnknownHeader_AD.unknownUInt32s.RemoveRange(71013, 6);
-                    address += 6;
-                if (address >= 71194) // UnknownHeader_AD.unknownUInt32s.RemoveRange(71172, 6);
-                    address += 6;
-                if (address >= 85684) // UnknownHeader_AD.unknownUInt32s.Insert(85674, 0x00000F10);
-                    address--;
-                if (address >= 85690) // UnknownHeader_AD.unknownUInt32s.Insert(85690, 0x00020006); UnknownHeader_AD.unknownUInt32s.Insert(85691, 0x00000E10); UnknownHeader_AD.unknownUInt32s.Insert(85692, 0x00020006); UnknownHeader_AD.unknownUInt32s.Insert(85693, 0x00000C10);
-                    address -= 4;
+                            var address = i - 409;
 
-               differences.Add((address, 4 * address + 0x4C46C, difference));
-            }
+                            if (address >= 107) // UnknownHeader_AD.unknownUInt32s.RemoveAt(107);
+                                address++;
+                            if (address >= 583) // UnknownHeader_AD.unknownUInt32s.RemoveAt(583);
+                                address++;
+                            if (address >= 788) // UnknownHeader_AD.unknownUInt32s.RemoveAt(788);
+                                address++;
+                            if (address >= 2491) // UnknownHeader_AD.unknownUInt32s.Insert(2491, 0x00000E10);
+                                address--;
+                            if (address >= 7011) // UnknownHeader_AD.unknownUInt32s.RemoveRange(7011, 20);
+                                address += 20;
+                            if (address >= 8540) //  UnknownHeader_AD.unknownUInt32s.RemoveAt(8516);
+                                address++;
+                            if (address >= 18141) // UnknownHeader_AD.unknownUInt32s.Insert(18132, 0x01020509); UnknownHeader_AD.unknownUInt32s.Insert(18133, 0x000000FF); UnknownHeader_AD.unknownUInt32s.Insert(18134, 0x00056830);
+                                address -= 3;
+                            if (address >= 70990) // UnknownHeader_AD.unknownUInt32s.RemoveRange(70982, 6);
+                                address += 6;
+                            if (address >= 71010) // UnknownHeader_AD.unknownUInt32s.RemoveRange(70989, 2);
+                                address += 2;
+                            if (address >= 71019) // UnknownHeader_AD.unknownUInt32s.RemoveRange(71013, 6);
+                                address += 6;
+                            if (address >= 71194) // UnknownHeader_AD.unknownUInt32s.RemoveRange(71172, 6);
+                                address += 6;
+                            if (address >= 85684) // UnknownHeader_AD.unknownUInt32s.Insert(85674, 0x00000F10);
+                                address--;
+                            if (address >= 85690) // UnknownHeader_AD.unknownUInt32s.Insert(85690, 0x00020006); UnknownHeader_AD.unknownUInt32s.Insert(85691, 0x00000E10); UnknownHeader_AD.unknownUInt32s.Insert(85692, 0x00020006); UnknownHeader_AD.unknownUInt32s.Insert(85693, 0x00000C10);
+                                address -= 4;
 
-            string res = "D:\\Users\\anima\\Source\\Repos\\DokaponFileReader\\pointerIndexes.bin";
-            var fileStreamRes = File.Create(res);
+                           differences.Add((address, 4 * address + 0x4C46C, difference));
+                        }
 
-            foreach (var item in differences)
-                fileStreamRes.Write(BitConverter.GetBytes(item.Item1));
+                        string res = "D:\\Users\\anima\\Source\\Repos\\DokaponFileReader\\pointerIndexes.bin";
+                        var fileStreamRes = File.Create(res);
+
+                        foreach (var item in differences)
+                            fileStreamRes.Write(BitConverter.GetBytes(item.Item1));
 
 
-            string org = "D:\\Users\\anima\\Source\\Repos\\DokaponFileReader\\stageBase_EN.DAT";
-            var fileStreamOrg = File.Open(org, FileMode.Open);
-            fileStreamOrg.Position = 0x4BE08;
+                        string org = "D:\\Users\\anima\\Source\\Repos\\DokaponFileReader\\stageBase_EN.DAT";
+                        var fileStreamOrg = File.Open(org, FileMode.Open);
+                        fileStreamOrg.Position = 0x4BE08;
 
-            List<(int, int, UInt32)> newDiff = new List<(int, int, UInt32)>();
+                        List<(int, int, UInt32)> newDiff = new List<(int, int, UInt32)>();
 
-            foreach(var item in differences)
-            {
-                fileStreamOrg.Position = item.Item2;
-                fileStreamOrg.Read(buffer);
+                        foreach(var item in differences)
+                        {
+                            fileStreamOrg.Position = item.Item2;
+                            fileStreamOrg.Read(buffer);
 
-                var value = BitConverter.ToUInt32(buffer);
+                            var value = BitConverter.ToUInt32(buffer);
 
-                if (value >= 0x4BE08 - 0x8330 && value <= 0xB1080 - 0x8330)
-                    continue;
+                            if (value >= 0x4BE08 - 0x8330 && value <= 0xB1080 - 0x8330)
+                                continue;
 
-                newDiff.Add((item.Item1, item.Item2, value));
-            }
+                            newDiff.Add((item.Item1, item.Item2, value));
+                        }
 
-            fileStreamOrg.Close();
-            fileStreamEng.Close();
-            fileStreamTst.Close();
-            fileStreamRes.Close();*/
+                        fileStreamOrg.Close();
+                        fileStreamEng.Close();
+                        fileStreamTst.Close();
+                        fileStreamRes.Close();*/
         }
 
         ~MainWindow()
@@ -175,7 +180,7 @@ namespace DokaponFileReader
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            this.DataContext = this;
         }
 
         private void CloseMenuItem_Click(object sender, RoutedEventArgs e)
@@ -264,19 +269,39 @@ namespace DokaponFileReader
 
         private void GetData()
         {
+            itemTypeData = new ObservableCollection<EffectItemType>();
+            itemTypeData.Add(EffectItemType.None);
+            itemTypeData.Add(EffectItemType.Weapon);
+            itemTypeData.Add(EffectItemType.Shield);
+            itemTypeData.Add(EffectItemType.Accessory);
+            itemTypeData.Add(EffectItemType.OffensiveMagic);
+            itemTypeData.Add(EffectItemType.DefensiveMagic);
+            itemTypeData.Add(EffectItemType.BagItem);
+            itemTypeData.Add(EffectItemType.FieldMagic);
+
             battleSkillData = BattleSkillData.GetData(charaFile);
-            offensiveMagicData = OffensiveMagicData.GetData(charaFile);
-            jobData = JobData.GetData(charaFile, battleSkillData);
-            monsterData = MonsterData.GetData(charaFile, battleSkillData, offensiveMagicData);
-            monsterAIData = MonsterAIData.GetData(charaFile);
+            jobSkillData = JobSkillData.GetData(charaFile);
             weaponData = WeaponData.GetData(charaFile);
             shieldData = ShieldData.GetData(charaFile);
             accessorydData = AccessoryData.GetData(charaFile);
-            hairstyleData = HairstyleData.GetData(charaFile);
+            offensiveMagicData = OffensiveMagicData.GetData(charaFile);
+            defensiveMagicData = DefensiveMagicData.GetData(charaFile);
             bagItemData = BagItemData.GetData(charaFile);
             localItemData = LocalItemData.GetData(charaFile, stageBaseFile);
-            defensiveMagicData = DefensiveMagicData.GetData(charaFile);
             fieldMagicData = FieldMagicData.GetData(charaFile);
+            ItemData.AddWeaponData(ref itemData, weaponData);
+            ItemData.AddShieldData(ref itemData, shieldData);
+            ItemData.AddAccessoryData(ref itemData, accessorydData);
+            ItemData.AddDefensiveMagicData(ref itemData, defensiveMagicData);
+            ItemData.AddOffensiveMagicData(ref itemData, offensiveMagicData);
+            ItemData.AddBagItemData(ref itemData, bagItemData);
+            ItemData.AddLocalItemData(ref itemData, localItemData);
+            ItemData.AddFieldMagicData(ref itemData, fieldMagicData);
+            jobNameData = JobNameData.GetData(charaFile);
+            jobData = JobData.GetData(charaFile, battleSkillData, jobSkillData, itemData, jobNameData);
+            monsterData = MonsterData.GetData(charaFile, battleSkillData, offensiveMagicData, defensiveMagicData, itemData);
+            monsterAIData = MonsterAIData.GetData(charaFile);
+            hairstyleData = HairstyleData.GetData(charaFile);
             darkArtData = DarkArtData.GetData(charaFile);
             combatFormulaData = CombatFormulaData.GetData(charaFile);
             cpuNameData = CPUNameData.GetData(charaFile);
@@ -304,6 +329,7 @@ namespace DokaponFileReader
 
         private void SetData()
         {
+            JobNameData.SetData(jobNameData, ref charaFile);
             JobData.SetData(jobData, ref charaFile);
             MonsterData.SetData(monsterData, ref charaFile);
             MonsterAIData.SetData(monsterAIData, ref charaFile);
@@ -317,6 +343,7 @@ namespace DokaponFileReader
             DefensiveMagicData.SetData(defensiveMagicData, ref charaFile);
             FieldMagicData.SetData(fieldMagicData, ref charaFile);
             BattleSkillData.SetData(battleSkillData, ref charaFile);
+            JobSkillData.SetData(jobSkillData, ref charaFile);
             DarkArtData.SetData(darkArtData, ref charaFile);
             CombatFormulaData.SetData(combatFormulaData, ref charaFile);
             CPUNameData.SetData(cpuNameData, ref charaFile);
@@ -353,6 +380,7 @@ namespace DokaponFileReader
             DefensiveMagicDataTab.DataContext = defensiveMagicData;
             FieldMagicDataTab.DataContext = fieldMagicData;
             BattleSkillDataTab.DataContext = battleSkillData;
+            PassiveSkillDataTab.DataContext = jobSkillData;
             DarkArtDataTab.DataContext = darkArtData;
             CombatFormulaDataTab.DataContext = combatFormulaData;
             ExperienceDataTab.DataContext = experienceData;
@@ -443,77 +471,15 @@ namespace DokaponFileReader
             Level4BattleSkill.ItemsSource = battleSkillData;
             Level6BattleSkill.ItemsSource = battleSkillData;
             MonsterBattleSkill.ItemsSource = battleSkillData;
+            PassiveSkill.ItemsSource = jobSkillData;
             MonsterOffensiveMagic.ItemsSource = offensiveMagicData;
+            MonsterDefensiveMagic.ItemsSource = defensiveMagicData;
+            DropItem1.ItemsSource = itemData;
+            DropItem2.ItemsSource = itemData;
+            ItemRequirement.ItemsSource = itemData;
+            MasteryRequirement1.ItemsSource = jobNameData;
+            MasteryRequirement2.ItemsSource = jobNameData;
+            MasteryRequirement3.ItemsSource = jobNameData;
         }
     }
 }
-
-/*
-         <DataGrid x:Name="StartingStats" ItemsSource="{Binding}" AutoGenerateColumns="False" Margin="0,0,400,0">
-            <DataGrid.Columns>
-                <DataGridComboBoxColumn x:Name="JobNameColumn" Header="Job Name"  SelectedValueBinding="{Binding jobName}" ItemsSource="{Binding JobName}" DisplayMemberPath="jobName"/>
-                <DataGridTextColumn x:Name="JobIndexColumn" Header="Job Index" Binding="{Binding jobIndex}"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <DataGrid x:Name="JobNames" ItemsSource="{Binding NotifyOnSourceUpdated=True}" AutoGenerateColumns="False" Margin="405,0,0,0">
-            <DataGrid.Columns>
-                <DataGridTextColumn x:Name="JobNameCol" Header="Job Name" Binding="{Binding jobName}"/>
-            </DataGrid.Columns>
-        </DataGrid>
-
-
-    public partial class Window1 : Window
-    {
-        public ObservableCollection<JobData> data { get; set; }
-        public ObservableCollection<JobName> jobNames { get; set; }
-
-        public Window1()
-        {
-            InitializeComponent();
-
-            data = new ObservableCollection<JobData>();
-            jobNames = new ObservableCollection<JobName>();
-
-            jobNames.Add(new JobName("Warrior"));
-            jobNames.Add(new JobName("Thief"));
-            jobNames.Add(new JobName("Wizard"));
-
-            data.Add(new JobData(jobNames[0], 0));
-            data.Add(new JobData(jobNames[0], 1));
-            data.Add(new JobData(jobNames[1], 2));
-            data.Add(new JobData(jobNames[1], 3));
-
-            JobNameColumn.ItemsSource = jobNames;
-            JobNames.DataContext = jobNames;
-            StartingStats.DataContext = data;
-        }
-
-        private void CmdCollectionChangedExecute(object sender, ExecutedRoutedEventArgs e)
-        {
-            Console.WriteLine("break");
-        }
-    }
-
-    public class JobData
-    {
-        public JobName jobName { get; set; }
-        public int jobIndex { get; set; }
-
-        public JobData(JobName jobName, int jobIndex)
-        {
-            this.jobName = jobName;
-            this.jobIndex = jobIndex;
-        }
-    }
-
-    public class JobName
-    {
-        public string jobName { get; set; }
-
-        public JobName(string jobName)
-        {
-            this.jobName = jobName;
-        }
-    }
-
- */

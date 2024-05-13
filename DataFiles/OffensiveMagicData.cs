@@ -58,6 +58,7 @@ namespace DokaponFileReader
         {
             for (int i = 0; i < offensiveMagicData.Count - 5 && i < charaFile.OffensiveMagicHeaders.Count; i++)
             {
+                charaFile.OffensiveMagicHeaders[i].index = offensiveMagicData[i].index;
                 charaFile.OffensiveMagicHeaders[i].name = offensiveMagicData[i].name;
                 charaFile.OffensiveMagicHeaders[i].price = offensiveMagicData[i].price;     
                 charaFile.OffensiveMagicHeaders[i].power = (ushort)(100 * offensiveMagicData[i].power + 0.5);

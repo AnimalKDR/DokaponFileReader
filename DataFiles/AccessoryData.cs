@@ -4,6 +4,7 @@ namespace DokaponFileReader
 {
     public class AccessoryData
     {
+        public byte index { get; set; }
         public string name { get; set; }
         public uint price { get; set; }
         public short attack { get; set; }
@@ -15,9 +16,10 @@ namespace DokaponFileReader
         public byte activationRate { get; set; }
         public string description { get; set; }
 
-        public AccessoryData(string name)
+        public AccessoryData(string name = "None", byte index = 0)
         {
             this.name = name;
+            this.index = index;
             description = "None";
         }
 
@@ -26,7 +28,7 @@ namespace DokaponFileReader
             ObservableCollection<AccessoryData> data = new ObservableCollection<AccessoryData>();
             foreach (var accessory in charaFile.AccessoryHeaders)
             {
-                AccessoryData accessoryData = new AccessoryData(accessory.name);
+                AccessoryData accessoryData = new AccessoryData(accessory.name, (byte)accessory.index);
                 accessoryData.price = accessory.price;
                 accessoryData.attack = accessory.attack;
                 accessoryData.defense = accessory.defense;
@@ -52,6 +54,7 @@ namespace DokaponFileReader
         {
             for (int i = 0; i < accesoryData.Count && i < charaFile.AccessoryHeaders.Count; i++)
             {
+                charaFile.AccessoryHeaders[i].index = accesoryData[i].index;
                 charaFile.AccessoryHeaders[i].name = accesoryData[i].name;
                 charaFile.AccessoryHeaders[i].price = accesoryData[i].price;
                 charaFile.AccessoryHeaders[i].attack = accesoryData[i].attack;

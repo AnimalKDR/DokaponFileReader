@@ -4,15 +4,17 @@ namespace DokaponFileReader
 {
     public class BagItemData
     {
+        public byte index { get; set; }
         public string name { get; set; }
         public uint price { get; set; }
         public ushort iconID { get; set; }
         public string itemType { get; set; }
         public string description { get; set; }
 
-        public BagItemData(string name)
+        public BagItemData(string name = "None", byte index = 0)
         {
             this.name = name;
+            this.index = index;
             description = "None";
             itemType = "None";
         }
@@ -22,7 +24,7 @@ namespace DokaponFileReader
             ObservableCollection<BagItemData> data = new ObservableCollection<BagItemData>();
             foreach (var bagItem in charaFile.BagItemHeaders)
             {
-                BagItemData bagItemData = new BagItemData(bagItem.name);
+                BagItemData bagItemData = new BagItemData(bagItem.name, bagItem.index);
                 bagItemData.price = bagItem.price;
                 bagItemData.itemType = charaFile.GetBagItemTypeName(bagItem.itemType);
                 bagItemData.iconID = bagItem.iconID;
@@ -42,6 +44,7 @@ namespace DokaponFileReader
         {
             for (int i = 0; i < bagItemData.Count && i < charaFile.BagItemHeaders.Count; i++)
             {
+                charaFile.BagItemHeaders[i].index = bagItemData[i].index;
                 charaFile.BagItemHeaders[i].name = bagItemData[i].name;
                 charaFile.BagItemHeaders[i].price = bagItemData[i].price;
                 charaFile.BagItemHeaders[i].iconID = bagItemData[i].iconID;

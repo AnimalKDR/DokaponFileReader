@@ -4,6 +4,7 @@ namespace DokaponFileReader.DataFiles
 {
     public class FieldMagicData
     {
+        public byte index { get; set; }
         public string name { get; set; }
         public uint price { get; set; }
         public float power { get; set; }
@@ -12,9 +13,10 @@ namespace DokaponFileReader.DataFiles
         public ushort effectType { get; set; }
         public string description { get; set; }
 
-        public FieldMagicData(string name)
+        public FieldMagicData(string name = "None", byte index = 0)
         {
             this.name = name;
+            this.index = index;
             description = "None";
             magicType = "None";
         }
@@ -24,7 +26,7 @@ namespace DokaponFileReader.DataFiles
             ObservableCollection<FieldMagicData> data = new ObservableCollection<FieldMagicData>();
             foreach (var fieldMagic in charFile.FieldMagicHeaders)
             {
-                FieldMagicData fieldMagicData = new FieldMagicData(fieldMagic.name);
+                FieldMagicData fieldMagicData = new FieldMagicData(fieldMagic.name, (byte)fieldMagic.index);
                 fieldMagicData.price = fieldMagic.price;
                 fieldMagicData.power = (float)(fieldMagic.power / 100.0);
                 fieldMagicData.magicType = charFile.GetFieldMagicTypeName(fieldMagic.magicType);
@@ -46,6 +48,7 @@ namespace DokaponFileReader.DataFiles
         {
             for (int i = 0; i < fieldMagicData.Count && i < charaFile.FieldMagicHeaders.Count; i++)
             {
+                charaFile.FieldMagicHeaders[i].index = fieldMagicData[i].index;
                 charaFile.FieldMagicHeaders[i].name = fieldMagicData[i].name;
                 charaFile.FieldMagicHeaders[i].price = fieldMagicData[i].price;
                 charaFile.FieldMagicHeaders[i].power = (ushort)(100 * fieldMagicData[i].power + 0.5);

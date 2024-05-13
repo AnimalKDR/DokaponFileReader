@@ -4,6 +4,7 @@ namespace DokaponFileReader
 {
     public class ShieldData
     {
+        public byte index { get; set; }
         public string name { get; set; }
         public uint price { get; set; }
         public short attack { get; set; }
@@ -15,9 +16,10 @@ namespace DokaponFileReader
         public byte activationRate { get; set; }
         public string description { get; set; }
 
-        public ShieldData(string name)
+        public ShieldData(string name = "None", byte index = 0)
         {
             this.name = name;
+            this.index = index;
             description = "None";
         }
 
@@ -26,7 +28,7 @@ namespace DokaponFileReader
             ObservableCollection<ShieldData> data = new ObservableCollection<ShieldData>();
             foreach (var shield in charaFile.ShieldHeaders)
             {
-                ShieldData shieldData = new ShieldData(shield.name);
+                ShieldData shieldData = new ShieldData(shield.name, (byte)shield.index);
                 shieldData.price = shield.price;
                 shieldData.attack = shield.attack;
                 shieldData.defense = shield.defense;
@@ -52,6 +54,7 @@ namespace DokaponFileReader
         {
             for (int i = 0; i < shieldData.Count && i < charaFile.ShieldHeaders.Count; i++)
             {
+                charaFile.ShieldHeaders[i].index = shieldData[i].index;
                 charaFile.ShieldHeaders[i].name = shieldData[i].name;
                 charaFile.ShieldHeaders[i].price = shieldData[i].price;
                 charaFile.ShieldHeaders[i].attack = shieldData[i].attack;

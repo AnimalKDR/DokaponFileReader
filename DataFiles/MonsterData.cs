@@ -16,13 +16,12 @@ namespace DokaponFileReader
         public byte voiceID { get; set; }
         public MonsterType monsterType { get; set; }
         public OffensiveMagicData offensiveMagic { get; set; }
-        public string defensiveMagic { get; set; }
+        public DefensiveMagicData defensiveMagic { get; set; }
         public BattleSkillData battleSkill { get; set; }
         public ushort experience { get; set; }
         public short gold { get; set; }
         public bool dynamicGold { get; set; }
-        public EffectItemType[] dropItemType { get; set; }
-        public string [] dropItem { get; set; }
+        public ItemData[] dropItem { get; set; }
         public byte[] dropItemChance { get; set; }
         public byte aiIndex { get; set; }
 
@@ -35,13 +34,12 @@ namespace DokaponFileReader
         public MonsterData(string name)
         {
             this.name = name;
-            dropItemType = new EffectItemType[2] {EffectItemType.None, EffectItemType.None };
-            dropItem = new string[2] { "None", "None" };
+            dropItem = new ItemData[2] {new ItemData(), new ItemData() };
             dropItemChance = new byte[2] { 0, 0 };
             description = String.Empty;
             monsterType = MonsterType.Special;
             offensiveMagic = new OffensiveMagicData();
-            defensiveMagic = "None";
+            defensiveMagic = new DefensiveMagicData();
             battleSkill = new BattleSkillData();
         }
 
@@ -76,7 +74,7 @@ namespace DokaponFileReader
             return (ushort)value3;
         }
 
-        public static ObservableCollection<MonsterData> GetData(CharaFile charaFile, ObservableCollection<BattleSkillData> battleSkillData, ObservableCollection<OffensiveMagicData> offensiveMagicData)
+        public static ObservableCollection<MonsterData> GetData(CharaFile charaFile, ObservableCollection<BattleSkillData> battleSkillData, ObservableCollection<OffensiveMagicData> offensiveMagicData, ObservableCollection<DefensiveMagicData> defensiveMagicData, ObservableCollection<ItemData> itemData)
         {
             ObservableCollection<MonsterData> data = new ObservableCollection<MonsterData>();
             foreach (var monster in charaFile.MonsterHeaders)
@@ -95,7 +93,7 @@ namespace DokaponFileReader
                 monsterData.dynamicGold = monster.gold < 0 ? true : false;
                 monsterData.battleSkill = BattleSkillData.GetBattleSkillDataByIndex(battleSkillData, (byte)monster.battleSkillID);
                 monsterData.offensiveMagic = OffensiveMagicData.GetOffensiveMagicDataByIndex(offensiveMagicData, monster.offensiveMagicID);
-                monsterData.defensiveMagic = charaFile.GetItemName(EffectItemType.DefensiveMagic, monster.defensiveMagicID);
+                monsterData.defensiveMagic = DefensiveMagicData.GetDefensiveMagicDataByIndex(defensiveMagicData, monster.defensiveMagicID);
 
                 data.Add(monsterData);
             }
@@ -107,10 +105,8 @@ namespace DokaponFileReader
 
             foreach (var monsterDrop in charaFile.MonsterItemDropHeaders)
             {
-                data[monsterDrop.index].dropItemType[0] = (EffectItemType)monsterDrop.categoryItem0;
-                data[monsterDrop.index].dropItemType[1] = (EffectItemType)monsterDrop.categoryItem1;
-                data[monsterDrop.index].dropItem[0] = charaFile.GetItemName((EffectItemType)monsterDrop.categoryItem0, monsterDrop.indexItem0);
-                data[monsterDrop.index].dropItem[1] = charaFile.GetItemName((EffectItemType)monsterDrop.categoryItem1, monsterDrop.indexItem1);
+                data[monsterDrop.index].dropItem[0] = ItemData.GetItemFromIndex(itemData, (EffectItemType)monsterDrop.categoryItem0, monsterDrop.indexItem0);
+                data[monsterDrop.index].dropItem[1] = ItemData.GetItemFromIndex(itemData, (EffectItemType)monsterDrop.categoryItem1, monsterDrop.indexItem1);
                 data[monsterDrop.index].dropItemChance[0] = monsterDrop.dropItemChance0;
                 data[monsterDrop.index].dropItemChance[1] = monsterDrop.dropItemChance1;
             }
@@ -140,7 +136,7 @@ namespace DokaponFileReader
                 charaFile.MonsterHeaders[i].gold = monsterData[i].dynamicGold ? (short)-monsterData[i].gold : monsterData[i].gold;
                 charaFile.MonsterHeaders[i].battleSkillID = monsterData[i].battleSkill.index;
                 charaFile.MonsterHeaders[i].offensiveMagicID = monsterData[i].offensiveMagic.index;
-                charaFile.MonsterHeaders[i].defensiveMagicID = charaFile.GetItemID(EffectItemType.DefensiveMagic, monsterData[i].defensiveMagic);
+                charaFile.MonsterHeaders[i].defensiveMagicID = monsterData[i].defensiveMagic.index;
             }
 
             for (int i = 0; i < monsterData.Count && i < charaFile.MonsterDescriptionHeader.description.Count; i++)
@@ -150,10 +146,10 @@ namespace DokaponFileReader
 
             for (int i = 0; i < monsterData.Count && i < charaFile.MonsterItemDropHeaders.Count; i++)
             {
-                charaFile.MonsterItemDropHeaders[i].categoryItem0 = (byte)monsterData[i].dropItemType[0];
-                charaFile.MonsterItemDropHeaders[i].categoryItem1 = (byte)monsterData[i].dropItemType[1];
-                charaFile.MonsterItemDropHeaders[i].indexItem0 = charaFile.GetItemID(monsterData[i].dropItemType[0], monsterData[i].dropItem[0]);
-                charaFile.MonsterItemDropHeaders[i].indexItem1 = charaFile.GetItemID(monsterData[i].dropItemType[1], monsterData[i].dropItem[1]);
+                charaFile.MonsterItemDropHeaders[i].categoryItem0 = (byte)monsterData[i].dropItem[0].itemType;
+                charaFile.MonsterItemDropHeaders[i].categoryItem1 = (byte)monsterData[i].dropItem[1].itemType;
+                charaFile.MonsterItemDropHeaders[i].indexItem0 = monsterData[i].dropItem[0].index;
+                charaFile.MonsterItemDropHeaders[i].indexItem1 = monsterData[i].dropItem[1].index;
                 charaFile.MonsterItemDropHeaders[i].dropItemChance0 = monsterData[i].dropItemChance[0];
                 charaFile.MonsterItemDropHeaders[i].dropItemChance1 = monsterData[i].dropItemChance[1];
             }
