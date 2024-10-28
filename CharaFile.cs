@@ -33,7 +33,7 @@ namespace DokaponFileReader
         public UnknownHeader_2C UnknownHeader_2C;
         public UnknownHeader_47 UnknownHeader_47;
         public UnknownHeader_4D UnknownHeader_4D;
-        public UnknownHeader_4F UnknownHeader_4F;
+        public MonsterEncounterHeader MonsterEncounterHeader;
         public ExperienceRequirementHeader ExperienceRequirementHeader;
         public CPULevelUpHeader CPULevelUpHeader;
         public UnknownHeader_8C UnknownHeader_8C;
@@ -182,7 +182,7 @@ namespace DokaponFileReader
             UnknownHeader_2C = new UnknownHeader_2C(4);
             UnknownHeader_47 = new UnknownHeader_47(4);
             UnknownHeader_4D = new UnknownHeader_4D(4);
-            UnknownHeader_4F = new UnknownHeader_4F(4);
+            MonsterEncounterHeader = new MonsterEncounterHeader(4);
             ExperienceRequirementHeader = new ExperienceRequirementHeader(4);
             CPULevelUpHeader = new CPULevelUpHeader(4);
             UnknownHeader_8C = new UnknownHeader_8C(4);
@@ -407,7 +407,7 @@ namespace DokaponFileReader
                     case HeaderType.Unknown_5C: UnknownHeaders_5C.Add(UnknownHeader_5C.ReadHeaderBlock(stageFile)); break;
                     case HeaderType.Unknown_4D: UnknownHeader_4D=UnknownHeader_4D.ReadHeaderBlock(stageFile); break;
                     case HeaderType.Unknown_4E: UnknownHeaders_4E.Add(UnknownHeader_4E.ReadHeaderBlock(stageFile)); break;
-                    case HeaderType.Unknown_4F: UnknownHeader_4F=UnknownHeader_4F.ReadHeaderBlock(stageFile); break;
+                    case HeaderType.MonsterEncounterTables: MonsterEncounterHeader=MonsterEncounterHeader.ReadHeaderBlock(stageFile); break;
                     case HeaderType.ExperienceRequirement: ExperienceRequirementHeader = ExperienceRequirementHeader.ReadHeaderBlock(stageFile); break;
                     case HeaderType.CPULevelUp: CPULevelUpHeader = CPULevelUpHeader.ReadHeaderBlock(stageFile);  break;
                     case HeaderType.DialogList: DialogListHeader = DialogListHeader.ReadHeaderBlock(stageFile); break;
@@ -930,15 +930,15 @@ namespace DokaponFileReader
             UnknownHeader_9D.WriteHeaderBlock(stageFile);
             UnknownHeader_9C.WriteHeaderBlock(stageFile);
             UnknownHeader_E1.WriteHeaderBlock(stageFile);
-            UnknownHeader_4F.WriteHeaderBlock(stageFile);
+            MonsterEncounterHeader.WriteHeaderBlock(stageFile);
             foreach (var header in UnknownHeaders_4E)
                 header.WriteHeaderBlock(stageFile);
             UnknownHeader_4D.WriteHeaderBlock(stageFile);
             CharUnknownHeaders_03[10].WriteHeaderBlock(stageFile);
             UnknownHeader_4D.WritePointerData(stageFile);
             UnknownHeader_4D.WriteBlockData(stageFile);
-            UnknownHeader_4F.WritePointerData(stageFile);
-            UnknownHeader_4F.WriteBlockData(stageFile);
+            MonsterEncounterHeader.WritePointerData(stageFile);
+            MonsterEncounterHeader.WriteBlockData(stageFile);
             CharUnknownHeaders_03[10].WriteEndDataBlock(stageFile);
 
             // Experience Data

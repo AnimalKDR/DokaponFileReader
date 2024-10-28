@@ -16,6 +16,7 @@ namespace DokaponFileReader
         public CharaFile charaFile = new CharaFile();
 
         public ObservableCollection<ItemData> itemData = new ObservableCollection<ItemData>();
+        public ObservableCollection<EffectItemData> effectItemData = new ObservableCollection<EffectItemData>();
         public ObservableCollection<JobNameData> jobNameData = new ObservableCollection<JobNameData>();
         public ObservableCollection<JobData> jobData = new ObservableCollection<JobData>();
         public ObservableCollection<MonsterData> monsterData = new ObservableCollection<MonsterData>();
@@ -47,8 +48,13 @@ namespace DokaponFileReader
         public ObservableCollection<TempleData> templeData = new ObservableCollection<TempleData>();
         public ObservableCollection<TownCastleData> townCastleData = new ObservableCollection<TownCastleData>();
 
-        public List<ObservableCollection<RandomLootData>> randomLootData = new List<ObservableCollection<RandomLootData>>();
+        public ObservableCollection<RandomLootData> randomLootData = new ObservableCollection<RandomLootData>();
         public ObservableCollection<EffectItemType> itemTypeData = new ObservableCollection<EffectItemType>();
+
+        public ObservableCollection<WeaponStoreData> weaponStoreData = new ObservableCollection<WeaponStoreData>();
+        public ObservableCollection<ItemStoreData> itemStoreData = new ObservableCollection<ItemStoreData>();
+        public ObservableCollection<MagicStoreData> magicStoreData = new ObservableCollection<MagicStoreData>();
+        public ObservableCollection<MonsterEncounterData> monsterEncounterData = new ObservableCollection<MonsterEncounterData>();
 
         public MainWindow()
         {
@@ -297,6 +303,16 @@ namespace DokaponFileReader
             ItemData.AddBagItemData(ref itemData, bagItemData);
             ItemData.AddLocalItemData(ref itemData, localItemData);
             ItemData.AddFieldMagicData(ref itemData, fieldMagicData);
+            EffectItemData.AddWeaponData(ref effectItemData, weaponData);
+            EffectItemData.AddShieldData(ref effectItemData, shieldData);
+            EffectItemData.AddAccessoryData(ref effectItemData, accessorydData);
+            EffectItemData.AddDefensiveMagicData(ref effectItemData, defensiveMagicData);
+            EffectItemData.AddOffensiveMagicData(ref effectItemData, offensiveMagicData);
+            EffectItemData.AddBagItemData(ref effectItemData, bagItemData);
+            EffectItemData.AddLocalItemData(ref effectItemData, localItemData);
+            EffectItemData.AddFieldMagicData(ref effectItemData, fieldMagicData);
+            EffectItemData.AddEffectData(ref effectItemData, stageBaseFile.RandomEffectHeaders);
+
             jobNameData = JobNameData.GetData(charaFile);
             jobData = JobData.GetData(charaFile, battleSkillData, jobSkillData, itemData, jobNameData);
             monsterData = MonsterData.GetData(charaFile, battleSkillData, offensiveMagicData, defensiveMagicData, itemData);
@@ -317,12 +333,11 @@ namespace DokaponFileReader
             locationData = LocationData.GetData(stageBaseFile);
             templeData = TempleData.GetData(stageBaseFile);
             townCastleData = TownCastleData.GetData(stageBaseFile);
-
-            randomLootData = new List<ObservableCollection<RandomLootData>>();
-            for (int i = 0; i < 69; i++)
-            {
-                randomLootData.Add(RandomLootData.GetData(charaFile, stageBaseFile, i));
-            }
+            weaponStoreData = WeaponStoreData.GetData(stageBaseFile, itemData);
+            itemStoreData = ItemStoreData.GetData(stageBaseFile, itemData);
+            magicStoreData = MagicStoreData.GetData(stageBaseFile, itemData);
+            monsterEncounterData = MonsterEncounterData.GetData(charaFile, monsterData);
+            randomLootData = RandomLootData.GetData(stageBaseFile, effectItemData);
 
             SetDataContext();
         }
@@ -358,11 +373,11 @@ namespace DokaponFileReader
             LocationData.SetData(locationData, ref stageBaseFile);
             TempleData.SetData(templeData, ref stageBaseFile);
             TownCastleData.SetData(townCastleData, ref stageBaseFile);
-
-            for (int i = 0; i < 69; i++)
-            {
-                RandomLootData.SetData(randomLootData[i], ref charaFile, ref stageBaseFile, i);
-            }
+            WeaponStoreData.SetData(weaponStoreData, itemData, ref stageBaseFile);
+            ItemStoreData.SetData(itemStoreData, itemData, ref stageBaseFile);
+            MagicStoreData.SetData(magicStoreData, itemData, ref stageBaseFile);
+            MonsterEncounterData.SetData(monsterEncounterData, monsterData, ref charaFile);
+            RandomLootData.SetData(randomLootData, ref stageBaseFile);
         }
 
         private void SetDataContext()
@@ -397,79 +412,40 @@ namespace DokaponFileReader
             TempleDataTab.DataContext = templeData;
             TownCastleDataTab.DataContext = townCastleData;
 
-            // I'm sure there's a cleaner way to do this
-            TableData0.DataContext = randomLootData[0];
-            TableData1.DataContext = randomLootData[1];
-            TableData2.DataContext = randomLootData[2];
-            TableData3.DataContext = randomLootData[3];
-            TableData4.DataContext = randomLootData[4];
-            TableData5.DataContext = randomLootData[5];
-            TableData6.DataContext = randomLootData[6];
-            TableData7.DataContext = randomLootData[7];
-            TableData8.DataContext = randomLootData[8];
-            TableData9.DataContext = randomLootData[9];
-            TableData10.DataContext = randomLootData[10];
-            TableData11.DataContext = randomLootData[11];
-            TableData12.DataContext = randomLootData[12];
-            TableData13.DataContext = randomLootData[13];
-            TableData14.DataContext = randomLootData[14];
-            TableData15.DataContext = randomLootData[15];
-            TableData16.DataContext = randomLootData[16];
-            TableData17.DataContext = randomLootData[17];
-            TableData18.DataContext = randomLootData[18];
-            TableData19.DataContext = randomLootData[19];
-            TableData20.DataContext = randomLootData[20];
-            TableData21.DataContext = randomLootData[21];
-            TableData22.DataContext = randomLootData[22];
-            TableData23.DataContext = randomLootData[23];
-            TableData24.DataContext = randomLootData[24];
-            TableData25.DataContext = randomLootData[25];
-            TableData26.DataContext = randomLootData[26];
-            TableData27.DataContext = randomLootData[27];
-            TableData28.DataContext = randomLootData[28];
-            TableData29.DataContext = randomLootData[29];
-            TableData30.DataContext = randomLootData[30];
-            TableData31.DataContext = randomLootData[31];
-            TableData32.DataContext = randomLootData[32];
-            TableData33.DataContext = randomLootData[33];
-            TableData34.DataContext = randomLootData[34];
-            TableData35.DataContext = randomLootData[35];
-            TableData36.DataContext = randomLootData[36];
-            TableData37.DataContext = randomLootData[37];
-            TableData38.DataContext = randomLootData[38];
-            TableData39.DataContext = randomLootData[39];
-            TableData40.DataContext = randomLootData[40];
-            TableData41.DataContext = randomLootData[41];
-            TableData42.DataContext = randomLootData[42];
-            TableData43.DataContext = randomLootData[43];
-            TableData44.DataContext = randomLootData[44];
-            TableData45.DataContext = randomLootData[45];
-            TableData46.DataContext = randomLootData[46];
-            TableData47.DataContext = randomLootData[47];
-            TableData48.DataContext = randomLootData[48];
-            TableData49.DataContext = randomLootData[49];
-            TableData50.DataContext = randomLootData[50];
-            TableData51.DataContext = randomLootData[51];
-            TableData52.DataContext = randomLootData[52];
-            TableData53.DataContext = randomLootData[53];
-            TableData54.DataContext = randomLootData[54];
-            TableData55.DataContext = randomLootData[55];
-            TableData56.DataContext = randomLootData[56];
-            TableData57.DataContext = randomLootData[57];
-            TableData58.DataContext = randomLootData[58];
-            TableData59.DataContext = randomLootData[59];
-            TableData60.DataContext = randomLootData[60];
-            TableData61.DataContext = randomLootData[61];
-            TableData62.DataContext = randomLootData[62];
-            TableData63.DataContext = randomLootData[63];
-            TableData64.DataContext = randomLootData[64];
-            TableData65.DataContext = randomLootData[65];
-            TableData66.DataContext = randomLootData[66];
-            TableData67.DataContext = randomLootData[67];
-            TableData68.DataContext = randomLootData[68];
+            int i = 0;
+            foreach (TabItem tabItem in WeaponStoreControl.Items)
+            {
+                tabItem.DataContext = weaponStoreData[i++].storeItems;
+                AddItemSourceToTab(tabItem);
+            }
 
+            i = 0;
+            foreach (TabItem tabItem in MagicStoreControl.Items)
+            {
+                tabItem.DataContext = magicStoreData[i++].storeItems;
+                AddItemSourceToTab(tabItem);
+            }
+
+            i = 0;
+            foreach (TabItem tabItem in ItemStoreControl.Items)
+            {
+                tabItem.DataContext = itemStoreData[i++].storeItems;
+                AddItemSourceToTab(tabItem);
+            }
+
+            i = 0;
+            foreach (TabItem tabItem in RandomLootControl.Items)
+            {
+                tabItem.DataContext = randomLootData[i++].randomItems;
+                AddEffectItemSourceToTab(tabItem);
+            }
+
+            i = 0;
+            foreach (TabItem tabItem in RandomBattleControl.Items)
+                tabItem.DataContext = monsterEncounterData[i++].monster;
+
+            Level2BattleSkill.ItemsSource = battleSkillData;
             Level4BattleSkill.ItemsSource = battleSkillData;
-            Level6BattleSkill.ItemsSource = battleSkillData;
             MonsterBattleSkill.ItemsSource = battleSkillData;
             PassiveSkill.ItemsSource = jobSkillData;
             MonsterOffensiveMagic.ItemsSource = offensiveMagicData;
@@ -480,6 +456,58 @@ namespace DokaponFileReader
             MasteryRequirement1.ItemsSource = jobNameData;
             MasteryRequirement2.ItemsSource = jobNameData;
             MasteryRequirement3.ItemsSource = jobNameData;
+        }
+
+        private void AddItemSourceToTab(TabItem tabItem)
+        {
+            var children = LogicalTreeHelper.GetChildren(tabItem);
+
+            foreach (var child in children)
+            {
+                Grid? grid = child as Grid;
+                if (grid == null)
+                    continue;
+
+                foreach (var gridChild in grid.Children)
+                {
+                    DataGrid? dataGrid = gridChild as DataGrid;
+                    if (dataGrid == null)
+                        continue;
+
+                    DataGridComboBoxColumn? dataGridComboBox = dataGrid.Columns[1] as DataGridComboBoxColumn;
+
+                    if (dataGridComboBox == null)
+                        continue;
+
+                    dataGridComboBox.ItemsSource = itemData;
+                }
+            }
+        }
+
+        private void AddEffectItemSourceToTab(TabItem tabItem)
+        {
+            var children = LogicalTreeHelper.GetChildren(tabItem);
+
+            foreach (var child in children)
+            {
+                Grid? grid = child as Grid;
+                if (grid == null)
+                    continue;
+
+                foreach (var gridChild in grid.Children)
+                {
+                    DataGrid? dataGrid = gridChild as DataGrid;
+                    if (dataGrid == null)
+                        continue;
+
+                    DataGridComboBoxColumn? dataGridComboBox = dataGrid.Columns[1] as DataGridComboBoxColumn;
+
+                    if (dataGridComboBox == null)
+                        continue;
+
+                    dataGridComboBox.ItemsSource = effectItemData;
+                }
+            }
         }
     }
 }

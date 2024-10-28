@@ -5,6 +5,7 @@ namespace DokaponFileReader
 {
     public class MonsterData
     {
+        public byte index { get; set; }
         public string name { get; set; }
         public string description { get; set; }
         public ushort level { get; set; }
@@ -31,8 +32,9 @@ namespace DokaponFileReader
         public SpecialStatType specialTypeSpeed { get; set; }
         public SpecialStatType specialTypeHP { get; set; }
 
-        public MonsterData(string name)
+        public MonsterData(byte index, string name)
         {
+            this.index = index;
             this.name = name;
             dropItem = new ItemData[2] {new ItemData(), new ItemData() };
             dropItemChance = new byte[2] { 0, 0 };
@@ -77,9 +79,10 @@ namespace DokaponFileReader
         public static ObservableCollection<MonsterData> GetData(CharaFile charaFile, ObservableCollection<BattleSkillData> battleSkillData, ObservableCollection<OffensiveMagicData> offensiveMagicData, ObservableCollection<DefensiveMagicData> defensiveMagicData, ObservableCollection<ItemData> itemData)
         {
             ObservableCollection<MonsterData> data = new ObservableCollection<MonsterData>();
+            byte index = 0;
             foreach (var monster in charaFile.MonsterHeaders)
             {
-                MonsterData monsterData = new MonsterData(monster.name);
+                MonsterData monsterData = new MonsterData(index++, monster.name);
                 monsterData.level = monster.level;
 
                 (monsterData.specialTypeAttack, monsterData.attack) = SetStatTypeAndValue(monster.attack);
@@ -98,9 +101,9 @@ namespace DokaponFileReader
                 data.Add(monsterData);
             }
 
-            for (int i = 0; i < charaFile.MonsterDescriptionHeader.description.Count && i < data.Count; i++)
+            for (index = 0; index < charaFile.MonsterDescriptionHeader.description.Count && index < data.Count; index++)
             {
-                data[i].description = charaFile.MonsterDescriptionHeader.description[i];
+                data[index].description = charaFile.MonsterDescriptionHeader.description[index];
             }
 
             foreach (var monsterDrop in charaFile.MonsterItemDropHeaders)

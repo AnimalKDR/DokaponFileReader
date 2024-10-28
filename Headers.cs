@@ -44,7 +44,7 @@ namespace DokaponFileReader
         Unknown_4C = 0x4C,
         Unknown_4D = 0x4D,
         Unknown_4E = 0x4E,
-        Unknown_4F = 0x4F,
+        MonsterEncounterTables = 0x4F,
         Monster = 0x50,
         MonsterUnknownInfo = 0x51,
         Unknown_52 = 0x52,
@@ -1794,31 +1794,31 @@ namespace DokaponFileReader
         }
     }
 
-    public class UnknownHeader_4F : Header
+    public class MonsterEncounterHeader : Header
     {
         public UInt32 listPointer;
-        public List<UInt32> dataPointers;
-        public List<List<byte>> unknownBytes;
+        public List<UInt32> encounterTablePointer;
+        public List<List<byte>> monsterEncounterList;
 
-        public UnknownHeader_4F(UInt32 headerStart) : base(HeaderType.Unknown_4F, headerStart)
+        public MonsterEncounterHeader(UInt32 headerStart) : base(HeaderType.MonsterEncounterTables, headerStart)
         {
-            dataPointers = new List<UInt32>();
-            unknownBytes = new List<List<byte>>();
+            encounterTablePointer = new List<UInt32>();
+            monsterEncounterList = new List<List<byte>>();
         }
 
-        public static UnknownHeader_4F ReadHeaderBlock(DokaponFileReader stageFile)
+        public static MonsterEncounterHeader ReadHeaderBlock(DokaponFileReader stageFile)
         {
-            var header = new UnknownHeader_4F(stageFile.GetPosition());
+            var header = new MonsterEncounterHeader(stageFile.GetPosition());
 
             header.listPointer = stageFile.GetUInt32();
-            header.dataPointers = stageFile.GetUInt32ListAtPosition(header.listPointer, true);
+            header.encounterTablePointer = stageFile.GetUInt32ListAtPosition(header.listPointer, true);
 
-            foreach (var pointer in header.dataPointers)
+            foreach (var pointer in header.encounterTablePointer)
             {
                 if (pointer == 0)
                     continue;
 
-                header.unknownBytes.Add(stageFile.GetByteListAtPosition(pointer, true));
+                header.monsterEncounterList.Add(stageFile.GetByteListAtPosition(pointer, true));
             }
 
             return header;
@@ -1834,7 +1834,7 @@ namespace DokaponFileReader
         {
             listPointer = stageFile.GetRelativePosition();
 
-            foreach (var v in dataPointers)
+            foreach (var v in encounterTablePointer)
                 stageFile.Write(v);
 
             var currentPosition = stageFile.GetPosition();
@@ -1847,21 +1847,21 @@ namespace DokaponFileReader
         {
             List<bool> duplicatePointer = new List<bool> { false };
 
-            for (int i = 1; i < dataPointers.Count; i++)
+            for (int i = 1; i < encounterTablePointer.Count; i++)
             {
-                duplicatePointer.Add(dataPointers[i] == dataPointers[i - 1]);
+                duplicatePointer.Add(encounterTablePointer[i] == encounterTablePointer[i - 1]);
             }
 
-            for (int i = 0; i < unknownBytes.Count; i++)
+            for (int i = 0; i < monsterEncounterList.Count; i++)
             {
                 if (i > 0 && duplicatePointer[i])
                 {
-                    dataPointers[i] = dataPointers[i - 1];
+                    encounterTablePointer[i] = encounterTablePointer[i - 1];
                     continue;
                 }
 
-                dataPointers[i] = stageFile.GetRelativePosition();
-                foreach (var v in unknownBytes[i])
+                encounterTablePointer[i] = stageFile.GetRelativePosition();
+                foreach (var v in monsterEncounterList[i])
                     stageFile.Write(v);
             }
 
@@ -3802,39 +3802,39 @@ namespace DokaponFileReader
         }
     }
 
-    public class UnknownHeader_78 : Header
+    public class StoreDataHeader : Header
     {
-        public UInt32 index;
+        public UInt32 spaceType;
         public UInt32 listPointer;
-        public List<UInt32> dataPointers;
-        public List<List<byte>> unknownBytes;
+        public List<UInt32> shopDataPointers;
+        public List<List<byte>> shopItemsList;
 
-        public UnknownHeader_78(UInt32 headerStart) : base(HeaderType.Unknown_78, headerStart)
+        public StoreDataHeader(UInt32 headerStart) : base(HeaderType.Unknown_78, headerStart)
         {
-            dataPointers = new List<UInt32>();
-            unknownBytes = new List<List<byte>>();
+            shopDataPointers = new List<UInt32>();
+            shopItemsList = new List<List<byte>>();
         }
 
-        public static UnknownHeader_78 ReadHeaderBlock(DokaponFileReader stageFile)
+        public static StoreDataHeader ReadHeaderBlock(DokaponFileReader stageFile)
         {
-            var header = new UnknownHeader_78(stageFile.GetPosition());
+            var header = new StoreDataHeader(stageFile.GetPosition());
 
-            header.index = stageFile.GetUInt32();
+            header.spaceType = stageFile.GetUInt32();
             header.listPointer = stageFile.GetUInt32();
-            header.dataPointers = stageFile.GetUInt32ListAtPosition(header.listPointer);
+            header.shopDataPointers = stageFile.GetUInt32ListAtPosition(header.listPointer);
 
-            foreach (var position in header.dataPointers)
+            foreach (var position in header.shopDataPointers)
             {
                 if (position == 0)
                     continue;
 
                 int tokenCount = 3;
-                if (header.index == 0x16)
+                if (header.spaceType == 0x16)
                     tokenCount = 2;
-                else if (header.index == 0x17)
+                else if (header.spaceType == 0x17)
                     tokenCount = 1;
 
-                header.unknownBytes.Add(stageFile.GetByteListWithTokenCount(position, 0x00, tokenCount, true));
+                header.shopItemsList.Add(stageFile.GetByteListWithTokenCount(position, 0x00, tokenCount, true));
             }
             return header;
         }
@@ -3842,7 +3842,7 @@ namespace DokaponFileReader
         public new void WriteHeaderBlock(DokaponFileWriter stageFile)
         {
             base.WriteHeaderBlock(stageFile);
-            stageFile.Write(index);
+            stageFile.Write(spaceType);
             stageFile.Write(listPointer);
         }
 
@@ -3850,14 +3850,14 @@ namespace DokaponFileReader
         {
             listPointer = stageFile.GetPosition();
 
-            foreach (var v in dataPointers)
+            foreach (var v in shopDataPointers)
                 stageFile.Write(v);
 
-            for (int i = 0; i < unknownBytes.Count; i++)
+            for (int i = 0; i < shopItemsList.Count; i++)
             {
-                dataPointers[i] = (UInt32)stageFile.GetRelativePosition();
+                shopDataPointers[i] = (UInt32)stageFile.GetRelativePosition();
 
-                foreach (var v in unknownBytes[i])
+                foreach (var v in shopItemsList[i])
                     stageFile.Write(v);
             }
 
@@ -3866,7 +3866,7 @@ namespace DokaponFileReader
 
             var currentPosition = stageFile.GetPosition();
             stageFile.SetPosition(listPointer);
-            foreach (var v in dataPointers)
+            foreach (var v in shopDataPointers)
                 stageFile.Write(v);
             stageFile.SetPosition(headerStart);
             WriteHeaderBlock(stageFile);

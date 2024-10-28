@@ -4,51 +4,39 @@ namespace DokaponFileReader.DataFiles
 {
     public class RandomLootData
     {
-        public string itemName { get; set; }
-        public EffectItemType itemType { get; set; }
+        public List<DataEffectItem> randomItems;
 
-        public RandomLootData(EffectItemType itemType, string itemName)
+        public RandomLootData()
         {
-            this.itemType = itemType;
-            this.itemName = itemName;
+            randomItems = new List<DataEffectItem>();
         }
 
-        public static ObservableCollection<RandomLootData> GetData(CharaFile charaFile, StageBaseFile stageBaseFile, int index)
+        public static ObservableCollection<RandomLootData> GetData(StageBaseFile stageBaseFile, ObservableCollection<EffectItemData> itemData)
         {
             ObservableCollection<RandomLootData> data = new ObservableCollection<RandomLootData>();
 
-            if (index >= stageBaseFile.RandomLootHeaders.Count)
-                return data;
-
-            foreach (var item in stageBaseFile.RandomLootHeaders[index].itemList)
+            for (int randomItemListIndex = 0; randomItemListIndex < stageBaseFile.RandomLootHeaders.Count; randomItemListIndex++)
             {
-                string itemName;
+                RandomLootData randomLootData = new RandomLootData();
 
-                if (item.type < 0x80)
-                    itemName = charaFile.GetItemName((EffectItemType)item.type, item.index);
-                else
-                    itemName = stageBaseFile.GetEffectName(item.type, item.index);
+                foreach (var item in stageBaseFile.RandomLootHeaders[randomItemListIndex].itemList)
+                {
+                    DataEffectItem randomEffectItem = new DataEffectItem(EffectItemData.GetEffectItemFromIndex(itemData, (EffectItemType)item.type, item.index));
+                    randomLootData.randomItems.Add(randomEffectItem);
+                }
 
-                data.Add(new RandomLootData((EffectItemType)item.type, itemName));
+                data.Add(randomLootData);
             }
-
             return data;
         }
 
-        public static void SetData(ObservableCollection<RandomLootData> randomLootData, ref CharaFile charaFile, ref StageBaseFile stageBaseFile, int index)
+        public static void SetData(ObservableCollection<RandomLootData> randomLootData, ref StageBaseFile stageBaseFile)
         {
-            if (index >= stageBaseFile.RandomLootHeaders.Count)
-                return;
-
-            for (int i = 0; i < randomLootData.Count; i++)
+            for (int randomItemListIndex = 0; randomItemListIndex < stageBaseFile.RandomLootHeaders.Count && randomItemListIndex < randomLootData.Count; randomItemListIndex++)
             {
-                if (randomLootData[i].itemType >= EffectItemType.GainGold)
+                for (int randomItemIndex = 0; randomItemIndex < stageBaseFile.RandomLootHeaders[randomItemListIndex].itemList.Count; randomItemIndex++)
                 {
-                    stageBaseFile.RandomLootHeaders[index].itemList[i] = (stageBaseFile.GetEffectTypeIndex(randomLootData[i].itemName), (byte)randomLootData[i].itemType);
-                }
-                else
-                {
-                    stageBaseFile.RandomLootHeaders[index].itemList[i] = (charaFile.GetItemID(randomLootData[i].itemType, randomLootData[i].itemName), (byte)randomLootData[i].itemType);
+                    stageBaseFile.RandomLootHeaders[randomItemListIndex].itemList[randomItemIndex] = (randomLootData[randomItemListIndex].randomItems[randomItemIndex].item.index, (byte)randomLootData[randomItemListIndex].randomItems[randomItemIndex].item.itemType);
                 }
             }
         }

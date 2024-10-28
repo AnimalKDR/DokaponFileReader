@@ -23,8 +23,8 @@ namespace DokaponFileReader
         public int masteryHP { get; set; }
         public byte bagItemSpace { get; set; }
         public byte fieldMagicSpace { get; set; }
+        public BattleSkillData level2BattleSkill { get; set; }
         public BattleSkillData level4BattleSkill { get; set; }
-        public BattleSkillData level6BattleSkill { get; set; }
         public JobSkillData passiveSkill { get; set; }
         public ItemData itemRequirement { get; set; }
         public uint startingSalary { get; set; }
@@ -40,8 +40,8 @@ namespace DokaponFileReader
             this.jobName = new JobNameData();
             masteryRequirement = new JobNameData[3] { new JobNameData(), new JobNameData(), new JobNameData() };
             itemRequirement = new ItemData();
+            level2BattleSkill = new BattleSkillData();
             level4BattleSkill = new BattleSkillData();
-            level6BattleSkill = new BattleSkillData();
             passiveSkill = new JobSkillData();
             jobDescription = String.Empty;
         }
@@ -109,8 +109,8 @@ namespace DokaponFileReader
                 if (jobBattleSkill.sex == 1)
                     continue;
 
-                data[jobBattleSkill.index].level4BattleSkill = BattleSkillData.GetBattleSkillDataByIndex(battleSkillData, jobBattleSkill.firstBattleSkillIndex);
-                data[jobBattleSkill.index].level6BattleSkill = BattleSkillData.GetBattleSkillDataByIndex(battleSkillData, jobBattleSkill.secondBattleSkillIndex);
+                data[jobBattleSkill.index].level2BattleSkill = BattleSkillData.GetBattleSkillDataByIndex(battleSkillData, jobBattleSkill.firstBattleSkillIndex);
+                data[jobBattleSkill.index].level4BattleSkill = BattleSkillData.GetBattleSkillDataByIndex(battleSkillData, jobBattleSkill.secondBattleSkillIndex);
             }
 
             for (int i = 0; i < charaFile.JobDescriptionHeader.description.Count / 2; i++)
@@ -207,11 +207,11 @@ namespace DokaponFileReader
 
             for (int i = 0; i < jobData.Count && i < charaFile.JobBattleSkillHeaders.Count / 2; i++)
             {
-                charaFile.JobBattleSkillHeaders[(2 * i) + 0].firstBattleSkillIndex = jobData[i].level4BattleSkill.index;
-                charaFile.JobBattleSkillHeaders[(2 * i) + 0].secondBattleSkillIndex = jobData[i].level6BattleSkill.index;
+                charaFile.JobBattleSkillHeaders[(2 * i) + 0].firstBattleSkillIndex = jobData[i].level2BattleSkill.index;
+                charaFile.JobBattleSkillHeaders[(2 * i) + 0].secondBattleSkillIndex = jobData[i].level4BattleSkill.index;
 
-                charaFile.JobBattleSkillHeaders[(2 * i) + 1].firstBattleSkillIndex = jobData[i].level4BattleSkill.index;
-                charaFile.JobBattleSkillHeaders[(2 * i) + 1].secondBattleSkillIndex = jobData[i].level6BattleSkill.index;
+                charaFile.JobBattleSkillHeaders[(2 * i) + 1].firstBattleSkillIndex = jobData[i].level2BattleSkill.index;
+                charaFile.JobBattleSkillHeaders[(2 * i) + 1].secondBattleSkillIndex = jobData[i].level4BattleSkill.index;
             }
 
             for (int i = 0; i < jobData.Count && i < charaFile.JobDescriptionHeader.description.Count / 2; i++)

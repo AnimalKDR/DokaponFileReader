@@ -23,7 +23,7 @@ namespace DokaponFileReader
         public List<TownCastleHeader> TownCastleHeaders;
         public List<UnknownHeader_6E> UnknownHeaders_6E;
         public List<UnknownCastleInfo> UnknownCastleInfos;
-        public List<UnknownHeader_78> UnknownHeaders_78;
+        public List<StoreDataHeader> StoreDataHeaders;
         public List<RandomLootHeader> RandomLootHeaders;
         public RandomLootList_85 RandomLootListHeader_85;
         public List<RandomEffectHeader> RandomEffectHeaders;
@@ -51,7 +51,7 @@ namespace DokaponFileReader
             TownCastleHeaders = new List<TownCastleHeader>();
             UnknownHeaders_6E = new List<UnknownHeader_6E>();
             UnknownCastleInfos = new List<UnknownCastleInfo>();
-            UnknownHeaders_78 = new List<UnknownHeader_78>();
+            StoreDataHeaders = new List<StoreDataHeader>();
             
             RandomLootHeaders = new List<RandomLootHeader>();
             RandomEffectHeaders = new List<RandomEffectHeader>();
@@ -99,7 +99,7 @@ namespace DokaponFileReader
                     case HeaderType.TownCastleName: TownCastleHeaders.Add(TownCastleHeader.ReadHeaderBlock(stageFile)); break;
                     case HeaderType.Unknown_6E: UnknownHeaders_6E.Add(UnknownHeader_6E.ReadHeaderBlock(stageFile)); break;
                     case HeaderType.CastleUnknownInfo: UnknownCastleInfos.Add(UnknownCastleInfo.ReadHeaderBlock(stageFile)); break;
-                    case HeaderType.Unknown_78: UnknownHeaders_78.Add(UnknownHeader_78.ReadHeaderBlock(stageFile)); break;
+                    case HeaderType.Unknown_78: StoreDataHeaders.Add(StoreDataHeader.ReadHeaderBlock(stageFile)); break;
                     case HeaderType.RandomLoot: RandomLootHeaders.Add(RandomLootHeader.ReadHeaderBlock(stageFile)); break;
                     case HeaderType.RandomEffect: RandomEffectHeaders.Add(RandomEffectHeader.ReadHeaderBlock(stageFile)); break;
                     case HeaderType.SpaceName: SpaceNameHeaders.Add(SpaceNameHeader.ReadHeaderBlock(stageFile)); break;
@@ -209,13 +209,13 @@ namespace DokaponFileReader
             RandomLootListHeader_94.WriteBlockData(stageFile);
             RandomLootListHeader_85.WriteHeaderBlock(stageFile);
             RandomLootListHeader_85.WriteBlockData(stageFile);
-            foreach (var header in UnknownHeaders_78)
+            foreach (var header in StoreDataHeaders)
                 header.WriteHeaderBlock(stageFile);
             UnknownHeaders_03[1].WriteHeaderBlock(stageFile);
             foreach (var header in RandomLootHeaders)
                 header.WriteBlockData(stageFile);
             bool b = true;
-            foreach (var header in UnknownHeaders_78)
+            foreach (var header in StoreDataHeaders)
             {
                 header.WriteBlockData(stageFile);
                 if (b)

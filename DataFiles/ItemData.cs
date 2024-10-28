@@ -90,5 +90,16 @@ namespace DokaponFileReader
 
             return new ItemData();
         }
+
+        public static byte GetItemIndexFromName(ObservableCollection<ItemData> itemData, EffectItemType itemType, string itemName)
+        {
+            foreach (var item in itemData)
+            {
+                if (item.itemType == itemType && item.name == itemName)
+                    return item.index;
+            }
+
+            return 0;
+        }
     }
 }
